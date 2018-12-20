@@ -1,0 +1,36 @@
+@import "~ng-zorro-antd/ng-zorro-antd.less";
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  background: #f0f2f5;
+
+  ::ng-deep {
+    .trigger {
+      font-size: 18px;
+      line-height: 64px;
+      padding: 0 24px;
+      cursor: pointer;
+      transition: color .3s;
+      color: @background-color-base;
+    }
+
+    .logo {
+      height: 64px;
+      background-color: @primary-color;
+      color: #fff;
+      text-align: center;
+      line-height: 64px;
+      font-size: 32px;
+    }
+  }
+}
+
+
+.zsx_layout-sidebar {
+  background-color: @component-background;
+}
+.zsx_layout-header {
+  background-color: @primary-color;
+  padding: 0;
+}

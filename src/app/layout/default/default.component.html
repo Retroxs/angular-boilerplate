@@ -1,3 +1,59 @@
-<p>
-  default works!
-</p>
+<nz-layout>
+  <nz-sider class="zsx_layout-sidebar" nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="triggerTemplate">
+    <div class="logo">
+      {{isCollapsed?'卓':'卓师兄'}}
+    </div>
+    <ul nz-menu [nzTheme]="'light'" [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed">
+      <li nz-submenu>
+        <span title><i nz-icon type="user"></i><span class="nav-text">数据项</span></span>
+        <ul>
+          <li nz-menu-item routerLink="/data">添加数据项</li>
+          <li nz-menu-item>数据项信息</li>
+        </ul>
+      </li>
+
+      <li nz-submenu>
+        <span title><i nz-icon type="team"></i><span class="nav-text">套餐</span></span>
+        <ul>
+          <li nz-menu-item>添加套餐</li>
+          <li nz-menu-item>套餐信息</li>
+        </ul>
+      </li>
+
+      <li nz-submenu>
+        <span title><i nz-icon type="file"></i><span class="nav-text">会员</span></span>
+        <ul>
+          <li nz-menu-item>添加会员</li>
+          <li nz-menu-item>会员信息</li>
+        </ul>
+      </li>
+
+      <li nz-submenu>
+        <span title><i nz-icon type="file"></i><span class="nav-text">首页功能配置</span></span>
+        <ul>
+          <li nz-menu-item>添加功能配置</li>
+          <li nz-menu-item>配置信息</li>
+        </ul>
+      </li>
+
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header class="zsx_layout-header">
+      <i class="trigger" nz-icon [type]="isCollapsed?'menu-unfold':'menu-fold'" (click)="isCollapsed=!isCollapsed"></i>
+    </nz-header>
+    <nz-content style="margin:0 16px;">
+      <nz-breadcrumb style="margin:16px 0;">
+        <nz-breadcrumb-item>User</nz-breadcrumb-item>
+        <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
+      </nz-breadcrumb>
+      <div style="padding:24px; background: #fff; min-height: 360px;">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+    <nz-footer style="text-align: center;">Ant Design ©2017 Implement By Angular</nz-footer>
+  </nz-layout>
+</nz-layout>
+<ng-template #trigger>
+  <i nz-icon type="up"></i>
+</ng-template>
