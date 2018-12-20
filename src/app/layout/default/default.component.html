@@ -1,7 +1,7 @@
 <nz-layout>
-  <nz-sider class="zsx_layout-sidebar" nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="triggerTemplate">
+  <nz-sider class="zsx__layout-sidebar" nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="triggerTemplate">
     <div class="logo">
-      {{isCollapsed?'卓':'卓师兄'}}
+      {{isCollapsed ? '卓' : '卓师兄'}}
     </div>
     <ul nz-menu [nzTheme]="'light'" [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed">
       <li nz-submenu>
@@ -38,14 +38,59 @@
 
     </ul>
   </nz-sider>
+
+
   <nz-layout>
-    <nz-header class="zsx_layout-header">
-      <i class="trigger" nz-icon [type]="isCollapsed?'menu-unfold':'menu-fold'" (click)="isCollapsed=!isCollapsed"></i>
+    <nz-header class="zsx__layout-header">
+
+
+      <div class="zsx__layout-nav-wrapper">
+
+
+        <ul class="zsx__layout-nav">
+          <li>
+            <div class="zsx__layout-nav-item">
+              <i class="trigger" nz-icon [type]="isCollapsed?'menu-unfold':'menu-fold'"
+                 (click)="isCollapsed=!isCollapsed"></i>
+            </div>
+          </li>
+        </ul>
+
+        <ul class="zsx__layout-nav">
+          <li>
+            <div class="zsx__layout-nav-item">
+              <i>
+                <nz-dropdown nzPlacement="bottomRight">
+                  <div nz-dropdown>
+                    <nz-avatar nzSrc="https://ng-alain.github.io/ng-alain/assets/tmp/img/avatar.jpg"
+                               nzSize="small"></nz-avatar>
+                    Admin
+                  </div>
+                  <ul nz-menu>
+                    <li nz-menu-item>
+                      <a>个人设置</a>
+                    </li>
+                    <li nz-menu-item>
+                      <a>退出登陆</a>
+                    </li>
+                  </ul>
+                </nz-dropdown>
+              </i>
+            </div>
+          </li>
+        </ul>
+
+
+      </div>
+
+
     </nz-header>
+
+
     <nz-content style="margin:0 16px;">
       <nz-breadcrumb style="margin:16px 0;">
-        <nz-breadcrumb-item>User</nz-breadcrumb-item>
-        <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
+        <nz-breadcrumb-item>控制台</nz-breadcrumb-item>
+        <!--<nz-breadcrumb-item>Bill</nz-breadcrumb-item>-->
       </nz-breadcrumb>
       <div style="padding:24px; background: #fff; min-height: 360px;">
         <router-outlet></router-outlet>
@@ -57,3 +102,5 @@
 <ng-template #trigger>
   <i nz-icon type="up"></i>
 </ng-template>
+
+

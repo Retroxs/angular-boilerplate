@@ -1,4 +1,5 @@
 @import "~ng-zorro-antd/ng-zorro-antd.less";
+
 :host {
   display: flex;
   flex-direction: column;
@@ -8,7 +9,6 @@
   ::ng-deep {
     .trigger {
       font-size: 18px;
-      line-height: 64px;
       padding: 0 24px;
       cursor: pointer;
       transition: color .3s;
@@ -27,10 +27,53 @@
 }
 
 
-.zsx_layout-sidebar {
-  background-color: @component-background;
-}
-.zsx_layout-header {
-  background-color: @primary-color;
-  padding: 0;
+.zsx {
+  &__layout {
+    &-sidebar {
+      background-color: @component-background;
+    }
+
+    &-header {
+      background-color: @primary-color;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      padding: 0;
+    }
+
+    &-nav {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+
+      &-wrapper {
+        color: #fff;
+        padding-right: 10px;
+        height: 40px;
+        display: flex;
+        flex: 1;
+        justify-content: space-between;
+      }
+
+      &-item {
+        display: block;
+        border-radius: 2px;
+        text-align: center;
+        line-height: 100%;
+        padding: 8px 2px;
+        min-width: 50px;
+        transition: background-color .3s;
+        cursor: pointer;
+        outline: 0;
+
+        &:hover, &:active {
+          color: #fff;
+          background-color: rgba(255, 255, 255, .2) !important;
+        }
+      }
+    }
+  }
+
+
 }
