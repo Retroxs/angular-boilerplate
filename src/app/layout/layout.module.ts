@@ -1,18 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { PassportComponent } from './passport/passport.component';
-import { LayoutSidebarComponent } from './default/sidebar/sidebar.component';
+import { LayoutPassportComponent } from './passport/passport.component';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { LayoutDefaultComponent } from './default/default.component';
-import { LayoutHeaderComponent } from './default/header/header.component';
+import { PageHeaderComponent } from './default/page/header/header.component';
 
 @NgModule({
-  declarations: [PassportComponent, LayoutDefaultComponent, LayoutSidebarComponent, LayoutHeaderComponent],
+  declarations: [LayoutPassportComponent, LayoutDefaultComponent, PageHeaderComponent],
   imports: [
     CommonModule,
     RouterModule,
     NgZorroAntdModule
+  ],
+  exports: [
+    NgZorroAntdModule,
+    PageHeaderComponent
   ]
 })
-export class LayoutModule { }
+export class LayoutModule {
+}

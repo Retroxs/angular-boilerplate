@@ -1,0 +1,71 @@
+@import "_var";
+
+ul {
+  list-style: none;
+}
+
+.zsx {
+  &__layout {
+    &-sidebar {
+      background-color: @component-background;
+
+      .ant-menu-item {
+        outline: none;
+      }
+    }
+
+    &-header {
+      background-color: @primary-color;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      padding: 0;
+    }
+
+    &-nav {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+
+      &-wrapper {
+        color: #fff;
+        padding-right: 10px;
+        height: 40px;
+        display: flex;
+        flex: 1;
+        justify-content: space-between;
+      }
+
+      &-item {
+        display: block;
+        border-radius: 2px;
+        text-align: center;
+        line-height: 100%;
+        padding: 8px;
+        min-width: 50px;
+        transition: background-color .3s;
+        cursor: pointer;
+        outline: 0;
+
+        &:hover, &:active {
+          color: #fff;
+          background-color: rgba(255, 255, 255, .2) !important;
+        }
+      }
+    }
+  }
+
+  &__content {
+    &-title {
+      height: 70px;
+      padding: 12px 24px;
+    }
+  }
+
+  &__table {
+    &-search-form {
+      margin-bottom: 24px;
+    }
+  }
+}
