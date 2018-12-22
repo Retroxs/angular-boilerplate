@@ -11,10 +11,13 @@ import { EnvComponent } from './dashboard/env/env.component';
 import { ConfigComponent } from './dashboard/config/config.component';
 import { MemberComponent } from './dashboard/member/member.component';
 import { PackComponent } from './dashboard/pack/pack.component';
-import { HighlightDirective } from './dashboard/config/highlight.directive';
+import { EnvFormComponent } from './dashboard/env/components/form/form.component';
+import { DangerDirective } from './danger.directive';
+import { ConfigFormComponent } from './dashboard/config/components/form/form.component';
+import { MemberFormComponent } from './dashboard/member/components/form/form.component';
 
 @NgModule({
-  declarations: [LoginComponent, WelcomeComponent, EnvComponent, ConfigComponent, MemberComponent, PackComponent, HighlightDirective],
+  declarations: [LoginComponent, WelcomeComponent, EnvComponent, ConfigComponent, MemberComponent, PackComponent, EnvFormComponent, DangerDirective, ConfigFormComponent, MemberFormComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -22,6 +25,7 @@ import { HighlightDirective } from './dashboard/config/highlight.directive';
     RoutesRoutingModule,
     LayoutModule
   ],
+  entryComponents: [EnvFormComponent, ConfigFormComponent, MemberFormComponent],
   exports: [RoutesRoutingModule]
 })
 export class RoutesModule {

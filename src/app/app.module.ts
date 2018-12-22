@@ -11,7 +11,7 @@ import { DefaultInterceptor } from './core/net/default.interceptor';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,

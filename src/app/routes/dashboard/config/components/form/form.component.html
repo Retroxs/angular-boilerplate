@@ -1,0 +1,41 @@
+
+<form nz-form [formGroup]="envForm" (ngSubmit)="onSubmit()">
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">名称</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="a">
+      <!--<nz-form-explain *ngIf="envForm.get('email').dirty && envForm.get('email').errors">The input is not valid E-mail!</nz-form-explain>-->
+      <!--<nz-form-extra danger>子项掩码由技术人员提供，请谨慎配置</nz-form-extra>-->
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>场景值</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="b">
+      <!--<nz-form-explain *ngIf="envForm.get('password').dirty && envForm.get('password').errors">Please input your password!</nz-form-explain>-->
+      <!--<nz-form-extra danger>常量名由技术人员提供，请谨慎配置</nz-form-extra>-->
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>排序</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="c">
+      <!--<nz-form-explain *ngIf="envForm.get('password').dirty && envForm.get('password').errors">Please input your password!</nz-form-explain>-->
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>状态</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-select formControlName="d">
+        <nz-option nzValue="1" nzLabel="生效"></nz-option>
+        <nz-option nzValue="0" nzLabel="失效"></nz-option>
+      </nz-select>
+      <!--<nz-form-explain *ngIf="envForm.get('password').dirty && envForm.get('password').errors">Please input your password!</nz-form-explain>-->
+    </nz-form-control>
+  </nz-form-item>
+
+</form>

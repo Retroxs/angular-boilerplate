@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { NzModalService } from 'ng-zorro-antd';
-import { ConfigComponent } from '../config/config.component';
+import { EnvFormComponent } from './components/form/form.component';
 
 @Component({
   selector: 'console-env',
@@ -15,8 +15,8 @@ export class EnvComponent implements OnInit {
       a: '1',
       b: 'John Brown',
       c: 32,
-      d: 'New York No. 1 Lake Park',
-      e: 'New York No. 1 Lake Park'
+      d: '1'
+      // e: 'New York No. 1 Lake Park'
     },
   ];
   validateForm = this.fb.group({
@@ -35,19 +35,43 @@ export class EnvComponent implements OnInit {
   }
 
   showModal(): void {
-    const modal = this.modalService.create({
-      nzTitle: 'Modal Title',
-      nzContent: ConfigComponent,
-      nzComponentParams: {
-        title: 'title in component',
-      },
+    this.modalService.create({
+      nzTitle: '添加数据项',
+      nzContent: EnvFormComponent,
       nzFooter: [{
-        label: 'change component tilte from outside',
+        label: '提交',
         onClick: (componentInstance) => {
-          componentInstance.title = 'title in inner component is changed';
+          componentInstance.onSubmit();
         }
       }]
     });
 
+  }
+
+  showEditModal(id) {
+    this.modalService.create({
+      nzTitle: '更新数据项',
+      nzContent: EnvFormComponent,
+      nzComponentParams: {
+        id
+      },
+      nzFooter: [{
+        label: '提交',
+        onClick: (componentInstance) => {
+          componentInstance.onSubmit();
+        }
+      }]
+    });
+  }
+
+  showDeleteConfirm() {
+    this.modalService.confirm({
+      nzTitle: '确认删除此项?',
+      nzOnOk: () => this.deleteItem()
+    });
+  }
+
+  private deleteItem() {
+    return undefined;
   }
 }
