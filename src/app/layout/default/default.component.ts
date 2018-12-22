@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '@zsx/core/auth/auth.service';
 
 @Component({
   selector: 'layout-default',
@@ -12,7 +12,9 @@ export class LayoutDefaultComponent implements OnInit {
   triggerTemplate = null;
 
   @ViewChild('trigger') customTrigger: TemplateRef<void>;
-  constructor() { }
+
+  constructor(private authService: AuthService) {
+  }
 
   ngOnInit() {
   }
@@ -20,5 +22,9 @@ export class LayoutDefaultComponent implements OnInit {
   /** custom trigger can be TemplateRef **/
   changeTrigger(): void {
     this.triggerTemplate = this.customTrigger;
+  }
+
+  logout() {
+    this.authService.deAuthorize();
   }
 }

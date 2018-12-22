@@ -1,23 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from '@zsx/core/auth/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.less']
 })
-export class LoginComponent implements OnInit {
-  username: string;
-  password: string;
+export class LoginComponent {
 
-  constructor(private http: HttpClient, private router: Router) { }
+  loginForm = this.fb.group({
+    username: ['', [Validators.required]],
+    password: ['', [Validators.required]]
+  });
 
-  ngOnInit() {
-  }
+  constructor(private fb: FormBuilder, private authService: AuthService) {}
 
   onSubmit(): void {
-    this.router.navigateByUrl('/');
+    const user = this.loginForm.value;
+    if (user.username === 'admin' && user.password === '111') {
+      this.authService.Authorize('token', '/');
+    } else {
+      console.log('password is incorrect');
+    }
   }
 
 }

@@ -8,26 +8,30 @@ import { EnvComponent } from './dashboard/env/env.component';
 import { ConfigComponent } from './dashboard/config/config.component';
 import { PackComponent } from './dashboard/pack/pack.component';
 import { MemberComponent } from './dashboard/member/member.component';
+import { AuthGuard } from '../core/auth/auth.guard';
 
 const routes: Routes = [
+  {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
   {
-    path: '',
+    path: 'dashboard',
     component: LayoutDefaultComponent,
+    canActivate: [AuthGuard],
     children: [
-      { path: '', redirectTo: 'dashboard/welcome', pathMatch: 'full' },
-      { path: 'dashboard', redirectTo: 'dashboard/welcome', pathMatch: 'full' },
-      { path: 'dashboard/welcome', component: WelcomeComponent },
-      { path: 'dashboard/env', component: EnvComponent },
-      { path: 'dashboard/config', component: ConfigComponent },
-      { path: 'dashboard/pack', component: PackComponent },
-      { path: 'dashboard/member', component: MemberComponent }
+      {path: '', redirectTo: 'welcome', pathMatch: 'full'},
+      {path: 'welcome', component: WelcomeComponent},
+      {path: 'env', component: EnvComponent},
+      {path: 'config', component: ConfigComponent},
+      {path: 'pack', component: PackComponent},
+      {path: 'member', component: MemberComponent}
     ],
   },
   {
     path: 'passport',
     component: LayoutPassportComponent,
+    canActivate: [AuthGuard],
     children: [
-      { path: 'login', component: LoginComponent }
+      {path: '', redirectTo: 'login', pathMatch: 'full'},
+      {path: 'login', component: LoginComponent}
     ]
   }
 ];

@@ -1,8 +1,12 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
+    "baseUrl": ".",
     "outDir": "../out-tsc/app",
-    "types": ["node"]
+    "types": ["node"],
+    "paths": {
+      "@zsx/core/*": ["./app/core/*"]
+    }
   },
   "exclude": [
     "test.ts",

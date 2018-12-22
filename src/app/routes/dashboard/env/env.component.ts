@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NzModalService } from 'ng-zorro-antd';
+import { ConfigComponent } from '../config/config.component';
 
 @Component({
   selector: 'console-env',
@@ -22,7 +24,7 @@ export class EnvComponent implements OnInit {
     lastName: ['']
   });
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private modalService: NzModalService) {
   }
 
   ngOnInit(): void {
@@ -32,4 +34,20 @@ export class EnvComponent implements OnInit {
     console.warn(this.validateForm.value);
   }
 
+  showModal(): void {
+    const modal = this.modalService.create({
+      nzTitle: 'Modal Title',
+      nzContent: ConfigComponent,
+      nzComponentParams: {
+        title: 'title in component',
+      },
+      nzFooter: [{
+        label: 'change component tilte from outside',
+        onClick: (componentInstance) => {
+          componentInstance.title = 'title in inner component is changed';
+        }
+      }]
+    });
+
+  }
 }

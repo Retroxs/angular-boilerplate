@@ -1,3 +1,11 @@
-<p>
-  config works!
-</p>
+
+<h1 appHighlight>{{title}}</h1>
+
+<input [(ngModel)]="num">
+<div *ngIf="showHero" #a>
+  <p *ngFor="let hero of heroes" on-click="echo(hero)">
+    {{hero}}
+  </p>
+</div>
+
+
