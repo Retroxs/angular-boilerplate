@@ -13,12 +13,22 @@ export class DefaultInterceptor implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const authReq = req.clone({
-      url: `/api/v1/${req.url}`,
+    const url = `/api/v1/${req.url}`;
+
+    const formReq = req.clone({
+      url,
       headers: req.headers.set('Content-Type', 'application/x-www-form-urlencoded')
         .set('Authorization', this.tokenService.get())
     });
-    return next.handle(authReq).pipe(
+
+    const commonReq = req.clone({
+      url,
+      headers: req.headers.set('Authorization', this.tokenService.get())
+    });
+
+    const request = url.match(/upload/) ? commonReq : formReq;
+
+    return next.handle(request).pipe(
       timeout(3000),
       tap(event => {
           if (event instanceof HttpResponse) {
