@@ -1,32 +1,29 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Query } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TableResponse } from '@zsx/core/net/response.interface';
 import { FormEncode, QuerySearch } from '@zsx/core/net/rest.decorators';
 
-
-export interface Env {
-  create_time: string;
-  define: string;
-  fn_code: string;
-  fn_id: number;
-  remark: string;
-  status: number;
+export interface Member {
+  member_id: string;
+  name: string;
+  logo: string;
+  suit_id: string;
+  suit_name: string;
 }
 
 @Injectable({
   providedIn: 'root'
 })
-export class EnvService {
-
+export class MemberService {
   constructor(private http: HttpClient) {
   }
 
-  prefix = 'function';
+  prefix = 'member';
 
   @QuerySearch()
-  fetch(params): Observable<TableResponse<Env[]>> {
-    return this.http.get<TableResponse<Env[]>>(`${this.prefix}/index`, {params});
+  fetch(params): Observable<TableResponse<Member[]>> {
+    return this.http.get<TableResponse<Member[]>>(`${this.prefix}/index`, {params});
   }
 
   @FormEncode()
@@ -42,10 +39,5 @@ export class EnvService {
   @FormEncode()
   delete(data) {
     return this.http.post(`${this.prefix}/delete`, data);
-  }
-
-  @FormEncode()
-  active(data) {
-    return this.http.post(`${this.prefix}/set-status`, data);
   }
 }

@@ -1,78 +1,89 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { NzModalService } from 'ng-zorro-antd';
 import { MemberFormComponent } from './components/form/form.component';
+import { Member, MemberService } from './member.service';
+import { BaseComponent } from '@zsx/core/base.component';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-member',
   templateUrl: './member.component.html',
   styleUrls: ['./member.component.less']
 })
-export class MemberComponent implements OnInit {
+export class MemberComponent extends BaseComponent implements OnInit {
 
-  dataSet = [
-    {
-      a: '1',
-      b: 'John Brown',
-      c: 32,
-      d: '1'
-      // e: 'New York No. 1 Lake Park'
-    },
-  ];
-  validateForm = this.fb.group({
-    firstName: ['', Validators.required],
-    lastName: ['']
+  dataSet: Member[];
+  queryForm = this.fb.group({
+    name: [''],
   });
 
-  constructor(private fb: FormBuilder, private modalService: NzModalService) {
+  constructor(private fb: FormBuilder, private modalService: NzModalService, private memberService: MemberService) {
+    super();
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.search();
   }
 
-  submitForm(): void {
-    console.warn(this.validateForm.value);
-  }
-
-  showModal(): void {
-    this.modalService.create({
-      nzTitle: '添加数据项',
+  showModal() {
+    const modal = this.modalService.create({
+      nzTitle: '添加会员',
       nzContent: MemberFormComponent,
       nzFooter: [{
         label: '提交',
         onClick: (componentInstance) => {
-          componentInstance.onSubmit();
+          this.memberService.create(componentInstance.envForm.value)
+            .pipe(
+              tap(() => modal.destroy()),
+              tap(() => this.search())
+            ).subscribe();
         }
       }]
     });
 
   }
 
-  showEditModal(id) {
-    this.modalService.create({
-      nzTitle: '更新数据项',
+  showEditModal(data) {
+    const modal = this.modalService.create({
+      nzTitle: '更新会员',
       nzContent: MemberFormComponent,
       nzComponentParams: {
-        id
+        member: data,
       },
       nzFooter: [{
         label: '提交',
         onClick: (componentInstance) => {
-          componentInstance.onSubmit();
+          this.memberService.update({...componentInstance.envForm.value, member_id: data.member_id})
+            .pipe(
+              tap(() => modal.destroy()),
+              tap(() => this.search())
+            ).subscribe();
         }
       }]
     });
   }
 
-  showDeleteConfirm() {
-    this.modalService.confirm({
+  showDeleteConfirm({member_id}) {
+    const modal = this.modalService.confirm({
       nzTitle: '确认删除此项?',
-      nzOnOk: () => this.deleteItem()
+      nzOnOk: () => this.memberService.delete({member_id})
+        .pipe(
+          tap(() => modal.destroy()),
+          tap(() => this.search())
+        ).subscribe()
     });
   }
 
-  private deleteItem() {
-    return undefined;
+  search(query = this.queryForm.value, page_size = this.pageSize, page = this.pageIndex) {
+    this.memberService.fetch({...query, page_size, page})
+      .pipe(
+        map(res => res.data),
+        tap(() => this.loading = false)
+      )
+      .subscribe(data => {
+        this.dataSet = data.list;
+        this.total = data.count;
+      });
   }
-
 }

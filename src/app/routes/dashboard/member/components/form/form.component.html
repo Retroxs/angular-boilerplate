@@ -3,9 +3,24 @@
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">会员名称</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="a">
-      <!--<nz-form-explain *ngIf="envForm.get('email').dirty && envForm.get('email').errors">The input is not valid E-mail!</nz-form-explain>-->
-      <!--<nz-form-extra danger>子项掩码由技术人员提供，请谨慎配置</nz-form-extra>-->
+      <input nz-input formControlName="name">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control>
+      <nz-upload class="avatar-uploader"
+                 nzAction="upload/member-image"
+                 nzName="UploadForm[file]"
+                 nzListType="picture-card"
+                 [nzShowUploadList]="false"
+                 (nzChange)="handleChange($event)">
+        <ng-container *ngIf="!avatarUrl">
+          <i nz-icon type="plus"></i>
+          <div class="ant-upload-text">Upload</div>
+        </ng-container>
+        <img *ngIf="avatarUrl" [src]="avatarUrl" class="avatar">
+      </nz-upload>
     </nz-form-control>
   </nz-form-item>
 

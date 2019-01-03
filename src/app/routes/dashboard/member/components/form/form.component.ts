@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { UploadChangeParam } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-form',
@@ -8,25 +9,29 @@ import { FormBuilder } from '@angular/forms';
 })
 export class MemberFormComponent implements OnInit {
 
-  @Input() id: Object;
+  @Input() member: any;
   envForm = this.fb.group({
-    a: [''],
-    b: [''],
-    c: [''],
-    d: [''],
+    name: [''],
+    logo: [''],
   });
+  avatarUrl: string;
 
   constructor(private fb: FormBuilder) {
   }
 
   ngOnInit() {
-    if (this.id) {
-      this.envForm.setValue({...this.id});
+    if (this.member) {
+      const {name, logo} = this.member;
+      this.envForm.setValue({name, logo});
+      this.avatarUrl = logo;
     }
   }
 
-  onSubmit() {
-    console.log(this.envForm.value);
+  handleChange($event: UploadChangeParam) {
+    const res = $event.file.response;
+    if (res) {
+      this.avatarUrl = res.data.url;
+      this.envForm.patchValue({logo: this.avatarUrl});
+    }
   }
-
 }
