@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '@zsx/core/auth/auth.service';
+import { LoginService } from './login.service';
+import qs from 'qs';
 
 @Component({
   selector: 'app-login',
@@ -10,19 +12,16 @@ import { AuthService } from '@zsx/core/auth/auth.service';
 export class LoginComponent {
 
   loginForm = this.fb.group({
-    username: ['', [Validators.required]],
+    user_name: ['', [Validators.required]],
     password: ['', [Validators.required]]
   });
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {}
+  constructor(private fb: FormBuilder, private loginService: LoginService) {
+  }
 
   onSubmit(): void {
     const user = this.loginForm.value;
-    if (user.username === 'admin' && user.password === '111') {
-      this.authService.Authorize('token', '/');
-    } else {
-      console.log('password is incorrect');
-    }
+    this.loginService.login(user).subscribe();
   }
 
 }

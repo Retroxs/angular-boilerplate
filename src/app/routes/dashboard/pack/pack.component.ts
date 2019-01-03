@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NzModalService } from 'ng-zorro-antd';
 import { ConfigFormComponent } from '../config/components/form/form.component';
+import { PackFormComponent } from './components/form/form.component';
 
 @Component({
   selector: 'app-pack',
@@ -37,7 +38,7 @@ export class PackComponent implements OnInit {
   showModal(): void {
     this.modalService.create({
       nzTitle: '添加数据项',
-      nzContent: ConfigFormComponent,
+      nzContent: PackFormComponent,
       nzFooter: [{
         label: '提交',
         onClick: (componentInstance) => {
@@ -51,7 +52,7 @@ export class PackComponent implements OnInit {
   showEditModal(id) {
     this.modalService.create({
       nzTitle: '更新数据项',
-      nzContent: ConfigFormComponent,
+      nzContent: PackFormComponent,
       nzComponentParams: {
         id
       },

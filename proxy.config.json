@@ -1,5 +1,14 @@
 {
-  "/api":{
-    "target":"http://localhost:8000"
+  "/api/v1":{
+    "target":"http://admin.purchase.zhuoshixiong.com",
+    "pathRewrite": {"^/api/v1" : "/v1"},
+    "changeOrigin": true,
+    "logLevel": "debug"
+  },
+
+  "/uploads":{
+    "target":"http://admin.purchase.zhuoshixiong.com",
+    "changeOrigin": true,
+    "logLevel": "debug"
   }
 }

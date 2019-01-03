@@ -1,29 +1,33 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, timeout } from 'rxjs/operators';
 import { NzMessageService } from 'ng-zorro-antd';
+import { TokenService } from '@zsx/core/auth/token.service';
+
 
 @Injectable()
 export class DefaultInterceptor implements HttpInterceptor {
 
-  constructor(private nzMessageService: NzMessageService) {
+  constructor(private nzMessageService: NzMessageService, private tokenService: TokenService) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const authToken = 'auth-xxx-auth';
     const authReq = req.clone({
-      headers: req.headers.set('Authorization', authToken)
+      url: `/api/v1/${req.url}`,
+      headers: req.headers.set('Content-Type', 'application/x-www-form-urlencoded')
+        .set('Authorization', this.tokenService.get())
     });
     return next.handle(authReq).pipe(
+      timeout(3000),
       tap(event => {
           if (event instanceof HttpResponse) {
             // console.info('');
           }
-        }, error => {
-          this.nzMessageService.error(error.status);
+        }, e => {
+          this.nzMessageService.error(e.error.msg);
         }
-      )
+      ),
     );
   }
 }

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Env, EnvService } from '../../env.service';
 
 @Component({
   selector: 'env-form',
@@ -8,24 +9,24 @@ import { FormBuilder } from '@angular/forms';
 })
 export class EnvFormComponent implements OnInit {
 
-  @Input() id: object;
+  @Input() env: Env;
+  @Input() id: string;
   envForm = this.fb.group({
-    a: [''],
-    b: [''],
-    c: [''],
-    d: [''],
+    fn_code: [''],
+    define: [''],
+    remark: [''],
+    status: ['1'],
   });
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private envService: EnvService) {
   }
 
   ngOnInit() {
     if (this.id) {
-      this.envForm.setValue({...this.id});
+      const {fn_code, define, remark, status} = this.env;
+      this.envForm.setValue({fn_code, define, remark, status: String(status)});
     }
   }
 
-  onSubmit() {
-    console.log(this.envForm.value);
-  }
+
 }

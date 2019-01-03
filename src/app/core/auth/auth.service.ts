@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthConfig } from './auth.config';
 import { TokenService } from './token.service';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private router: Router, private authConfig: AuthConfig, private tokenService: TokenService) {
+  constructor(private router: Router, private authConfig: AuthConfig, private tokenService: TokenService, private http: HttpClient) {
   }
 
 

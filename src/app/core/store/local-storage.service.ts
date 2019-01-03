@@ -12,7 +12,6 @@ export class LocalStorageStore<T> implements IStore<T> {
     localStorage.setItem(key, JSON.stringify(value));
     return true;
   }
-
   remove(key: string) {
     localStorage.removeItem(key);
     return true;

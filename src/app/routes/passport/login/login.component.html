@@ -6,9 +6,9 @@
   <nz-form-item>
     <nz-form-control>
       <nz-input-group [nzPrefix]="prefixUser">
-        <input formControlName="username" nz-input placeholder="用户名/邮箱">
+        <input formControlName="user_name" nz-input placeholder="用户名/邮箱">
       </nz-input-group>
-      <nz-form-explain *ngIf="loginForm.get('username').dirty && loginForm.get('username').errors">请输入用户名</nz-form-explain>
+      <nz-form-explain *ngIf="loginForm.get('user_name').dirty && loginForm.get('user_name').errors">请输入用户名</nz-form-explain>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>

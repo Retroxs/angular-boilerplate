@@ -12,8 +12,8 @@ export class TokenService {
   }
 
   get(): string {
-    let { token } = this.tokenStore.get(this.authConfig.token_key);
-    return token ? token : '';
+    const  { token } = this.tokenStore.get(this.authConfig.token_key);
+    return token ? 'Bearer ' + token : '';
 
   }
 
