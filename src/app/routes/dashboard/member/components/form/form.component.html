@@ -1,5 +1,4 @@
-<form nz-form [formGroup]="envForm" (ngSubmit)="onSubmit()">
-
+<form nz-form [formGroup]="envForm">
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">会员名称</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
@@ -8,6 +7,7 @@
   </nz-form-item>
 
   <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>会员图标</nz-form-label>
     <nz-form-control>
       <nz-upload class="avatar-uploader"
                  nzAction="upload/member-image"
@@ -23,33 +23,4 @@
       </nz-upload>
     </nz-form-control>
   </nz-form-item>
-
-  <!--<nz-form-item>-->
-    <!--<nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>场景值</nz-form-label>-->
-    <!--<nz-form-control [nzSm]="14" [nzXs]="24">-->
-      <!--<input nz-input formControlName="b">-->
-      <!--&lt;!&ndash;<nz-form-explain *ngIf="envForm.get('password').dirty && envForm.get('password').errors">Please input your password!</nz-form-explain>&ndash;&gt;-->
-      <!--&lt;!&ndash;<nz-form-extra danger>常量名由技术人员提供，请谨慎配置</nz-form-extra>&ndash;&gt;-->
-    <!--</nz-form-control>-->
-  <!--</nz-form-item>-->
-
-  <!--<nz-form-item>-->
-    <!--<nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>排序</nz-form-label>-->
-    <!--<nz-form-control [nzSm]="14" [nzXs]="24">-->
-      <!--<input nz-input formControlName="c">-->
-      <!--&lt;!&ndash;<nz-form-explain *ngIf="envForm.get('password').dirty && envForm.get('password').errors">Please input your password!</nz-form-explain>&ndash;&gt;-->
-    <!--</nz-form-control>-->
-  <!--</nz-form-item>-->
-
-  <!--<nz-form-item>-->
-    <!--<nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>状态</nz-form-label>-->
-    <!--<nz-form-control [nzSm]="14" [nzXs]="24">-->
-      <!--<nz-select formControlName="d">-->
-        <!--<nz-option nzValue="1" nzLabel="生效"></nz-option>-->
-        <!--<nz-option nzValue="0" nzLabel="失效"></nz-option>-->
-      <!--</nz-select>-->
-      <!--&lt;!&ndash;<nz-form-explain *ngIf="envForm.get('password').dirty && envForm.get('password').errors">Please input your password!</nz-form-explain>&ndash;&gt;-->
-    <!--</nz-form-control>-->
-  <!--</nz-form-item>-->
-
 </form>

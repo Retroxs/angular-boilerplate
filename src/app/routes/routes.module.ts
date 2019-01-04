@@ -16,9 +16,11 @@ import { DangerDirective } from './danger.directive';
 import { ConfigFormComponent } from './dashboard/config/components/form/form.component';
 import { MemberFormComponent } from './dashboard/member/components/form/form.component';
 import { PackFormComponent } from './dashboard/pack/components/form/form.component';
+import { PriceModalComponent } from './dashboard/pack/components/modal/price.modal';
+import { BindModalComponent } from './dashboard/pack/components/modal/bind.modal';
 
 @NgModule({
-  declarations: [LoginComponent, WelcomeComponent, EnvComponent, ConfigComponent, MemberComponent, PackComponent, EnvFormComponent, DangerDirective, ConfigFormComponent, MemberFormComponent, PackFormComponent],
+  declarations: [LoginComponent, WelcomeComponent, EnvComponent, ConfigComponent, MemberComponent, PackComponent, EnvFormComponent, DangerDirective, ConfigFormComponent, MemberFormComponent, PackFormComponent, PriceModalComponent, BindModalComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -26,7 +28,7 @@ import { PackFormComponent } from './dashboard/pack/components/form/form.compone
     RoutesRoutingModule,
     LayoutModule
   ],
-  entryComponents: [EnvFormComponent, ConfigFormComponent, MemberFormComponent, PackFormComponent],
+  entryComponents: [EnvFormComponent, ConfigFormComponent, MemberFormComponent, PackFormComponent, PriceModalComponent, BindModalComponent],
   exports: [RoutesRoutingModule]
 })
 export class RoutesModule {

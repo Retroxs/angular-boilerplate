@@ -1,139 +1,171 @@
 <nz-tabset [nzTabPosition]="'top'" [nzType]="'card'">
   <nz-tab nzTitle="基础信息">
-    <form nz-form nzLayout="horizontal" [formGroup]="envForm" (ngSubmit)="onSubmit()">
+    <form nz-form nzLayout="horizontal" [formGroup]="packForm" (ngSubmit)="onSubmit()">
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">套餐名称</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-          <input nz-input formControlName="a">
-          <!--<nz-form-explain *ngIf="envForm.get('email').dirty && envForm.get('email').errors">The input is not valid E-mail!</nz-form-explain>-->
-          <!--<nz-form-extra danger>子项掩码由技术人员提供，请谨慎配置</nz-form-extra>-->
+          <input nz-input formControlName="suit_name">
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>产品信息</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-          <input nz-input formControlName="b">
-          <!--<nz-form-explain *ngIf="envForm.get('password').dirty && envForm.get('password').errors">Please input your password!</nz-form-explain>-->
-          <!--<nz-form-extra danger>常量名由技术人员提供，请谨慎配置</nz-form-extra>-->
+          <nz-select formControlName="product_id">
+            <nz-option nzValue="" nzLabel="请选择所属产品"></nz-option>
+            <nz-option *ngFor="let p of select?.product_list" [nzValue]="p.product_id"
+                       [nzLabel]="p.product_name"></nz-option>
+          </nz-select>
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>原价</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-          <input nz-input formControlName="c">
-          <!--<nz-form-explain *ngIf="envForm.get('password').dirty && envForm.get('password').errors">Please input your password!</nz-form-explain>-->
+          <input nz-input formControlName="origin_price">
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>实际价格</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-          <input nz-input formControlName="c">
-          <!--<nz-form-explain *ngIf="envForm.get('password').dirty && envForm.get('password').errors">Please input your password!</nz-form-explain>-->
+          <input nz-input formControlName="price">
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>单次购买限制数</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-          <input nz-input formControlName="c">
-          <!--<nz-form-explain *ngIf="envForm.get('password').dirty && envForm.get('password').errors">Please input your password!</nz-form-explain>-->
+          <input nz-input formControlName="per_purchase_limit">
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>标签</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-          <input nz-input formControlName="c">
-          <!--<nz-form-explain *ngIf="envForm.get('password').dirty && envForm.get('password').errors">Please input your password!</nz-form-explain>-->
+          <input nz-input formControlName="tag_name">
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>是否推荐</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-          <nz-select formControlName="d">
-            <nz-option nzValue="1" nzLabel="生效"></nz-option>
-            <nz-option nzValue="0" nzLabel="失效"></nz-option>
+          <nz-select formControlName="recommend">
+            <nz-option nzValue="1" nzLabel="推荐"></nz-option>
+            <nz-option nzValue="0" nzLabel="不推荐"></nz-option>
           </nz-select>
-          <!--<nz-form-explain *ngIf="envForm.get('password').dirty && envForm.get('password').errors">Please input your password!</nz-form-explain>-->
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>场景类型</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-          <nz-select formControlName="d">
-            <nz-option nzValue="1" nzLabel="生效"></nz-option>
-            <nz-option nzValue="0" nzLabel="失效"></nz-option>
+          <nz-select formControlName="scen_type">
+            <nz-option nzValue="0" nzLabel="未知产品类型"></nz-option>
+            <nz-option nzValue="1" nzLabel="图片"></nz-option>
+            <nz-option nzValue="2" nzLabel="附件"></nz-option>
+            <nz-option nzValue="3" nzLabel="视频"></nz-option>
           </nz-select>
-          <!--<nz-form-explain *ngIf="envForm.get('password').dirty && envForm.get('password').errors">Please input your password!</nz-form-explain>-->
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>套餐图片</nz-form-label>
+        <nz-form-control>
+          <nz-upload class="avatar-uploader"
+                     nzAction="upload/suit-image"
+                     nzName="UploadForm[file]"
+                     nzListType="picture-card"
+                     [nzShowUploadList]="false"
+                     (nzChange)="handleChange($event)">
+            <ng-container *ngIf="!packForm.value.image_url">
+              <i nz-icon type="plus"></i>
+              <div class="ant-upload-text">Upload</div>
+            </ng-container>
+            <img *ngIf="packForm.value.image_url" [src]="packForm.value.image_url" class="avatar">
+          </nz-upload>
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>套餐状态</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-          <nz-select formControlName="d">
+          <nz-select formControlName="status">
             <nz-option nzValue="1" nzLabel="生效"></nz-option>
             <nz-option nzValue="0" nzLabel="失效"></nz-option>
           </nz-select>
-          <!--<nz-form-explain *ngIf="envForm.get('password').dirty && envForm.get('password').errors">Please input your password!</nz-form-explain>-->
         </nz-form-control>
       </nz-form-item>
 
     </form>
   </nz-tab>
+
+
   <nz-tab nzTitle="应用信息">
-    <button nz-button (click)="addApp()">
+    <button nz-button nzType="primary" (click)="addApp()">
       添加应用
     </button>
-    <div *ngFor="let app of apps; let i = index">
-      <input nz-input type="text">
-      <input nz-input type="text">
-      <button nz-button (click)="deleteApp(i)">delete{{i + 1}}</button>
+
+    <div *ngFor="let app of apps; let i = index" nz-row style="padding: 10px 0">
+      <div nz-col nzSpan="8">
+        <nz-select [(ngModel)]="app.app_id" style="width: 80%">
+          <nz-option nzValue="" nzLabel="请选择产品"></nz-option>
+          <nz-option *ngFor="let _app of select?.app_list" [nzValue]="_app.app_id" [nzLabel]="_app.remark"></nz-option>
+        </nz-select>
+      </div>
+      <div nz-col nzSpan="8">
+        <input nz-input [(ngModel)]="app.scen_code" style="width: 90%" placeholder="请输入请填写应用场景值">
+      </div>
+      <div nz-col nzSpan="4">
+        <button nz-button nzType="danger" (click)="deleteApp(i)">删除</button>
+      </div>
     </div>
   </nz-tab>
+
   <nz-tab nzTitle="授权码限制">
-    <form nz-form nzLayout="horizontal" [formGroup]="envForm" (ngSubmit)="onSubmit()">
+    <form nz-form nzLayout="horizontal" [formGroup]="packForm" (ngSubmit)="onSubmit()">
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">电脑限制数</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-          <input nz-input formControlName="a">
-          <!--<nz-form-explain *ngIf="envForm.get('email').dirty && envForm.get('email').errors">The input is not valid E-mail!</nz-form-explain>-->
-          <!--<nz-form-extra danger>子项掩码由技术人员提供，请谨慎配置</nz-form-extra>-->
+          <input nz-input formControlName="computer_count">
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>设备限制数</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-          <input nz-input formControlName="b">
-          <!--<nz-form-explain *ngIf="envForm.get('password').dirty && envForm.get('password').errors">Please input your password!</nz-form-explain>-->
-          <!--<nz-form-extra danger>常量名由技术人员提供，请谨慎配置</nz-form-extra>-->
+          <input nz-input formControlName="device_count">
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>有效期限(单位：天)</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-          <input nz-input formControlName="c">
-          <!--<nz-form-explain *ngIf="envForm.get('password').dirty && envForm.get('password').errors">Please input your password!</nz-form-explain>-->
+          <input nz-input formControlName="expire_in">
         </nz-form-control>
       </nz-form-item>
 
     </form>
   </nz-tab>
   <nz-tab nzTitle="授权码数据项限制">
-    <button nz-button (click)="addApp()">
+    <button nz-button nzType="primary" (click)="addFunc()">
       添加数据项
     </button>
-    <div *ngFor="let app of apps">
-      <input nz-input type="text">
-      <input nz-input type="text">
-      <button nz-button>-</button>
+    <div *ngFor="let func of func_list ; let i = index" nz-row style="padding: 10px 0">
+      <div nz-col nzSpan="6">
+        <nz-select [(ngModel)]="func.function_code" style="width: 80%">
+          <nz-option nzValue="" nzLabel="请选择数据项"></nz-option>
+          <nz-option *ngFor="let fn of select?.function_num" [nzValue]="fn.fn_code" [nzLabel]="fn.remark"></nz-option>
+        </nz-select>
+      </div>
+      <div nz-col nzSpan="6">
+        <input nz-input [(ngModel)]="func.fixid_count" style="width: 90%" placeholder="请输入标识限制数">
+      </div>
+      <div nz-col nzSpan="6">
+        <input nz-input [(ngModel)]="func.expire_in" style="width: 90%" placeholder="从创建日期起算的过期天数(-1表示无限制)">
+      </div>
+      <div nz-col nzSpan="4">
+        <button nz-button nzType="danger" (click)="deleteFunc(i)">删除</button>
+      </div>
     </div>
   </nz-tab>
 </nz-tabset>
