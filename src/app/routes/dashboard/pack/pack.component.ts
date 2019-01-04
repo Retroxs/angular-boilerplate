@@ -21,7 +21,7 @@ export class PackComponent extends BaseComponent implements OnInit {
     app_id: ['']
   });
 
-  select =  {};
+  select:any;
 
   constructor(private fb: FormBuilder, private modalService: NzModalService, private packService: PackService) {
     super();

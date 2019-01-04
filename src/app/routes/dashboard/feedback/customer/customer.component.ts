@@ -16,7 +16,7 @@ export class CustomerFeedbackComponent extends BaseComponent implements OnInit {
   dataSet = [];
   startValue: Date = null;
   endValue: Date = null;
-  select = {};
+  select: any;
 
   constructor(private fb: FormBuilder, private feedbackService: FeedbackService, private packService: PackService) {
     super();

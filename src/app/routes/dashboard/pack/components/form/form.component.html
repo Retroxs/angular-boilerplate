@@ -1,6 +1,6 @@
 <nz-tabset [nzTabPosition]="'top'" [nzType]="'card'">
   <nz-tab nzTitle="基础信息">
-    <form nz-form nzLayout="horizontal" [formGroup]="packForm" (ngSubmit)="onSubmit()">
+    <form nz-form nzLayout="horizontal" [formGroup]="packForm">
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">套餐名称</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
@@ -126,7 +126,7 @@
 
   <nz-tab nzTitle="授权码限制">
     <nz-alert nzType="warning" nzMessage="提示：如果不配置将会使用软件默认限制" nzShowIcon></nz-alert>
-    <form nz-form nzLayout="horizontal" [formGroup]="packForm" (ngSubmit)="onSubmit()">
+    <form nz-form nzLayout="horizontal" [formGroup]="packForm">
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">电脑限制数</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
