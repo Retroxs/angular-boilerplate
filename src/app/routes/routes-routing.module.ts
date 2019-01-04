@@ -9,6 +9,8 @@ import { ConfigComponent } from './dashboard/config/config.component';
 import { PackComponent } from './dashboard/pack/pack.component';
 import { MemberComponent } from './dashboard/member/member.component';
 import { AuthGuard } from '../core/auth/auth.guard';
+import { CustomerFeedbackComponent } from './dashboard/feedback/customer/customer.component';
+import { DataFeedbackComponent } from './dashboard/feedback/data/data.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -22,7 +24,9 @@ const routes: Routes = [
       {path: 'env', component: EnvComponent},
       {path: 'config', component: ConfigComponent},
       {path: 'pack', component: PackComponent},
-      {path: 'member', component: MemberComponent}
+      {path: 'member', component: MemberComponent},
+      {path: 'feedback_user', component: CustomerFeedbackComponent},
+      {path: 'feedback_data', component: DataFeedbackComponent}
     ],
   },
   {

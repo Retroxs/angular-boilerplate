@@ -52,7 +52,10 @@
       <td>{{data.origin_price}}</td>
       <td>{{data.price}}</td>
       <td>{{data.create_time}}</td>
-      <td>{{data.status}}</td>
+      <td>
+        <nz-tag *ngIf="data.has_app" [nzColor]="'green'">使用中</nz-tag>
+        <nz-tag *ngIf="!data.has_app" [nzColor]="'red'">未使用</nz-tag>
+      </td>
       <td>
         <a (click)="changePrice(data)">改价</a>
         <nz-divider nzType="vertical"></nz-divider>

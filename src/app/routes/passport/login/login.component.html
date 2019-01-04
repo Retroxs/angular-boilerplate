@@ -1,8 +1,4 @@
-
-<!--<input class="zsx__login-input" nz-input placeholder="用户名/邮箱" [(ngModel)]="user.username">-->
-<!--<input class="zsx__login-input" nz-input placeholder="密码" [(ngModel)]="user.password">-->
-<!--<button nz-button nzType="primary" (click)="onSubmit()"> 登陆 </button>-->
-<form nz-form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+<form nz-form [formGroup]="loginForm" (ngSubmit)="onLogin()">
   <nz-form-item>
     <nz-form-control>
       <nz-input-group [nzPrefix]="prefixUser">

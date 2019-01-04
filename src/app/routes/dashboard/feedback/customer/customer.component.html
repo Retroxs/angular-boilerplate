@@ -1,0 +1,80 @@
+<page-header title="用户反馈"></page-header>
+
+<nz-card>
+  <form class="zsx__table-search-form" nz-form nzLayout="inline" [formGroup]="queryForm" (ngSubmit)="search()">
+    <nz-form-item>
+      <nz-form-label>产品</nz-form-label>
+      <nz-form-control>
+        <nz-select style="width: 200px;" formControlName="app_id">
+          <nz-option nzValue="" nzLabel="全部"></nz-option>
+          <nz-option *ngFor="let app of select?.app_list" [nzValue]="app.app_id" [nzLabel]="app.remark"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label>软件版本</nz-form-label>
+      <nz-form-control>
+        <input formControlName="app_version" nz-input>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label >开始</nz-form-label>
+      <nz-form-control >
+        <nz-date-picker
+          [nzDisabledDate]="disabledStartDate"
+          nzShowTime
+          nzFormat="yyyy-MM-dd HH:mm:ss"
+          formControlName="start_time"
+          (ngModelChange)="onStartChange($event)">
+        </nz-date-picker>
+
+      </nz-form-control>
+    </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label>结束</nz-form-label>
+        <nz-form-control >
+          <nz-date-picker
+            [nzDisabledDate]="disabledEndDate"
+            nzShowTime
+            nzFormat="yyyy-MM-dd HH:mm:ss"
+            formControlName="end_time"
+            (ngModelChange)="onEndChange($event)">
+          </nz-date-picker>
+        </nz-form-control>
+      </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control>
+        <button nz-button nzType="primary">搜索</button>
+      </nz-form-control>
+    </nz-form-item>
+
+  </form>
+
+  <nz-table [nzData]="dataSet" [nzLoading]="loading" [nzFrontPagination]="false" [nzTotal]="total"
+            [(nzPageIndex)]="pageIndex" (nzPageIndexChange)="search()" >
+    <thead>
+    <tr>
+      <th>时间</th>
+      <th>反馈人</th>
+      <th>产品</th>
+      <th>软件版本</th>
+      <th>ip</th>
+      <th>反馈内容</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of dataSet">
+      <td>{{data.created_at}}</td>
+      <td>{{data.contact}}</td>
+      <td>{{data.app_name}}</td>
+      <td>{{data.app_version}}</td>
+      <td>{{data.ip}}</td>
+      <td>{{data.content}}</td>
+    </tr>
+    </tbody>
+  </nz-table>
+</nz-card>

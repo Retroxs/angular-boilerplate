@@ -30,8 +30,8 @@ export class ConfigFormComponent implements OnInit {
   ngOnInit() {
     if (this.config) {
       console.log(this.config);
-      const {name, scene_code, sort, status, icon} = this.config;
-      this.envForm.patchValue({name, scene_code, sort, status: String(status), icon});
+      const {name, scene_code, sort, status, icon, pid, tags, route} = this.config;
+      this.envForm.patchValue({name, scene_code, sort, status: String(status), icon, pid, tags, route});
       this.avatarUrl = icon;
     }
   }

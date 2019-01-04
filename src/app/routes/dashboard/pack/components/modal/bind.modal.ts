@@ -1,10 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 
 @Component({
-  template: `
-    <nz-checkbox-group [(ngModel)]="memberList"></nz-checkbox-group>
-  `,
+  template: `<nz-checkbox-group [(ngModel)]="memberList"></nz-checkbox-group>`,
 })
 export class BindModalComponent implements OnInit {
 
@@ -19,6 +16,7 @@ export class BindModalComponent implements OnInit {
         m.checked = true;
       }
     });
+    console.log(this.memberList);
   }
 
 }

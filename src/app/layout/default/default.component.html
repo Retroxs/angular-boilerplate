@@ -4,40 +4,53 @@
       {{isCollapsed ? '卓' : '卓师兄'}}
     </div>
     <ul nz-menu [nzTheme]="'light'" [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed">
-      <li nz-menu-item routerLink="/dashboard/env" [nzSelected]="initSelected === 'env'">数据项</li>
-      <li nz-menu-item routerLink="/dashboard/pack" [nzSelected]="initSelected === 'pack'">套餐</li>
-      <li nz-menu-item routerLink="/dashboard/member" [nzSelected]="initSelected === 'member'">会员</li>
-      <li nz-menu-item routerLink="/dashboard/config" [nzSelected]="initSelected === 'config'">首页功能配置</li>
+
+      <li nz-menu-item routerLink="/dashboard/config" [nzSelected]="initSelected === 'config'">
+        <span title><i nz-icon type="home"></i><span class="nav-text">首页功能配置</span></span>
+      </li>
+
+      <li nz-menu-item routerLink="/dashboard/env" [nzSelected]="initSelected === 'env'">
+        <span title><i nz-icon type="setting"></i><span class="nav-text">数据项</span></span>
+      </li>
+
+      <li nz-menu-item routerLink="/dashboard/pack" [nzSelected]="initSelected === 'pack'">
+        <span title><i nz-icon type="gift"></i><span class="nav-text">套餐</span></span>
+      </li>
+
+      <li nz-menu-item routerLink="/dashboard/member" [nzSelected]="initSelected === 'member'">
+        <span title><i nz-icon type="crown"></i><span class="nav-text">会员</span></span>
+      </li>
+
+      <li nz-submenu>
+        <span title><i nz-icon type="smile"></i><span class="nav-text">反馈管理</span></span>
+        <ul>
+          <li nz-menu-item routerLink="/dashboard/feedback_user">用户反馈</li>
+          <li nz-menu-item routerLink="/dashboard/feedback_data">数据项反馈</li>
+        </ul>
+      </li>
+
       <!--<li nz-submenu>-->
-        <!--<span title><i nz-icon type="user"></i><span class="nav-text">数据项</span></span>-->
-        <!--<ul>-->
-          <!--<li nz-menu-item routerLink="/dashboard/env">添加数据项</li>-->
-          <!--<li nz-menu-item routerLink="/dashboard/env">数据项信息</li>-->
-        <!--</ul>-->
+      <!--<span title><i nz-icon type="team"></i><span class="nav-text">套餐</span></span>-->
+      <!--<ul>-->
+      <!--<li nz-menu-item routerLink="/dashboard/pack">添加套餐</li>-->
+      <!--<li nz-menu-item routerLink="/dashboard/pack">套餐信息</li>-->
+      <!--</ul>-->
       <!--</li>-->
 
       <!--<li nz-submenu>-->
-        <!--<span title><i nz-icon type="team"></i><span class="nav-text">套餐</span></span>-->
-        <!--<ul>-->
-          <!--<li nz-menu-item routerLink="/dashboard/pack">添加套餐</li>-->
-          <!--<li nz-menu-item routerLink="/dashboard/pack">套餐信息</li>-->
-        <!--</ul>-->
+      <!--<span title><i nz-icon type="file"></i><span class="nav-text">会员</span></span>-->
+      <!--<ul>-->
+      <!--<li nz-menu-item routerLink="/dashboard/member">添加会员</li>-->
+      <!--<li nz-menu-item routerLink="/dashboard/member">会员信息</li>-->
+      <!--</ul>-->
       <!--</li>-->
 
       <!--<li nz-submenu>-->
-        <!--<span title><i nz-icon type="file"></i><span class="nav-text">会员</span></span>-->
-        <!--<ul>-->
-          <!--<li nz-menu-item routerLink="/dashboard/member">添加会员</li>-->
-          <!--<li nz-menu-item routerLink="/dashboard/member">会员信息</li>-->
-        <!--</ul>-->
-      <!--</li>-->
-
-      <!--<li nz-submenu>-->
-        <!--<span title><i nz-icon type="file"></i><span class="nav-text">首页功能配置</span></span>-->
-        <!--<ul>-->
-          <!--<li nz-menu-item routerLink="/dashboard/config">添加功能配置</li>-->
-          <!--<li nz-menu-item routerLink="/dashboard/config">配置信息</li>-->
-        <!--</ul>-->
+      <!--<span title><i nz-icon type="file"></i><span class="nav-text">首页功能配置</span></span>-->
+      <!--<ul>-->
+      <!--<li nz-menu-item routerLink="/dashboard/config">添加功能配置</li>-->
+      <!--<li nz-menu-item routerLink="/dashboard/config">配置信息</li>-->
+      <!--</ul>-->
       <!--</li>-->
 
     </ul>
@@ -79,9 +92,9 @@
       </div>
     </nz-header>
     <nz-content style="margin:0 16px;">
-        <router-outlet></router-outlet>
+      <router-outlet></router-outlet>
     </nz-content>
-    <nz-footer style="text-align: center;">@2018 by zhuoshixong</nz-footer>
+    <nz-footer style="text-align: center;">@2018 by zhuoshixiong</nz-footer>
   </nz-layout>
 </nz-layout>
 

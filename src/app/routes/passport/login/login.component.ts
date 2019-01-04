@@ -1,13 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from '@zsx/core/auth/auth.service';
 import { LoginService } from './login.service';
-import qs from 'qs';
 
 @Component({
-  selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.less']
+  styles: [':host { display: block;width: 368px;margin: 0 auto;}']
 })
 export class LoginComponent {
 
@@ -16,12 +13,10 @@ export class LoginComponent {
     password: ['', [Validators.required]]
   });
 
-  constructor(private fb: FormBuilder, private loginService: LoginService) {
-  }
+  constructor(private fb: FormBuilder, private loginService: LoginService) {}
 
-  onSubmit(): void {
+  onLogin(): void {
     const user = this.loginForm.value;
     this.loginService.login(user).subscribe();
   }
-
 }

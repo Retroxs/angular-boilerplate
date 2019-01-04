@@ -10,6 +10,9 @@ export interface Config {
   icon: string;
   sort: number;
   status: number;
+  route: string;
+  tags: string;
+  pid: string;
   create_time: number;
   update_time: number;
   scene_code: string;

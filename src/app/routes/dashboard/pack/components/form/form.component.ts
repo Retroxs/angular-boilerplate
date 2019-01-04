@@ -59,11 +59,6 @@ export class PackFormComponent implements OnInit {
         ...rest
       } = this.pack;
 
-      Object.keys(rest).forEach(v => {
-        if (typeof rest[v] === 'number') {
-          rest[v] = String(rest[v]);
-        }
-      });
       this.packForm.setValue({...rest, apps, fun_value});
       this.apps = apps;
       this.func_list = fun_value;
@@ -98,4 +93,7 @@ export class PackFormComponent implements OnInit {
     return this.packForm.value;
   }
 
+  compareFn(o1, o2) {
+    return o1 == o2;
+  }
 }

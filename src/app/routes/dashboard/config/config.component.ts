@@ -7,9 +7,7 @@ import { map, tap } from 'rxjs/operators';
 import { BaseComponent } from '@zsx/core/base.component';
 
 @Component({
-  selector: 'app-config',
-  templateUrl: './config.component.html',
-  styleUrls: ['./config.component.less'],
+  templateUrl: './config.component.html'
 })
 export class ConfigComponent extends BaseComponent implements OnInit {
   dataSet: Config[];

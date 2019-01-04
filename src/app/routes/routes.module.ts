@@ -18,9 +18,11 @@ import { MemberFormComponent } from './dashboard/member/components/form/form.com
 import { PackFormComponent } from './dashboard/pack/components/form/form.component';
 import { PriceModalComponent } from './dashboard/pack/components/modal/price.modal';
 import { BindModalComponent } from './dashboard/pack/components/modal/bind.modal';
+import { CustomerFeedbackComponent } from './dashboard/feedback/customer/customer.component';
+import { DataFeedbackComponent } from './dashboard/feedback/data/data.component';
 
 @NgModule({
-  declarations: [LoginComponent, WelcomeComponent, EnvComponent, ConfigComponent, MemberComponent, PackComponent, EnvFormComponent, DangerDirective, ConfigFormComponent, MemberFormComponent, PackFormComponent, PriceModalComponent, BindModalComponent],
+  declarations: [LoginComponent, WelcomeComponent, EnvComponent, ConfigComponent, MemberComponent, PackComponent, EnvFormComponent, DangerDirective, ConfigFormComponent, MemberFormComponent, PackFormComponent, PriceModalComponent, BindModalComponent, CustomerFeedbackComponent, DataFeedbackComponent],
   imports: [
     CommonModule,
     FormsModule,

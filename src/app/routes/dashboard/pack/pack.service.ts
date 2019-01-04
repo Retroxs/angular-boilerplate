@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { FormEncode, QuerySearch } from '@zsx/core/net/rest.decorators';
 import { Observable } from 'rxjs';
 import { TableResponse, Response } from '@zsx/core/net/response.interface';
-import { prefillHostVars } from '@angular/core/src/render3/instructions';
 
 export interface Pack {
   suit_id: string;
@@ -11,7 +10,7 @@ export interface Pack {
   origin_price: string;
   price: string;
   create_time: string;
-  status: string;
+  has_app: string;
 }
 
 @Injectable({
