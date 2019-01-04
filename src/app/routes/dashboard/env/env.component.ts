@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { NzModalService } from 'ng-zorro-antd';
+import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import { EnvFormComponent } from './components/form/form.component';
 import { Env, EnvService } from './env.service';
 import { BaseComponent } from '@zsx/core/base.component';
@@ -21,7 +21,10 @@ export class EnvComponent extends BaseComponent implements OnInit {
     status: ['']
   });
 
-  constructor(private fb: FormBuilder, private modalService: NzModalService, private envService: EnvService) {
+  constructor(private fb: FormBuilder,
+              private message: NzMessageService,
+              private modalService: NzModalService,
+              private envService: EnvService) {
     super();
   }
 
@@ -51,6 +54,7 @@ export class EnvComponent extends BaseComponent implements OnInit {
         onClick: (componentInstance) => {
           this.envService.create(componentInstance.envForm.value)
             .pipe(
+              tap(() => this.message.create('success', '操作成功')),
               tap(() => modal.destroy()),
               tap(() => this.handleChange())
             ).subscribe();
@@ -72,6 +76,7 @@ export class EnvComponent extends BaseComponent implements OnInit {
         onClick: (componentInstance) => {
           this.envService.update({...componentInstance.envForm.value, fn_id: env.fn_id})
             .pipe(
+              tap(() => this.message.create('success', '操作成功')),
               tap(() => modal.destroy()),
               tap(() => this.handleChange())
             ).subscribe();
@@ -85,6 +90,7 @@ export class EnvComponent extends BaseComponent implements OnInit {
       nzTitle: '确认删除此项?',
       nzOnOk: () => this.envService.delete({fn_id})
         .pipe(
+          tap(() => this.message.create('success', '操作成功')),
           tap(() => modal.destroy()),
           tap(() => this.handleChange())
         ).subscribe()
@@ -104,6 +110,7 @@ export class EnvComponent extends BaseComponent implements OnInit {
       nzTitle: '确认更新此项?',
       nzOnOk: () => this.envService.active({fn_id, status: +!status})
         .pipe(
+          tap(() => this.message.create('success', '操作成功')),
           tap(() => modal.destroy()),
           tap(() => this.handleChange())
         ).subscribe()

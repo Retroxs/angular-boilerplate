@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { NzModalService } from 'ng-zorro-antd';
+import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import { MemberFormComponent } from './components/form/form.component';
 import { Member, MemberService } from './member.service';
 import { BaseComponent } from '@zsx/core/base.component';
@@ -18,7 +18,10 @@ export class MemberComponent extends BaseComponent implements OnInit {
     name: [''],
   });
 
-  constructor(private fb: FormBuilder, private modalService: NzModalService, private memberService: MemberService) {
+  constructor(private fb: FormBuilder,
+              private message: NzMessageService,
+              private modalService: NzModalService,
+              private memberService: MemberService) {
     super();
   }
 
@@ -35,6 +38,7 @@ export class MemberComponent extends BaseComponent implements OnInit {
         onClick: (componentInstance) => {
           this.memberService.create(componentInstance.envForm.value)
             .pipe(
+              tap(() => this.message.create('success', '操作成功')),
               tap(() => modal.destroy()),
               tap(() => this.search())
             ).subscribe();
@@ -56,6 +60,7 @@ export class MemberComponent extends BaseComponent implements OnInit {
         onClick: (componentInstance) => {
           this.memberService.update({...componentInstance.envForm.value, member_id: data.member_id})
             .pipe(
+              tap(() => this.message.create('success', '操作成功')),
               tap(() => modal.destroy()),
               tap(() => this.search())
             ).subscribe();
@@ -69,6 +74,7 @@ export class MemberComponent extends BaseComponent implements OnInit {
       nzTitle: '确认删除此项?',
       nzOnOk: () => this.memberService.delete({member_id})
         .pipe(
+          tap(() => this.message.create('success', '操作成功')),
           tap(() => modal.destroy()),
           tap(() => this.search())
         ).subscribe()

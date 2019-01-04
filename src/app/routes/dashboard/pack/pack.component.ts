@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { NzModalService } from 'ng-zorro-antd';
+import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import { PackFormComponent } from './components/form/form.component';
 import { Pack, PackService } from './pack.service';
 import { map, tap } from 'rxjs/operators';
@@ -21,9 +21,12 @@ export class PackComponent extends BaseComponent implements OnInit {
     app_id: ['']
   });
 
-  select:any;
+  select: any;
 
-  constructor(private fb: FormBuilder, private modalService: NzModalService, private packService: PackService) {
+  constructor(private fb: FormBuilder,
+              private message: NzMessageService,
+              private modalService: NzModalService,
+              private packService: PackService) {
     super();
   }
 
@@ -46,6 +49,7 @@ export class PackComponent extends BaseComponent implements OnInit {
           console.log(componentInstance.allFormValue());
           this.packService.create(componentInstance.allFormValue())
             .pipe(
+              tap(() => this.message.create('success', '操作成功')),
               tap(() => modal.destroy()),
               tap(() => this.search())
             ).subscribe();
@@ -76,6 +80,7 @@ export class PackComponent extends BaseComponent implements OnInit {
           onClick: (componentInstance) => {
             this.packService.update({...componentInstance.packForm.value, suit_id: data.suit_id})
               .pipe(
+                tap(() => this.message.create('success', '操作成功')),
                 tap(() => modal.destroy()),
                 tap(() => this.search())
               ).subscribe();
@@ -90,6 +95,7 @@ export class PackComponent extends BaseComponent implements OnInit {
       nzTitle: '确认删除此项?',
       nzOnOk: () => this.packService.delete({suit_id})
         .pipe(
+          tap(() => this.message.create('success', '操作成功')),
           tap(() => modal.destroy()),
           tap(() => this.search())
         ).subscribe()
@@ -125,6 +131,7 @@ export class PackComponent extends BaseComponent implements OnInit {
             onClick: (componentInstance) => {
               this.packService.updatePrice({...componentInstance.priceForm.value, suit_id: data.suit_id})
                 .pipe(
+                  tap(() => this.message.create('success', '操作成功')),
                   tap(() => modal.destroy()),
                   tap(() => this.search())
                 ).subscribe();
@@ -154,6 +161,7 @@ export class PackComponent extends BaseComponent implements OnInit {
               const checkedList = componentInstance.memberList.filter(m => m.checked).map(m => m.member_id);
               this.packService.bindMember({member_id: checkedList, suit_id: data.suit_id})
                 .pipe(
+                  tap(() => this.message.create('success', '操作成功')),
                   tap(() => modal.destroy()),
                   tap(() => this.search())
                 ).subscribe();

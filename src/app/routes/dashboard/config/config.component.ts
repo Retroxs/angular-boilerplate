@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { NzModalService } from 'ng-zorro-antd';
+import { FormBuilder } from '@angular/forms';
+import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import { ConfigFormComponent } from './components/form/form.component';
 import { ConfigService, Config } from './config.service';
 import { map, tap } from 'rxjs/operators';
@@ -16,7 +16,10 @@ export class ConfigComponent extends BaseComponent implements OnInit {
   });
   select = [];
 
-  constructor(private fb: FormBuilder, private modalService: NzModalService, private configService: ConfigService) {
+  constructor(private fb: FormBuilder,
+              private modalService: NzModalService,
+              private message: NzMessageService,
+              private configService: ConfigService) {
     super();
   }
 
@@ -37,6 +40,7 @@ export class ConfigComponent extends BaseComponent implements OnInit {
         onClick: (componentInstance) => {
           this.configService.create(componentInstance.envForm.value)
             .pipe(
+              tap(() => this.message.create('success', '操作成功')),
               tap(() => modal.destroy()),
               tap(() => this.search())
             ).subscribe();
@@ -59,6 +63,7 @@ export class ConfigComponent extends BaseComponent implements OnInit {
         onClick: (componentInstance) => {
           this.configService.update({...componentInstance.envForm.value, id: data.id})
             .pipe(
+              tap(() => this.message.create('success', '操作成功')),
               tap(() => modal.destroy()),
               tap(() => this.search())
             ).subscribe();
@@ -72,6 +77,7 @@ export class ConfigComponent extends BaseComponent implements OnInit {
       nzTitle: `确认${status ? '隐藏' : '显示'}此项?`,
       nzOnOk: () => this.configService.active({id, status: +!status})
         .pipe(
+          tap(() => this.message.create('success', '操作成功')),
           tap(() => modal.destroy()),
           tap(() => this.search())
         ).subscribe()
