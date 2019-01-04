@@ -154,7 +154,10 @@
     </form>
   </nz-tab>
   <nz-tab nzTitle="授权码数据项限制">
-    <nz-alert nzType="warning" nzMessage="提示：如果不配置将会使用软件默认数据项限制" nzShowIcon style="margin-bottom: 20px"></nz-alert>
+    <nz-alert nzType="warning" nzMessage="提示：如果不配置将会使用软件默认数据项限制，默认数据项有如下：" nzShowIcon style="margin-bottom: 20px" [nzDescription]="tags"></nz-alert>
+      <ng-template #tags>
+      <nz-tag [nzColor]="'volcano'" *ngFor="let tag of select?.default_function_limit">{{tag.softwareFNum.remark}}</nz-tag>
+      </ng-template>
     <button nz-button nzType="primary" (click)="addFunc()">
       添加数据项
     </button>
