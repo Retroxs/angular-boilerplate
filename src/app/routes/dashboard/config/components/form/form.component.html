@@ -46,6 +46,13 @@
   </nz-form-item>
 
   <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>缺省值标识</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="place_holder">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>父级功能</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <nz-select formControlName="pid">

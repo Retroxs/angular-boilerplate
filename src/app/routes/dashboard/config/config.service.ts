@@ -13,6 +13,8 @@ export interface Config {
   route: string;
   tags: string;
   pid: string;
+  place_holder: string;
+  parent_func_name: string;
   create_time: number;
   update_time: number;
   scene_code: string;

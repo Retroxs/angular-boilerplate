@@ -18,6 +18,7 @@ export class ConfigFormComponent implements OnInit {
     status: ['1'],
     icon: [''],
     route: [''],
+    place_holder: [''],
     pid: [''],
     tags: [''],
   });
