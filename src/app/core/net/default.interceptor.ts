@@ -4,12 +4,13 @@ import { Observable } from 'rxjs';
 import { tap, timeout } from 'rxjs/operators';
 import { NzMessageService } from 'ng-zorro-antd';
 import { TokenService } from '@zsx/core/auth/token.service';
+import { AuthService } from '@zsx/core/auth/auth.service';
 
 
 @Injectable()
 export class DefaultInterceptor implements HttpInterceptor {
 
-  constructor(private nzMessageService: NzMessageService, private tokenService: TokenService) {
+  constructor(private nzMessageService: NzMessageService, private tokenService: TokenService, private authService: AuthService) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -32,9 +33,12 @@ export class DefaultInterceptor implements HttpInterceptor {
       timeout(3000),
       tap(event => {
           if (event instanceof HttpResponse) {
-            // console.info('');
           }
         }, e => {
+          const httpStatus = e.status;
+          if (httpStatus === 401) {
+            this.authService.deAuthorize();
+          }
           this.nzMessageService.error(e.error.msg);
         }
       ),

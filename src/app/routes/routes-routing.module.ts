@@ -19,7 +19,7 @@ const routes: Routes = [
     component: LayoutDefaultComponent,
     canActivate: [AuthGuard],
     children: [
-      {path: '', redirectTo: 'welcome', pathMatch: 'full'},
+      {path: '', redirectTo: 'config', pathMatch: 'full'},
       {path: 'welcome', component: WelcomeComponent},
       {path: 'env', component: EnvComponent},
       {path: 'config', component: ConfigComponent},
