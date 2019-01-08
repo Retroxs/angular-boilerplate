@@ -1,13 +1,13 @@
 {
   "/api/v1":{
-    "target":"http://admin.purchase.zhuoshixiong.com",
+    "target":"http://apiadmin.purchase.zhuoshixiong.com",
     "pathRewrite": {"^/api/v1" : "/v1"},
     "changeOrigin": true,
     "logLevel": "debug"
   },
 
   "/uploads":{
-    "target":"http://admin.purchase.zhuoshixiong.com",
+    "target":"http://apiadmin.purchase.zhuoshixiong.com",
     "changeOrigin": true,
     "logLevel": "debug"
   }
