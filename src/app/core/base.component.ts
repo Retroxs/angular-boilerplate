@@ -63,8 +63,12 @@ export class BaseTableComponent implements OnInit {
       nzTitle,
       nzContent,
       nzComponentParams,
+      nzKeyboard: false,
+      nzMaskClosable: false,
+      nzWidth: 700,
       nzFooter: [{
         label: '提交',
+        type: 'primary',
         onClick: (componentInstance) => {
           source$(componentInstance)
             .pipe(

@@ -1,6 +1,5 @@
-import { Injectable, Query } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { TableResponse, Response } from '@zsx/core/net/response.interface';
 import { FormEncode, QuerySearch } from '@zsx/core/net/rest.decorators';
 
@@ -20,41 +19,46 @@ export interface Config {
   scene_code: string;
 }
 
+export interface Pid {
+  id: number;
+  name: string;
+}
+
+
 @Injectable({
   providedIn: 'root'
 })
-export class ConfigService {
-  constructor(private http: HttpClient) {
-  }
+export class AppFunctionService {
+  constructor(private http: HttpClient) {}
 
-  prefix = 'app-func';
+  private baseUrl = 'app-func';
 
   @QuerySearch()
-  fetch(params): Observable<TableResponse<Config[]>> {
-    return this.http.get<TableResponse<Config[]>>(`${this.prefix}/index`, {params});
+  fetch(params) {
+    return this.http.get<TableResponse<Config[]>>(`${this.baseUrl}/index`, {params});
   }
 
   fetchSelect() {
-    return this.http.get<Response<any>>(`${this.prefix}/get-select`);
+    return this.http.get<Response<Pid[]>>(`${this.baseUrl}/get-select`);
   }
 
   @FormEncode()
   create(data) {
-    return this.http.post(`${this.prefix}/add`, data);
+    return this.http.post(`${this.baseUrl}/add`, data);
   }
 
   @FormEncode()
   update(data) {
-    return this.http.post(`${this.prefix}/edit`, data);
+    return this.http.post(`${this.baseUrl}/edit`, data);
   }
 
   @FormEncode()
   delete(data) {
-    return this.http.post(`${this.prefix}/delete`, data);
+    return this.http.post(`${this.baseUrl}/delete`, data);
   }
 
   @FormEncode()
-  active(data) {
-    return this.http.post(`${this.prefix}/set-status`, data);
+  setStatus(data) {
+    return this.http.post(`${this.baseUrl}/set-status`, data);
   }
 }

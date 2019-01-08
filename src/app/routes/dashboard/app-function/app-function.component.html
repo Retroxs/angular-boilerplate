@@ -22,8 +22,15 @@
   </form>
 
 
-    <nz-table [nzData]="dataSet" [nzLoading]="loading" [nzFrontPagination]="false" [nzTotal]="total"
-              [(nzPageIndex)]="pageIndex" (nzPageIndexChange)="search()">
+    <nz-table
+              nzBordered
+              [nzSize]="'middle'"
+              [nzData]="dataSet"
+              [nzLoading]="loading"
+              [nzFrontPagination]="false"
+              [nzTotal]="total"
+              [(nzPageIndex)]="pageIndex"
+              (nzPageIndexChange)="search()">
     <thead>
     <tr>
       <th>ID</th>
@@ -31,9 +38,9 @@
       <th>名称</th>
       <th>跳转场景值</th>
       <th>排序</th>
-      <th>路由</th>
-      <th>标签</th>
-      <th>缺省值标识</th>
+      <th [nzWidth]="'150px'">路由</th>
+      <th [nzWidth]="'150px'">标签</th>
+      <th [nzWidth]="'150px'">缺省值标识</th>
       <th>父级功能</th>
       <th>当前状态</th>
       <th>操作</th>
@@ -43,7 +50,7 @@
     <tr *ngFor="let data of dataSet">
       <td>{{data.id}}</td>
       <td>
-        <img [src]="data.icon" alt="">
+        <img class="zsx__table-row-image" [src]="data.icon" alt="">
       </td>
       <td>{{data.name}}</td>
       <td>{{data.scene_code}}</td>
@@ -53,13 +60,12 @@
       <td>{{data.place_holder}}</td>
       <td>{{data.parent_func_name}}</td>
       <td>
-        <nz-tag *ngIf="data.status" [nzColor]="'green'">已显示</nz-tag>
-        <nz-tag *ngIf="!data.status" [nzColor]="'red'">已隐藏</nz-tag>
+        <nz-tag [nzColor]="data.status?'green':'red'">{{data.status | status:'visible'}}</nz-tag>
       </td>
       <td>
         <a (click)="showEditModal(data)">编辑</a>
         <nz-divider nzType="vertical"></nz-divider>
-        <a (click)="changeStatus(data)">{{data.status ? '隐藏' : '显示'}}</a>
+        <a nz-popconfirm [nzTitle]="(data.status?'隐藏':'显示') + '此功能'" nzPlacement="top" (nzOnConfirm)="setStatus(data)">{{data.status ? '隐藏':'显示'}}</a>
       </td>
     </tr>
     </tbody>

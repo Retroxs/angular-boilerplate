@@ -5,7 +5,7 @@ import { LayoutPassportComponent } from '../layout/passport/passport.component';
 import { LayoutDefaultComponent } from '../layout/default/default.component';
 import { WelcomeComponent } from './dashboard/welcome/welcome.component';
 import { EnvComponent } from './dashboard/env/env.component';
-import { ConfigComponent } from './dashboard/config/config.component';
+import { AppFunctionComponent } from './dashboard/app-function/app-function.component';
 import { PackComponent } from './dashboard/pack/pack.component';
 import { MemberComponent } from './dashboard/member/member.component';
 import { AuthGuard } from '../core/auth/auth.guard';
@@ -22,7 +22,7 @@ const routes: Routes = [
       {path: '', redirectTo: 'config', pathMatch: 'full'},
       {path: 'welcome', component: WelcomeComponent},
       {path: 'env', component: EnvComponent},
-      {path: 'config', component: ConfigComponent},
+      {path: 'config', component: AppFunctionComponent},
       {path: 'pack', component: PackComponent},
       {path: 'member', component: MemberComponent},
       {path: 'feedback_user', component: CustomerFeedbackComponent},

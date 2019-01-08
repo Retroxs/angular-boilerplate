@@ -1,32 +1,32 @@
-<form nz-form [formGroup]="envForm">
+<form nz-form [formGroup]="appFunctionForm">
 
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">名称</nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>名称</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <input nz-input formControlName="name">
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>场景值</nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>场景值</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <input nz-input formControlName="scene_code">
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>排序</nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>排序</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <input nz-input formControlName="sort">
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>状态</nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>状态</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <nz-select formControlName="status">
-        <nz-option nzValue="1" nzLabel="显示"></nz-option>
-        <nz-option nzValue="0" nzLabel="隐藏"></nz-option>
+        <nz-option [nzValue]="1" nzLabel="显示"></nz-option>
+        <nz-option [nzValue]="0" nzLabel="隐藏"></nz-option>
       </nz-select>
     </nz-form-control>
   </nz-form-item>
@@ -53,11 +53,11 @@
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>父级功能</nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>父级功能</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <nz-select formControlName="pid">
-        <nz-option nzValue="" nzLabel="请选择父级功能"></nz-option>
-        <nz-option *ngFor="let pid of select" [nzValue]="pid.id" [nzLabel]="pid.name"></nz-option>
+        <nz-option [nzValue]="0" nzLabel="顶级"></nz-option>
+        <nz-option *ngFor="let pid of parentPid" [nzValue]="pid.id" [nzLabel]="pid.name"></nz-option>
       </nz-select>
     </nz-form-control>
   </nz-form-item>
@@ -65,19 +65,17 @@
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>配置图标</nz-form-label>
     <nz-form-control>
-      <nz-upload class="avatar-uploader"
-                 nzAction="upload/app-func"
+      <nz-upload nzAction="upload/app-func"
                  nzName="UploadForm[file]"
                  nzListType="picture-card"
                  [nzShowUploadList]="false"
-                 (nzChange)="handleChange($event)">
-        <ng-container *ngIf="!avatarUrl">
+                 (nzChange)="handleUploadChange($event)">
+        <ng-container *ngIf="!iconUrl">
           <i nz-icon type="plus"></i>
           <div class="ant-upload-text">Upload</div>
         </ng-container>
-        <img *ngIf="avatarUrl" [src]="avatarUrl" class="avatar">
+        <img *ngIf="iconUrl" [src]="iconUrl"  class="avatar">
       </nz-upload>
     </nz-form-control>
   </nz-form-item>
-
 </form>
