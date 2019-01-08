@@ -7,20 +7,20 @@ import { LayoutModule } from '../layout/layout.module';
 
 import { WelcomeComponent } from './dashboard/welcome/welcome.component';
 import { LoginComponent } from './passport/login/login.component';
-import { AppEnvComponent } from './dashboard/env/app-env.component';
 import { AppFunctionComponent } from './dashboard/app-function/app-function.component';
 import { MemberComponent } from './dashboard/member/member.component';
 import { PackComponent } from './dashboard/pack/pack.component';
-import { AppEnvModalComponent } from './dashboard/env/modal/app-env-modal.component';
 import { DangerDirective } from './danger.directive';
 import { AppFunctionModalComponent } from './dashboard/app-function/modal/app-function-modal.component';
-import { MemberFormComponent } from './dashboard/member/components/form/form.component';
+import { MemberModalComponent } from './dashboard/member/modal/member-modal.component';
 import { PackFormComponent } from './dashboard/pack/components/form/form.component';
 import { PriceModalComponent } from './dashboard/pack/components/modal/price.modal';
 import { BindModalComponent } from './dashboard/pack/components/modal/bind.modal';
 import { CustomerFeedbackComponent } from './dashboard/feedback/customer/customer.component';
 import { DataFeedbackComponent } from './dashboard/feedback/data/data.component';
 import { StatusPipe } from '@zsx/core/pipe/status.pipe';
+import { AppEnvModalComponent } from './dashboard/app-env/modal/app-env-modal.component';
+import { AppEnvComponent } from './dashboard/app-env/app-env.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +39,7 @@ import { StatusPipe } from '@zsx/core/pipe/status.pipe';
     // modal
     AppFunctionModalComponent,
     AppEnvModalComponent,
-    MemberFormComponent,
+    MemberModalComponent,
     PackFormComponent,
     PriceModalComponent,
 
@@ -56,7 +56,7 @@ import { StatusPipe } from '@zsx/core/pipe/status.pipe';
   entryComponents: [
     AppEnvModalComponent,
     AppFunctionModalComponent,
-    MemberFormComponent,
+    MemberModalComponent,
     PackFormComponent,
     PriceModalComponent,
     BindModalComponent

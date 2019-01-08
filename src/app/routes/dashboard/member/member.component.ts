@@ -1,95 +1,50 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { NzMessageService, NzModalService } from 'ng-zorro-antd';
-import { MemberFormComponent } from './components/form/form.component';
-import { Member, MemberService } from './member.service';
-import { BaseComponent } from '@zsx/core/base.component';
-import { map, tap } from 'rxjs/operators';
+import { Component, Injector, OnInit } from '@angular/core';
+import { MemberModalComponent } from './modal/member-modal.component';
+import { MemberService } from './member.service';
+import { BaseTableComponent } from '@zsx/core/base.component';
 
 @Component({
-  selector: 'app-member',
   templateUrl: './member.component.html',
-  styleUrls: ['./member.component.less']
 })
-export class MemberComponent extends BaseComponent implements OnInit {
+export class MemberComponent extends BaseTableComponent implements OnInit {
 
-  dataSet: Member[];
   queryForm = this.fb.group({
     name: [''],
   });
 
-  constructor(private fb: FormBuilder,
-              private message: NzMessageService,
-              private modalService: NzModalService,
-              private memberService: MemberService) {
-    super();
+  constructor(protected injector: Injector,
+              protected service: MemberService) {
+    super(injector);
   }
 
   ngOnInit() {
-    this.search();
+    super.ngOnInit();
   }
 
   showModal() {
-    const modal = this.modalService.create({
-      nzTitle: '添加会员',
-      nzContent: MemberFormComponent,
-      nzFooter: [{
-        label: '提交',
-        onClick: (componentInstance) => {
-          this.memberService.create(componentInstance.appEnvForm.value)
-            .pipe(
-              tap(() => this.message.create('success', '操作成功')),
-              tap(() => modal.destroy()),
-              tap(() => this.search())
-            ).subscribe();
-        }
-      }]
+    this.openModal({
+      nzTitle: '添加会员配置',
+      nzContent: MemberModalComponent,
+      source$: (componentInstance: MemberModalComponent) => this.service.create(componentInstance.memberForm.value)
     });
 
   }
 
-  showEditModal(data) {
-    const modal = this.modalService.create({
-      nzTitle: '更新会员',
-      nzContent: MemberFormComponent,
+  showEditModal(member) {
+    this.openModal({
+      nzTitle: '更新会员配置',
+      nzContent: MemberModalComponent,
       nzComponentParams: {
-        member: data,
+        member,
       },
-      nzFooter: [{
-        label: '提交',
-        onClick: (componentInstance) => {
-          this.memberService.update({...componentInstance.appEnvForm.value, member_id: data.member_id})
-            .pipe(
-              tap(() => this.message.create('success', '操作成功')),
-              tap(() => modal.destroy()),
-              tap(() => this.search())
-            ).subscribe();
-        }
-      }]
+      source$: (componentInstance: MemberModalComponent) => this.service.update({
+        ...componentInstance.memberForm.value,
+        member_id: member.member_id
+      })
     });
   }
 
-  showDeleteConfirm({member_id}) {
-    const modal = this.modalService.confirm({
-      nzTitle: '确认删除此项?',
-      nzOnOk: () => this.memberService.delete({member_id})
-        .pipe(
-          tap(() => this.message.create('success', '操作成功')),
-          tap(() => modal.destroy()),
-          tap(() => this.search())
-        ).subscribe()
-    });
-  }
-
-  search(query = this.queryForm.value, page_size = this.pageSize, page = this.pageIndex) {
-    this.memberService.fetch({...query, page_size, page})
-      .pipe(
-        map(res => res.data),
-        tap(() => this.loading = false)
-      )
-      .subscribe(data => {
-        this.dataSet = data.list;
-        this.total = data.count;
-      });
+  delete({member_id}) {
+    this.service.delete({member_id}).pipe(this.doneAndReload).subscribe();
   }
 }

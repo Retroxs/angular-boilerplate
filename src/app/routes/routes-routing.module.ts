@@ -4,13 +4,13 @@ import { LoginComponent } from './passport/login/login.component';
 import { LayoutPassportComponent } from '../layout/passport/passport.component';
 import { LayoutDefaultComponent } from '../layout/default/default.component';
 import { WelcomeComponent } from './dashboard/welcome/welcome.component';
-import { AppEnvComponent } from './dashboard/env/app-env.component';
 import { AppFunctionComponent } from './dashboard/app-function/app-function.component';
 import { PackComponent } from './dashboard/pack/pack.component';
 import { MemberComponent } from './dashboard/member/member.component';
 import { AuthGuard } from '../core/auth/auth.guard';
 import { CustomerFeedbackComponent } from './dashboard/feedback/customer/customer.component';
 import { DataFeedbackComponent } from './dashboard/feedback/data/data.component';
+import { AppEnvComponent } from './dashboard/app-env/app-env.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},

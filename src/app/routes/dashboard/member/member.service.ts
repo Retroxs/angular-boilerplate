@@ -19,25 +19,25 @@ export class MemberService {
   constructor(private http: HttpClient) {
   }
 
-  prefix = 'member';
+  baseUrl = 'member';
 
   @QuerySearch()
   fetch(params): Observable<TableResponse<Member[]>> {
-    return this.http.get<TableResponse<Member[]>>(`${this.prefix}/index`, {params});
+    return this.http.get<TableResponse<Member[]>>(`${this.baseUrl}/index`, {params});
   }
 
   @FormEncode()
   create(data) {
-    return this.http.post(`${this.prefix}/add`, data);
+    return this.http.post(`${this.baseUrl}/add`, data);
   }
 
   @FormEncode()
   update(data) {
-    return this.http.post(`${this.prefix}/edit`, data);
+    return this.http.post(`${this.baseUrl}/edit`, data);
   }
 
   @FormEncode()
   delete(data) {
-    return this.http.post(`${this.prefix}/delete`, data);
+    return this.http.post(`${this.baseUrl}/delete`, data);
   }
 }

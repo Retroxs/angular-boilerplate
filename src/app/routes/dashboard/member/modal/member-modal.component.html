@@ -1,6 +1,6 @@
-<form nz-form [formGroup]="envForm">
+<form nz-form [formGroup]="memberForm">
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">会员名称</nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>会员名称</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <input nz-input formControlName="name">
     </nz-form-control>
@@ -9,17 +9,16 @@
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>会员图标</nz-form-label>
     <nz-form-control>
-      <nz-upload class="avatar-uploader"
-                 nzAction="upload/member-image"
+      <nz-upload nzAction="upload/member-image"
                  nzName="UploadForm[file]"
                  nzListType="picture-card"
                  [nzShowUploadList]="false"
-                 (nzChange)="handleChange($event)">
-        <ng-container *ngIf="!avatarUrl">
+                 (nzChange)="handleUploadChange($event)">
+        <ng-container *ngIf="!logoUrl">
           <i nz-icon type="plus"></i>
           <div class="ant-upload-text">Upload</div>
         </ng-container>
-        <img class="zsx__table-row-image" *ngIf="avatarUrl" [src]="avatarUrl" class="avatar">
+        <img class="zsx__table-row-image" *ngIf="logoUrl" [src]="logoUrl" class="avatar">
       </nz-upload>
     </nz-form-control>
   </nz-form-item>
