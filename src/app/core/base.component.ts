@@ -13,13 +13,9 @@ export abstract class BaseComponent {
 }
 
 @Injectable()
-export class BaseTableComponent implements OnInit {
+export class BaseTableComponent extends BaseComponent implements OnInit {
 
   dataSet: any[];
-  pageIndex = 1;
-  pageSize = 10;
-  loading = true;
-  total: number;
   queryForm: FormGroup;
 
   // injector
@@ -34,6 +30,7 @@ export class BaseTableComponent implements OnInit {
   );
 
   constructor(protected injector: Injector) {
+    super();
     this.fb = this.injector.get(FormBuilder);
     this.modalService = this.injector.get(NzModalService);
     this.messageService = this.injector.get(NzMessageService);
