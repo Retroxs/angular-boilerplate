@@ -2,14 +2,14 @@
   <nz-tab nzTitle="基础信息">
     <form nz-form nzLayout="horizontal" [formGroup]="packForm">
       <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">套餐名称</nz-form-label>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>套餐名称</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
           <input nz-input formControlName="suit_name">
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>产品信息</nz-form-label>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>产品信息</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
           <nz-select formControlName="product_id" >
             <nz-option nzValue="" nzLabel="请选择所属产品"></nz-option>
@@ -20,21 +20,21 @@
       </nz-form-item>
 
       <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>原价</nz-form-label>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>原价</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
           <input nz-input formControlName="origin_price">
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>实际价格</nz-form-label>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>实际价格</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
           <input nz-input formControlName="price">
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>单次购买限制数</nz-form-label>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>单次购买限制数</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
           <input nz-input formControlName="per_purchase_limit">
           <nz-form-extra>0或-1不限制</nz-form-extra>
@@ -42,7 +42,7 @@
       </nz-form-item>
 
       <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>标签</nz-form-label>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>标签</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
           <input nz-input formControlName="tag_name">
           <nz-form-extra danger>多个标签请用竖线分割（例如：更多数据项恢复|授权长达一年|PC端同步特权</nz-form-extra>
@@ -50,7 +50,7 @@
       </nz-form-item>
 
       <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>是否推荐</nz-form-label>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>是否推荐</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
           <nz-select formControlName="recommend">
             <nz-option [nzValue]="1" nzLabel="推荐"></nz-option>
@@ -60,7 +60,7 @@
       </nz-form-item>
 
       <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>场景类型</nz-form-label>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>场景类型</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
           <nz-select formControlName="scen_type">
             <nz-option [nzValue]="0" nzLabel="未知产品类型"></nz-option>
@@ -79,18 +79,18 @@
                      nzName="UploadForm[file]"
                      nzListType="picture-card"
                      [nzShowUploadList]="false"
-                     (nzChange)="handleChange($event)">
-            <ng-container *ngIf="!packForm.value.image_url">
+                     (nzChange)="handleUploadChange($event)">
+            <ng-container *ngIf="!imageUrl">
               <i nz-icon type="plus"></i>
               <div class="ant-upload-text">Upload</div>
             </ng-container>
-            <img *ngIf="packForm.value.image_url" [src]="packForm.value.image_url" class="avatar">
+            <img *ngIf="imageUrl" [src]="imageUrl" class="avatar">
           </nz-upload>
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>套餐状态</nz-form-label>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>套餐状态</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
           <nz-select formControlName="status">
             <nz-option [nzValue]="1" nzLabel="生效"></nz-option>
@@ -109,7 +109,7 @@
     </button>
 
     <div *ngFor="let app of apps; let i = index" nz-row style="padding: 10px 0">
-      <div nz-col nzSpan="8">
+      <div nz-col nzSpan="12">
         <nz-select [(ngModel)]="app.app_id" style="width: 80%">
           <nz-option nzValue="" nzLabel="请选择产品"></nz-option>
           <nz-option *ngFor="let _app of select?.app_list" [nzValue]="_app.app_id" [nzLabel]="_app.remark"></nz-option>
@@ -119,7 +119,7 @@
         <input nz-input [(ngModel)]="app.scen_code" style="width: 90%" placeholder="请输入请填写应用场景值">
       </div>
       <div nz-col nzSpan="4">
-        <button *ngIf="apps.length > 1" nz-button nzType="danger" (click)="deleteApp(i)">删除</button>
+        <button *ngIf="apps.length > 1" nz-button nzType="danger" (click)="deleteApp(i)"><i nz-icon type="delete"></i></button>
       </div>
     </div>
   </nz-tab>
@@ -136,7 +136,7 @@
       </nz-form-item>
 
       <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>设备限制数</nz-form-label>
+        <nz-form-label [nzSm]="6" [nzXs]="24"  nzRequired>设备限制数</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
           <input nz-input formControlName="device_count">
           <nz-form-extra>0或-1不限制</nz-form-extra>
@@ -144,7 +144,7 @@
       </nz-form-item>
 
       <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>有效期限(单位：天)</nz-form-label>
+        <nz-form-label [nzSm]="6" [nzXs]="24"  nzRequired>有效期限(单位：天)</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
           <input nz-input formControlName="expire_in">
           <nz-form-extra>0或-1不限制</nz-form-extra>
@@ -153,6 +153,7 @@
 
     </form>
   </nz-tab>
+
   <nz-tab nzTitle="授权码数据项限制">
     <nz-alert nzType="warning" nzMessage="提示：如果不配置将会使用软件默认数据项限制，默认数据项有如下：" nzShowIcon style="margin-bottom: 20px" [nzDescription]="tags"></nz-alert>
       <ng-template #tags>
@@ -163,7 +164,7 @@
     </button>
     <div *ngFor="let func of func_list ; let i = index" nz-row style="padding: 10px 0">
       <div nz-col nzSpan="6">
-        <nz-select [(ngModel)]="func.function_code" style="width: 80%">
+        <nz-select [(ngModel)]="func.function_code">
           <nz-option nzValue="" nzLabel="请选择数据项"></nz-option>
           <nz-option *ngFor="let fn of select?.function_num" [nzValue]="fn.fn_code" [nzLabel]="fn.remark"></nz-option>
         </nz-select>
@@ -175,7 +176,7 @@
         <input nz-input [(ngModel)]="func.expire_in" style="width: 90%" placeholder="从创建日期起算的过期天数(-1表示无限制)">
       </div>
       <div nz-col nzSpan="4">
-        <button nz-button nzType="danger" (click)="deleteFunc(i)">删除</button>
+        <button nz-button nzType="danger" (click)="deleteFunc(i)"><i nz-icon type="delete"></i></button>
       </div>
     </div>
   </nz-tab>

@@ -13,9 +13,9 @@ import { PackComponent } from './dashboard/pack/pack.component';
 import { DangerDirective } from './danger.directive';
 import { AppFunctionModalComponent } from './dashboard/app-function/modal/app-function-modal.component';
 import { MemberModalComponent } from './dashboard/member/modal/member-modal.component';
-import { PackFormComponent } from './dashboard/pack/components/form/form.component';
-import { PriceModalComponent } from './dashboard/pack/components/modal/price.modal';
-import { BindModalComponent } from './dashboard/pack/components/modal/bind.modal';
+import { PackModalComponent } from './dashboard/pack/modal/pack/pack-modal.component';
+import { PriceModalComponent } from './dashboard/pack/modal/price-modal.component';
+import { BindModalComponent } from './dashboard/pack/modal/bind-modal.component';
 import { CustomerFeedbackComponent } from './dashboard/feedback/customer/customer.component';
 import { DataFeedbackComponent } from './dashboard/feedback/data/data.component';
 import { StatusPipe } from '@zsx/core/pipe/status.pipe';
@@ -40,7 +40,7 @@ import { AppEnvComponent } from './dashboard/app-env/app-env.component';
     AppFunctionModalComponent,
     AppEnvModalComponent,
     MemberModalComponent,
-    PackFormComponent,
+    PackModalComponent,
     PriceModalComponent,
 
     // pipe
@@ -57,7 +57,7 @@ import { AppEnvComponent } from './dashboard/app-env/app-env.component';
     AppEnvModalComponent,
     AppFunctionModalComponent,
     MemberModalComponent,
-    PackFormComponent,
+    PackModalComponent,
     PriceModalComponent,
     BindModalComponent
   ],

@@ -14,7 +14,7 @@
       <nz-form-control>
         <nz-select style="width: 200px;" formControlName="app_id">
           <nz-option nzValue="" nzLabel="全部"></nz-option>
-          <nz-option *ngFor="let app of select?.app_list" [nzValue]="app.app_id" [nzLabel]="app.remark"></nz-option>
+          <nz-option *ngFor="let app of selects?.app_list" [nzValue]="app.app_id" [nzLabel]="app.remark"></nz-option>
         </nz-select>
       </nz-form-control>
     </nz-form-item>
@@ -31,9 +31,13 @@
     </nz-form-item>
   </form>
 
-
-  <nz-table [nzData]="dataSet" [nzLoading]="loading" [nzFrontPagination]="false" [nzTotal]="total"
-            [(nzPageIndex)]="pageIndex" (nzPageIndexChange)="search()">
+  <nz-table
+            [nzData]="dataSet"
+            [nzLoading]="loading"
+            [nzFrontPagination]="false"
+            [nzTotal]="total"
+            [(nzPageIndex)]="pageIndex"
+            (nzPageIndexChange)="search()">
     <thead>
     <tr>
       <th>ID</th>
@@ -53,17 +57,16 @@
       <td>{{data.price}}</td>
       <td>{{data.create_time}}</td>
       <td>
-        <nz-tag *ngIf="data.has_app" [nzColor]="'green'">使用中</nz-tag>
-        <nz-tag *ngIf="!data.has_app" [nzColor]="'red'">未使用</nz-tag>
+        <nz-tag [nzColor]="data.status?'green':'red'">{{data.status | status:'usage'}}</nz-tag>
       </td>
       <td>
         <a (click)="changePrice(data)">改价</a>
         <nz-divider nzType="vertical"></nz-divider>
         <a (click)="bindMember(data)">绑定会员</a>
         <nz-divider nzType="vertical"></nz-divider>
-        <a (click)="findPack(data)">编辑</a>
+        <a (click)="findPackAndOpenModal(data)">编辑</a>
         <nz-divider nzType="vertical"></nz-divider>
-        <a (click)="showDeleteConfirm(data)">删除</a>
+        <a nz-popconfirm danger [nzTitle]="'删除此套餐?'" nzPlacement="top" (nzOnConfirm)="delete(data)">删除</a>
       </td>
     </tr>
     </tbody>

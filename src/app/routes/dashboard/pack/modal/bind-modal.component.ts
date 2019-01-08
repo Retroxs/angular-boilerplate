@@ -8,7 +8,7 @@ export class BindModalComponent implements OnInit {
   @Input() memberList;
   @Input() suit_id;
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.memberList.forEach(m => {
       m.label = m.name;
       m.value = m.member_id;
@@ -16,7 +16,9 @@ export class BindModalComponent implements OnInit {
         m.checked = true;
       }
     });
-    console.log(this.memberList);
   }
 
+  get checkedList() {
+    return this.memberList.filter(m => m.checked).map(m => m.member_id);
+  }
 }

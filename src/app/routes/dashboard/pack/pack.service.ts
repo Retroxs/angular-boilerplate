@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormEncode, QuerySearch } from '@zsx/core/net/rest.decorators';
-import { Observable } from 'rxjs';
 import { TableResponse, Response } from '@zsx/core/net/response.interface';
 
 export interface Pack {
@@ -18,50 +17,49 @@ export interface Pack {
 })
 export class PackService {
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
-  prefix = 'suit';
+  baseUrl = 'suit';
 
   @QuerySearch()
-  fetch(params): Observable<TableResponse<Pack[]>> {
-    return this.http.get<TableResponse<Pack[]>>(`${this.prefix}/index`, {params});
+  fetch(params) {
+    return this.http.get<TableResponse<Pack[]>>(`${this.baseUrl}/index`, {params});
   }
 
   fetchSelect() {
-    return this.http.get<Response<any>>(`${this.prefix}/selected`);
+    return this.http.get<Response>(`${this.baseUrl}/selected`);
   }
 
   fetchMembers(params) {
-    return this.http.get<Response<any>>(`${this.prefix}/bind-member`, {params});
+    return this.http.get<Response>(`${this.baseUrl}/bind-member`, {params});
   }
 
   @FormEncode()
   create(data) {
-    return this.http.post(`${this.prefix}/add`, data);
+    return this.http.post(`${this.baseUrl}/add`, data);
   }
 
   @FormEncode()
   update(data) {
-    return this.http.post(`${this.prefix}/edit`, data);
+    return this.http.post(`${this.baseUrl}/edit`, data);
   }
 
   @FormEncode()
   updatePrice(data) {
-    return this.http.post(`${this.prefix}/edit-price`, data);
+    return this.http.post(`${this.baseUrl}/edit-price`, data);
   }
 
   @FormEncode()
   bindMember(data) {
-    return this.http.post(`${this.prefix}/bind-member`, data);
+    return this.http.post(`${this.baseUrl}/bind-member`, data);
   }
 
   @FormEncode()
   delete(data) {
-    return this.http.post(`${this.prefix}/delete`, data);
+    return this.http.post(`${this.baseUrl}/delete`, data);
   }
 
   findById(params) {
-    return this.http.get<Response<any>>(`${this.prefix}/info`, {params});
+    return this.http.get<Response<any>>(`${this.baseUrl}/info`, {params});
   }
 }

@@ -1,174 +1,104 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { NzMessageService, NzModalService } from 'ng-zorro-antd';
-import { PackFormComponent } from './components/form/form.component';
-import { Pack, PackService } from './pack.service';
-import { map, tap } from 'rxjs/operators';
-import { BaseComponent } from '@zsx/core/base.component';
-import { PriceModalComponent } from './components/modal/price.modal';
-import { BindModalComponent } from './components/modal/bind.modal';
+import { Component, Injector, OnInit } from '@angular/core';
+import { PackModalComponent } from './modal/pack/pack-modal.component';
+import { PackService } from './pack.service';
+import { map } from 'rxjs/operators';
+import { BaseTableComponent } from '@zsx/core/base.component';
+import { PriceModalComponent } from './modal/price-modal.component';
+import { BindModalComponent } from './modal/bind-modal.component';
 
 @Component({
-  selector: 'app-pack',
-  templateUrl: './pack.component.html',
-  styleUrls: ['./pack.component.less']
+  templateUrl: './pack.component.html'
 })
-export class PackComponent extends BaseComponent implements OnInit {
+export class PackComponent extends BaseTableComponent implements OnInit {
 
-  dataSet: Pack[];
   queryForm = this.fb.group({
     suit_name: [''],
     app_id: ['']
   });
 
-  select: any;
+  selects: {};
 
-  constructor(private fb: FormBuilder,
-              private message: NzMessageService,
-              private modalService: NzModalService,
-              private packService: PackService) {
-    super();
+  constructor(protected injector: Injector,
+              protected service: PackService) {
+    super(injector);
   }
 
-  ngOnInit(): void {
-    this.search();
-    this.packService.fetchSelect().subscribe(v => this.select = v.data);
+  ngOnInit() {
+    super.ngOnInit();
+    this.fetchAppList();
+  }
+
+  fetchAppList() {
+    this.service.fetchSelect().subscribe(res => this.selects = res.data);
+  }
+
+  delete({suit_id}) {
+    this.service.delete({suit_id}).pipe(this.doneAndReload).subscribe();
   }
 
   showModal() {
-    const modal = this.modalService.create({
+    this.openModal({
       nzTitle: '添加套餐',
-      nzWidth: 700,
-      nzContent: PackFormComponent,
+      nzContent: PackModalComponent,
       nzComponentParams: {
-        select: this.select
+        select: this.selects
       },
-      nzFooter: [{
-        label: '提交',
-        onClick: (componentInstance) => {
-          console.log(componentInstance.allFormValue());
-          this.packService.create(componentInstance.allFormValue())
-            .pipe(
-              tap(() => this.message.create('success', '操作成功')),
-              tap(() => modal.destroy()),
-              tap(() => this.search())
-            ).subscribe();
-        }
-      }]
+      source$: (componentInstance: PackModalComponent) => this.service.create(componentInstance.allFormValue)
     });
-
   }
 
 
-  findPack(data) {
-    this.packService.findById({suit_id: data.suit_id}).subscribe(
+  findPackAndOpenModal({suit_id}) {
+    this.service.findById({suit_id}).subscribe(
       res => this.showEditModal(res.data.suit_info)
     );
   }
 
-  showEditModal(data) {
-    const modal = this.modalService.create({
-        nzTitle: '更新套餐',
-        nzWidth: 700,
-        nzContent: PackFormComponent,
-        nzComponentParams: {
-          select: this.select,
-          pack: data
-        },
-        nzFooter: [{
-          label: '更新',
-          onClick: (componentInstance) => {
-            this.packService.update({...componentInstance.packForm.value, suit_id: data.suit_id})
-              .pipe(
-                tap(() => this.message.create('success', '操作成功')),
-                tap(() => modal.destroy()),
-                tap(() => this.search())
-              ).subscribe();
-          }
-        }]
-      })
-    ;
-  }
-
-  showDeleteConfirm({suit_id}) {
-    const modal = this.modalService.confirm({
-      nzTitle: '确认删除此项?',
-      nzOnOk: () => this.packService.delete({suit_id})
-        .pipe(
-          tap(() => this.message.create('success', '操作成功')),
-          tap(() => modal.destroy()),
-          tap(() => this.search())
-        ).subscribe()
+  showEditModal(pack) {
+    this.openModal({
+      nzTitle: '更新套餐',
+      nzContent: PackModalComponent,
+      nzComponentParams: {
+        select: this.selects,
+        pack
+      },
+      source$: (componentInstance: PackModalComponent) => this.service.update({...componentInstance.packForm.value, suit_id: pack.suit_id})
     });
   }
 
-  search(query = this.queryForm.value, page_size = this.pageSize, page = this.pageIndex) {
-    this.packService.fetch({...query, page_size, page})
-      .pipe(
-        map(res => res.data),
-        tap(() => this.loading = false)
-      )
-      .subscribe(data => {
-        this.dataSet = data.list;
-        this.total = data.count;
-      });
+
+  changePrice({suit_id, price, origin_price}) {
+    this.openModal({
+      nzTitle: '更改套餐价格',
+      nzContent: PriceModalComponent,
+      nzComponentParams: {
+        price: {price, origin_price}
+      },
+      source$: (componentInstance: PriceModalComponent) => this.service.updatePrice({
+        ...componentInstance.priceForm.value,
+        suit_id
+      })
+    });
   }
 
-  changePrice(data: Pack) {
-    this.packService.findById({suit_id: data.suit_id}).subscribe(
-      res => {
-        const suit_info = res.data.suit_info;
-        const {price, origin_price} = suit_info;
-        const modal = this.modalService.create({
-          nzTitle: '更改套餐价格',
-          nzWidth: 700,
-          nzContent: PriceModalComponent,
-          nzComponentParams: {
-            price: {price, origin_price}
-          },
-          nzFooter: [{
-            label: '更新',
-            onClick: (componentInstance) => {
-              this.packService.updatePrice({...componentInstance.priceForm.value, suit_id: data.suit_id})
-                .pipe(
-                  tap(() => this.message.create('success', '操作成功')),
-                  tap(() => modal.destroy()),
-                  tap(() => this.search())
-                ).subscribe();
-            }
-          }]
-        });
-      }
-    );
+
+  showBindMemberModal({memberList, suit_id}) {
+    this.openModal({
+      nzTitle: '绑定会员',
+      nzContent: BindModalComponent,
+      nzComponentParams: {
+        memberList,
+        suit_id
+      },
+      source$: (componentInstance: BindModalComponent) => this.service.bindMember({member_id: componentInstance.checkedList, suit_id})
+    });
   }
 
-  bindMember(data: Pack) {
-    this.packService.fetchMembers({suit_id: data.suit_id}).pipe(
+  bindMember({suit_id}) {
+    this.service.fetchMembers({suit_id}).pipe(
       map(res => res.data.member_list),
     ).subscribe(
-      memberList => {
-        const modal = this.modalService.create({
-          nzTitle: '绑定会员',
-          nzWidth: 700,
-          nzContent: BindModalComponent,
-          nzComponentParams: {
-            memberList,
-            suit_id: data.suit_id
-          },
-          nzFooter: [{
-            label: '提交',
-            onClick: (componentInstance) => {
-              const checkedList = componentInstance.memberList.filter(m => m.checked).map(m => m.member_id);
-              this.packService.bindMember({member_id: checkedList, suit_id: data.suit_id})
-                .pipe(
-                  tap(() => this.message.create('success', '操作成功')),
-                  tap(() => modal.destroy()),
-                  tap(() => this.search())
-                ).subscribe();
-            }
-          }]
-        });
-      }
+      memberList => this.showBindMemberModal({memberList, suit_id})
     );
   }
 }

@@ -4,10 +4,9 @@ import { UploadChangeParam } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-form',
-  templateUrl: './form.component.html',
-  styleUrls: ['./form.component.less']
+  templateUrl: './pack-modal.component.html'
 })
-export class PackFormComponent implements OnInit {
+export class PackModalComponent implements OnInit {
 
   @Input() pack: any;
   @Input() select: any;
@@ -18,82 +17,68 @@ export class PackFormComponent implements OnInit {
     origin_price: [''],
     price: [''],
     per_purchase_limit: [''],
-    tag_name: [''], //
-    recommend: ['0'],
-    scen_type: ['0'],
+    tag_name: [''],
+    recommend: [1],
+    scen_type: [0],
     image_url: [''],
-    status: ['0'],
+    status: [1],
 
     apps: [''],
 
     computer_count: [''],
     device_count: [''],
-    expire_in: [''],
+    expire_in: [],
 
     fun_value: ['']
   });
 
   apps = [{app_id: '', scen_code: ''}];
-  func_list = [{function_code: '', fixid_count: '', expire_in: '', status: '1'}];
+  func_list = [{function_code: '', fixid_count: '', expire_in: '', status: 1}];
 
-  constructor(private fb: FormBuilder) {
+  _apps = {app_id: '', scen_code: ''};
+  _func_list = {function_code: '', fixid_count: '', expire_in: '', status: 1};
+
+
+  get imageUrl() {
+    return this.packForm.value.image_url;
   }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
+    this.packForm.patchValue({});
     if (this.pack) {
-      const {
-        create_time,
-        currency,
-        has_app,
-        icon,
-        origin,
-        product,
-        subtitle,
-        suit_id,
-        suit_info,
-        suit_tags,
-        suit_type,
-        version_id,
-        apps,
-        fun_value,
-        ...rest
-      } = this.pack;
-
-      this.packForm.setValue({...rest, apps, fun_value});
+      const {apps, fun_value} = this.pack;
+      this.packForm.patchValue({...this.pack});
       this.apps = apps;
       this.func_list = fun_value;
     }
   }
 
   addApp() {
-    this.apps.push({app_id: '', scen_code: ''});
+    this.apps.push(this._apps);
   }
 
   deleteApp(index) {
     this.apps.splice(index, 1);
   }
 
+  addFunc() {
+    this.func_list.push(this._func_list);
+  }
+
   deleteFunc(index) {
     this.func_list.splice(index, 1);
   }
 
-  handleChange($event: UploadChangeParam) {
+  handleUploadChange($event: UploadChangeParam) {
     const res = $event.file.response;
     if (res) {
       this.packForm.patchValue({image_url: res.data.url});
     }
   }
 
-  addFunc() {
-    this.func_list.push({function_code: '', fixid_count: '', expire_in: '', status: '1'});
-  }
-
-  allFormValue() {
+  get allFormValue() {
     this.packForm.patchValue({apps: this.apps, fun_value: this.func_list});
     return this.packForm.value;
-  }
-
-  compareFn(o1, o2) {
-    return o1 == o2;
   }
 }
