@@ -7,11 +7,11 @@ import { LayoutModule } from '../layout/layout.module';
 
 import { WelcomeComponent } from './dashboard/welcome/welcome.component';
 import { LoginComponent } from './passport/login/login.component';
-import { EnvComponent } from './dashboard/env/env.component';
+import { AppEnvComponent } from './dashboard/env/app-env.component';
 import { AppFunctionComponent } from './dashboard/app-function/app-function.component';
 import { MemberComponent } from './dashboard/member/member.component';
 import { PackComponent } from './dashboard/pack/pack.component';
-import { EnvFormComponent } from './dashboard/env/components/form/form.component';
+import { AppEnvModalComponent } from './dashboard/env/modal/app-env-modal.component';
 import { DangerDirective } from './danger.directive';
 import { AppFunctionModalComponent } from './dashboard/app-function/modal/app-function-modal.component';
 import { MemberFormComponent } from './dashboard/member/components/form/form.component';
@@ -27,7 +27,7 @@ import { StatusPipe } from '@zsx/core/pipe/status.pipe';
     // component
     LoginComponent,
     WelcomeComponent,
-    EnvComponent,
+    AppEnvComponent,
     AppFunctionComponent,
     MemberComponent,
     PackComponent,
@@ -37,11 +37,11 @@ import { StatusPipe } from '@zsx/core/pipe/status.pipe';
     DataFeedbackComponent,
 
     // modal
-    EnvFormComponent,
+    AppFunctionModalComponent,
+    AppEnvModalComponent,
     MemberFormComponent,
     PackFormComponent,
     PriceModalComponent,
-    AppFunctionModalComponent,
 
     // pipe
     StatusPipe
@@ -54,7 +54,7 @@ import { StatusPipe } from '@zsx/core/pipe/status.pipe';
     LayoutModule,
   ],
   entryComponents: [
-    EnvFormComponent,
+    AppEnvModalComponent,
     AppFunctionModalComponent,
     MemberFormComponent,
     PackFormComponent,

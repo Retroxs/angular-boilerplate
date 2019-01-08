@@ -36,7 +36,7 @@ export class MemberComponent extends BaseComponent implements OnInit {
       nzFooter: [{
         label: '提交',
         onClick: (componentInstance) => {
-          this.memberService.create(componentInstance.envForm.value)
+          this.memberService.create(componentInstance.appEnvForm.value)
             .pipe(
               tap(() => this.message.create('success', '操作成功')),
               tap(() => modal.destroy()),
@@ -58,7 +58,7 @@ export class MemberComponent extends BaseComponent implements OnInit {
       nzFooter: [{
         label: '提交',
         onClick: (componentInstance) => {
-          this.memberService.update({...componentInstance.envForm.value, member_id: data.member_id})
+          this.memberService.update({...componentInstance.appEnvForm.value, member_id: data.member_id})
             .pipe(
               tap(() => this.message.create('success', '操作成功')),
               tap(() => modal.destroy()),

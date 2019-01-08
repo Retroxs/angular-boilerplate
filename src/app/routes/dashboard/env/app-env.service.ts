@@ -17,35 +17,34 @@ export interface Env {
 @Injectable({
   providedIn: 'root'
 })
-export class EnvService {
+export class AppEnvService {
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
-  prefix = 'function';
+  baseUrl = 'function';
 
   @QuerySearch()
   fetch(params): Observable<TableResponse<Env[]>> {
-    return this.http.get<TableResponse<Env[]>>(`${this.prefix}/index`, {params});
+    return this.http.get<TableResponse<Env[]>>(`${this.baseUrl}/index`, {params});
   }
 
   @FormEncode()
   create(data) {
-    return this.http.post(`${this.prefix}/add`, data);
+    return this.http.post(`${this.baseUrl}/add`, data);
   }
 
   @FormEncode()
   update(data) {
-    return this.http.post(`${this.prefix}/edit`, data);
+    return this.http.post(`${this.baseUrl}/edit`, data);
   }
 
   @FormEncode()
   delete(data) {
-    return this.http.post(`${this.prefix}/delete`, data);
+    return this.http.post(`${this.baseUrl}/delete`, data);
   }
 
   @FormEncode()
   active(data) {
-    return this.http.post(`${this.prefix}/set-status`, data);
+    return this.http.post(`${this.baseUrl}/set-status`, data);
   }
 }

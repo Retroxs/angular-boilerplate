@@ -4,7 +4,7 @@ import { LoginComponent } from './passport/login/login.component';
 import { LayoutPassportComponent } from '../layout/passport/passport.component';
 import { LayoutDefaultComponent } from '../layout/default/default.component';
 import { WelcomeComponent } from './dashboard/welcome/welcome.component';
-import { EnvComponent } from './dashboard/env/env.component';
+import { AppEnvComponent } from './dashboard/env/app-env.component';
 import { AppFunctionComponent } from './dashboard/app-function/app-function.component';
 import { PackComponent } from './dashboard/pack/pack.component';
 import { MemberComponent } from './dashboard/member/member.component';
@@ -21,7 +21,7 @@ const routes: Routes = [
     children: [
       {path: '', redirectTo: 'config', pathMatch: 'full'},
       {path: 'welcome', component: WelcomeComponent},
-      {path: 'env', component: EnvComponent},
+      {path: 'env', component: AppEnvComponent},
       {path: 'config', component: AppFunctionComponent},
       {path: 'pack', component: PackComponent},
       {path: 'member', component: MemberComponent},
