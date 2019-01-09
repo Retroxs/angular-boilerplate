@@ -14,7 +14,7 @@ export class DataFeedbackComponent extends BaseComponent implements OnInit {
   startValue: Date = null;
   endValue: Date = null;
   select: any;
-  ghash_list:any;
+  ghash_list: any;
 
   constructor(private fb: FormBuilder, private feedbackService: FeedbackService, private packService: PackService) {
     super();
@@ -34,7 +34,7 @@ export class DataFeedbackComponent extends BaseComponent implements OnInit {
     this.feedbackService.fetchHash().subscribe(v => this.ghash_list = v.data);
   }
 
-  search(query = this.queryForm.value, page_size = this.pageSize, page = this.pageIndex) {
+  search(page = 1, query = this.queryForm.value, page_size = this.pageSize) {
     query.start_time = formatDate(query.start_time);
     query.end_time = formatDate(query.end_time);
     this.feedbackService.fetchData({...query, page_size, page})
@@ -45,6 +45,7 @@ export class DataFeedbackComponent extends BaseComponent implements OnInit {
       .subscribe(data => {
         this.dataSet = data.list;
         this.total = data.count;
+        this.pageIndex = page;
       });
   }
 

@@ -11,6 +11,7 @@
     <nz-form-label [nzSm]="6" [nzXs]="24">场景值</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <input nz-input formControlName="scene_code">
+      <nz-form-extra danger>由技术人员提供,请谨慎配置</nz-form-extra>
     </nz-form-control>
   </nz-form-item>
 
@@ -18,6 +19,7 @@
     <nz-form-label [nzSm]="6" [nzXs]="24" nzrequired>排序</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <input nz-input formControlName="sort">
+      <nz-form-extra danger>数字越大越靠前</nz-form-extra>
     </nz-form-control>
   </nz-form-item>
 
@@ -32,9 +34,10 @@
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24">路由</nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24">跳转路由</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <textarea nz-input formControlName="route"></textarea>
+      <nz-form-extra danger>由技术人员提供,请谨慎配置</nz-form-extra>
     </nz-form-control>
   </nz-form-item>
 
@@ -46,9 +49,10 @@
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24">缺省值标识</nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24">图片缺省值标识</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <input nz-input formControlName="place_holder">
+      <nz-form-extra danger>由技术人员提供,请谨慎配置</nz-form-extra>
     </nz-form-control>
   </nz-form-item>
 
@@ -59,6 +63,7 @@
         <nz-option [nzValue]="0" nzLabel="顶级"></nz-option>
         <nz-option *ngFor="let pid of parentPid" [nzValue]="pid.id" [nzLabel]="pid.name"></nz-option>
       </nz-select>
+      <nz-form-extra danger>对应APP分组栏目</nz-form-extra>
     </nz-form-control>
   </nz-form-item>
 

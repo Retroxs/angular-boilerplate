@@ -52,7 +52,7 @@
             [nzFrontPagination]="false"
             [nzTotal]="total"
             [(nzPageIndex)]="pageIndex"
-            (nzPageIndexChange)="search()">
+            (nzPageIndexChange)="search($event)">
     <thead>
     <tr>
       <th>名称</th>

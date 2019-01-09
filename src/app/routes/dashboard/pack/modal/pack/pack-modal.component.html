@@ -72,7 +72,7 @@
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>套餐图片</nz-form-label>
+        <nz-form-label [nzSm]="6" [nzXs]="24">套餐图片</nz-form-label>
         <nz-form-control>
           <nz-upload class="avatar-uploader"
                      nzAction="upload/suit-image"
@@ -104,6 +104,8 @@
 
 
   <nz-tab nzTitle="应用信息">
+    <nz-alert nzType="warning" nzMessage="提示：如果不配置将会使用软件默认数据项限制，默认数据项有如下：" nzShowIcon style="margin-bottom: 20px" [nzDescription]="tags"></nz-alert>
+
     <button nz-button nzType="primary" (click)="addApp()">
       添加应用
     </button>

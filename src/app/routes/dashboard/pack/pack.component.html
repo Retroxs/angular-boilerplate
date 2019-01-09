@@ -1,4 +1,4 @@
-<page-header title="产品套餐"></page-header>
+<page-header title="商品参数"></page-header>
 
 <nz-card>
   <form class="zsx__table-search-form" nz-form nzLayout="inline" [formGroup]="queryForm" (ngSubmit)="search()">
@@ -37,11 +37,11 @@
             [nzFrontPagination]="false"
             [nzTotal]="total"
             [(nzPageIndex)]="pageIndex"
-            (nzPageIndexChange)="search()">
+            (nzPageIndexChange)="search($event)">
     <thead>
     <tr>
       <th>ID</th>
-      <th>套餐名称</th>
+      <th>商品名称</th>
       <th>原价</th>
       <th>实际价格</th>
       <th>创建时间</th>
@@ -66,7 +66,7 @@
         <nz-divider nzType="vertical"></nz-divider>
         <a (click)="findPackAndOpenModal(data)">编辑</a>
         <nz-divider nzType="vertical"></nz-divider>
-        <a nz-popconfirm danger [nzTitle]="'删除此套餐?'" nzPlacement="top" (nzOnConfirm)="delete(data)">删除</a>
+        <a nz-popconfirm danger [nzTitle]="'删除此商品?'" nzPlacement="top" (nzOnConfirm)="delete(data)">删除</a>
       </td>
     </tr>
     </tbody>

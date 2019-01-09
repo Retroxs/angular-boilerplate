@@ -34,7 +34,7 @@ export class CustomerFeedbackComponent extends BaseComponent implements OnInit {
     this.packService.fetchSelect().subscribe(v => this.select = v.data);
   }
 
-  search(query = this.queryForm.value, page_size = this.pageSize, page = this.pageIndex) {
+  search(page = 1, query = this.queryForm.value, page_size = this.pageSize) {
     query.start_time = formatDate(query.start_time);
     query.end_time = formatDate(query.end_time);
     this.feedbackService.fetchUser({...query, page_size, page})
@@ -45,6 +45,7 @@ export class CustomerFeedbackComponent extends BaseComponent implements OnInit {
       .subscribe(data => {
         this.dataSet = data.list;
         this.total = data.count;
+        this.pageIndex = page;
       });
   }
 

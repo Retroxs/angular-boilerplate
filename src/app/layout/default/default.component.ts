@@ -19,7 +19,6 @@ export class LayoutDefaultComponent implements OnInit {
 
   ngOnInit() {
     this.initSelected = this.router.url;
-
   }
 
   /** custom trigger can be TemplateRef **/

@@ -55,7 +55,7 @@
   </form>
 
   <nz-table [nzData]="dataSet" [nzLoading]="loading" [nzFrontPagination]="false" [nzTotal]="total"
-            [(nzPageIndex)]="pageIndex" (nzPageIndexChange)="search()" >
+            [(nzPageIndex)]="pageIndex" (nzPageIndexChange)="search($event)" >
     <thead>
     <tr>
       <th>时间</th>

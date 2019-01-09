@@ -6,7 +6,7 @@ import { Injectable, Injector, OnInit } from '@angular/core';
 import { pipe } from 'rxjs';
 
 export abstract class BaseComponent {
-  pageIndex = 1;
+  protected pageIndex = 1;
   pageSize = 10;
   loading = true;
   total: number;
@@ -36,7 +36,7 @@ export class BaseTableComponent extends BaseComponent implements OnInit {
     this.messageService = this.injector.get(NzMessageService);
   }
 
-  search(query = this.queryForm.value, page_size = this.pageSize, page = this.pageIndex): void {
+  search(page = 1, query = this.queryForm.value, page_size = this.pageSize): void {
     this.service.fetch({...query, page_size, page})
       .pipe(
         map(res => res.data),
@@ -45,6 +45,7 @@ export class BaseTableComponent extends BaseComponent implements OnInit {
       .subscribe(data => {
         this.dataSet = data.list;
         this.total = data.count;
+        this.pageIndex = page;
       });
   }
 
