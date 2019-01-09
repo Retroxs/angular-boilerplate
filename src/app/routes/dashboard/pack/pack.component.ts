@@ -16,7 +16,7 @@ export class PackComponent extends BaseTableComponent implements OnInit {
     app_id: ['']
   });
 
-  selects: {};
+  selects: any;
 
   constructor(protected injector: Injector,
               protected service: PackService) {
