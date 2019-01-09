@@ -6,6 +6,7 @@ import { FormEncode, QuerySearch } from '@zsx/core/net/rest.decorators';
 export interface Config {
   id: number;
   name: string;
+  app_name: string;
   icon: string;
   sort: number;
   status: number;

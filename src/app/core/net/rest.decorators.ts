@@ -14,7 +14,7 @@ export function QuerySearch() {
   return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
     const o = descriptor.value;
     descriptor.value = function () {
-      arguments[0] = pure(arguments[0]);
+      arguments[0] = qs.parse(qs.stringify(arguments[0]))
       return o.apply(this, arguments);
     };
   };

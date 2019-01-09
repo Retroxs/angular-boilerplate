@@ -10,6 +10,15 @@
     </nz-form-item>
 
     <nz-form-item>
+      <nz-form-label>应用</nz-form-label>
+      <nz-form-control>
+        <nz-select style="width: 200px;" formControlName="app_id" nzShowSearch nzAllowClear nzPlaceHolder="全部">
+          <nz-option *ngFor="let app of selects?.app_list" [nzValue]="app.app_id" [nzLabel]="app.remark"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
       <nz-form-control>
         <button nz-button nzType="primary">搜索</button>
       </nz-form-control>
@@ -36,11 +45,10 @@
       <th>ID</th>
       <th>图标</th>
       <th>名称</th>
+      <th>所属APP</th>
       <th>跳转场景值</th>
       <th>排序</th>
-      <th [nzWidth]="'150px'">路由</th>
       <th [nzWidth]="'150px'">标签</th>
-      <th [nzWidth]="'150px'">缺省值标识</th>
       <th>父级功能</th>
       <th>当前状态</th>
       <th>操作</th>
@@ -53,11 +61,12 @@
         <img class="zsx__table-row-image" [src]="data.icon" alt="">
       </td>
       <td>{{data.name}}</td>
+      <td>{{data.app_name}}</td>
       <td>{{data.scene_code}}</td>
       <td>{{data.sort}}</td>
-      <td>{{data.route}}</td>
-      <td>{{data.tags}}</td>
-      <td>{{data.place_holder}}</td>
+      <td>
+        <nz-tag [nzColor]="'purple'" *ngIf="data.tags">{{data.tags}}</nz-tag>
+      </td>
       <td>{{data.parent_func_name}}</td>
       <td>
         <nz-tag [nzColor]="data.status?'green':'red'">{{data.status | status:'visible'}}</nz-tag>

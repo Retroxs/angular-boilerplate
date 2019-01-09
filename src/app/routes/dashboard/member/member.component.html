@@ -33,7 +33,7 @@
     <tr>
       <th>LOGO</th>
       <th>会员名称</th>
-      <th>绑定套餐</th>
+      <th>已绑定的商品</th>
       <th>操作</th>
     </tr>
     </thead>
@@ -43,7 +43,9 @@
         <img class="zsx__table-row-image" [src]="data.logo">
       </td>
       <td>{{data.name}}</td>
-      <td>{{data.suit_name}}</td>
+      <td>
+        <nz-tag [nzColor]="'purple'" *ngFor="let t of data.suit_name.split(',')">{{t}}</nz-tag>
+      </td>
       <td>
         <a (click)="showEditModal(data)">编辑</a>
         <nz-divider nzType="vertical"></nz-divider>

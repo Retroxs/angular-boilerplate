@@ -9,8 +9,10 @@ import { Config, AppFunctionService, Pid } from '../app-function.service';
 export class AppFunctionModalComponent implements OnInit {
 
   @Input() config: Config;
+  @Input() appList: any;
   appFunctionForm = this.fb.group({
     name: [''],
+    app_id: [],
     scene_code: [''],
     sort: [''],
     status: [1],

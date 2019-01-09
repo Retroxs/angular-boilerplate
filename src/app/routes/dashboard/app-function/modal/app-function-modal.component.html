@@ -8,6 +8,15 @@
   </nz-form-item>
 
   <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>所属APP</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-select formControlName="app_id" nzShowSearch nzAllowClear nzPlaceHolder="选择APP">
+        <nz-option *ngFor="let app of appList" [nzValue]="app.app_id" [nzLabel]="app.remark"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24">场景值</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <input nz-input formControlName="scene_code">
@@ -16,7 +25,7 @@
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzrequired>排序</nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>排序</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <input nz-input formControlName="sort">
       <nz-form-extra danger>数字越大越靠前</nz-form-extra>

@@ -26,7 +26,7 @@ export class BaseTableComponent extends BaseComponent implements OnInit {
 
   doneAndReload = pipe(
     tap(() => this.messageService.create('success', '操作成功')),
-    tap(() => this.search())
+    tap(() => this.search(this.pageIndex))
   );
 
   constructor(protected injector: Injector) {
