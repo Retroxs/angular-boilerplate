@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Response } from '@zsx/core/net/response.interface';
 import { AuthService } from '@zsx/core/auth/auth.service';
 import { FormEncode } from '@zsx/core/net/rest.decorators';
+import qs from 'qs';
 
 interface Token {
   token: string;
@@ -17,14 +18,16 @@ interface Token {
 })
 export class LoginService {
 
-  constructor(private http: HttpClient, private authService: AuthService) {
+  constructor(
+    private http: HttpClient
+  ) {
   }
+
 
   @FormEncode()
   login(user): Observable<Response<Token>> {
-    return this.http.post<Response<Token>>('login/account', user)
-      .pipe(
-        tap(res => this.authService.Authorize(res.data.token, '/'))
-      );
+    return this.http.post<Response<Token>>('login/account', user);
   }
+
+
 }

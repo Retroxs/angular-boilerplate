@@ -9,12 +9,19 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AuthService {
 
-  constructor(private router: Router, private authConfig: AuthConfig, private tokenService: TokenService, private http: HttpClient) {}
+  constructor(
+    private router: Router,
+    private authConfig: AuthConfig,
+    private tokenService: TokenService,
+    private http: HttpClient) {
+  }
 
 
-  Authorize(token, redirectTo) {
+  Authorize(token, redirectTo?) {
     this.tokenService.set(token);
-    this.router.navigateByUrl(redirectTo);
+    if (redirectTo) {
+      this.router.navigateByUrl(redirectTo);
+    }
   }
 
   deAuthorize() {

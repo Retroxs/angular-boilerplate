@@ -12,13 +12,18 @@ export class TokenService {
   }
 
   get(): string {
-    const  { token } = this.tokenStore.get(this.authConfig.token_key);
+    const {token} = this.tokenStore.get(this.authConfig.token_key);
     return token ? 'Bearer ' + token : '';
 
   }
 
+  get username(): string {
+    const {username} = this.tokenStore.get(this.authConfig.token_key);
+    return username;
+  }
+
   set(token) {
-    this.tokenStore.set(this.authConfig.token_key, {token});
+    this.tokenStore.set(this.authConfig.token_key, token);
   }
 
   remove() {

@@ -21,6 +21,7 @@ import { DataFeedbackComponent } from './dashboard/feedback/data/data.component'
 import { StatusPipe } from '@zsx/core/pipe/status.pipe';
 import { AppEnvModalComponent } from './dashboard/app-env/modal/app-env-modal.component';
 import { AppEnvComponent } from './dashboard/app-env/app-env.component';
+import { LoginModalComponent } from './passport/login/login-modal/login-modal.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { AppEnvComponent } from './dashboard/app-env/app-env.component';
     DataFeedbackComponent,
 
     // modal
+    LoginModalComponent,
     AppFunctionModalComponent,
     AppEnvModalComponent,
     MemberModalComponent,
@@ -44,7 +46,8 @@ import { AppEnvComponent } from './dashboard/app-env/app-env.component';
     PriceModalComponent,
 
     // pipe
-    StatusPipe
+    StatusPipe,
+
   ],
   imports: [
     CommonModule,
@@ -59,7 +62,8 @@ import { AppEnvComponent } from './dashboard/app-env/app-env.component';
     MemberModalComponent,
     PackModalComponent,
     PriceModalComponent,
-    BindModalComponent
+    BindModalComponent,
+    LoginModalComponent
   ],
   exports: [RoutesRoutingModule]
 })

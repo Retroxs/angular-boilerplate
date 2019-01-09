@@ -2,16 +2,21 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } fr
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap, timeout } from 'rxjs/operators';
-import { NzMessageService } from 'ng-zorro-antd';
+import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import { TokenService } from '@zsx/core/auth/token.service';
-import { AuthService } from '@zsx/core/auth/auth.service';
+import { RecertificationService } from '../../routes/passport/login/login-modal/recertification.service';
 
 
 @Injectable()
 export class DefaultInterceptor implements HttpInterceptor {
 
-  constructor(private nzMessageService: NzMessageService, private tokenService: TokenService, private authService: AuthService) {
+  constructor(
+    private nzMessageService: NzMessageService,
+    private tokenService: TokenService,
+    private nzModalService: NzModalService,
+    private recertificationService: RecertificationService) {
   }
+
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const url = `/api/v1/${req.url}`;
@@ -36,10 +41,12 @@ export class DefaultInterceptor implements HttpInterceptor {
           }
         }, e => {
           const httpStatus = e.status;
+
           if (httpStatus === 401) {
-            this.authService.deAuthorize();
+            this.recertificationService.auth();
+          } else {
+            this.nzMessageService.error(e.error.msg);
           }
-          this.nzMessageService.error(e.error.msg);
         }
       ),
     );
