@@ -6,7 +6,7 @@ import { Injectable, Injector, OnInit } from '@angular/core';
 import { pipe } from 'rxjs';
 
 export abstract class BaseComponent {
-  protected pageIndex = 1;
+  pageIndex = 1;
   pageSize = 10;
   loading = true;
   total: number;
