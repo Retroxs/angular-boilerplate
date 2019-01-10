@@ -67,9 +67,9 @@ export class PackComponent extends BaseTableComponent implements OnInit {
   }
 
 
-  changePrice({suit_id, price, origin_price}) {
+  changePrice({suit_id, suit_name, price, origin_price}) {
     this.openModal({
-      nzTitle: '更改套餐价格',
+      nzTitle: `更改套餐价格:    ${suit_name}`,
       nzContent: PriceModalComponent,
       nzComponentParams: {
         price: {price, origin_price}
