@@ -26,7 +26,7 @@
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24"  nzRequired>是否生效</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
-      <nz-select formControlName="status">
+      <nz-select formControlName="status" [compareWith]="selectCompareWith">
         <nz-option [nzValue]="1" nzLabel="生效"></nz-option>
         <nz-option [nzValue]="0" nzLabel="失效"></nz-option>
       </nz-select>

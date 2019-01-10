@@ -61,7 +61,7 @@ export class AppFunctionComponent extends BaseTableComponent implements OnInit {
   }
 
   setStatus({id, status}) {
-    this.service.setStatus({id, status: +!status}).pipe(this.doneAndReload).subscribe();
+    this.service.setStatus({id, status: (+status ? 0 : 1)}).pipe(this.doneAndReload).subscribe();
   }
 
 }

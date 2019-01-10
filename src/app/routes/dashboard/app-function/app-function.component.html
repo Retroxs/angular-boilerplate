@@ -69,12 +69,12 @@
       </td>
       <td>{{data.parent_func_name}}</td>
       <td>
-        <nz-tag [nzColor]="data.status?'green':'red'">{{data.status | status:'visible'}}</nz-tag>
+        <nz-tag [nzColor]="+data.status?'green':'red'">{{+data.status | status:'visible'}}</nz-tag>
       </td>
       <td>
         <a (click)="showEditModal(data)">编辑</a>
         <nz-divider nzType="vertical"></nz-divider>
-        <a nz-popconfirm [nzTitle]="(data.status?'隐藏':'显示') + '此功能'" nzPlacement="top" (nzOnConfirm)="setStatus(data)">{{data.status ? '隐藏':'显示'}}</a>
+        <a nz-popconfirm [nzTitle]="(+data.status?'隐藏':'显示') + '此功能'" nzPlacement="top" (nzOnConfirm)="setStatus(data)">{{+data.status ? '隐藏':'显示'}}</a>
       </td>
     </tr>
     </tbody>

@@ -57,7 +57,7 @@
       <td>{{data.price}}</td>
       <td>{{data.create_time}}</td>
       <td>
-        <nz-tag [nzColor]="data.status?'green':'red'">{{data.status | status:'usage'}}</nz-tag>
+        <nz-tag [nzColor]="+data.status?'green':'red'">{{+data.status | status:'usage'}}</nz-tag>
       </td>
       <td>
         <a (click)="changePrice(data)">改价</a>

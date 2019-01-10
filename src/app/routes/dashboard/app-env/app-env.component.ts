@@ -49,7 +49,7 @@ export class AppEnvComponent extends BaseTableComponent implements OnInit {
   }
 
   setStatus({fn_id, status}) {
-    this.service.active({fn_id, status: +!status}).pipe(this.doneAndReload).subscribe();
+    this.service.active({fn_id, status: (+status ? 0 : 1)}).pipe(this.doneAndReload).subscribe();
   }
 
   delete(fn_id) {

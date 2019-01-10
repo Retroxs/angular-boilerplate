@@ -1,12 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { UploadChangeParam } from 'ng-zorro-antd';
+import { BaseSelect } from '@zsx/core/base.component';
 
 @Component({
   selector: 'app-form',
   templateUrl: './pack-modal.component.html'
 })
-export class PackModalComponent implements OnInit {
+export class PackModalComponent extends BaseSelect implements OnInit {
 
   @Input() pack: any;
   @Input() select: any;
@@ -42,7 +43,9 @@ export class PackModalComponent implements OnInit {
   get imageUrl() {
     return this.packForm.value.image_url;
   }
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {
+    super();
+  }
 
   ngOnInit() {
     this.packForm.patchValue({});

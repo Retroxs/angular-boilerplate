@@ -70,10 +70,10 @@
       <td>{{data.define}}</td>
       <td>{{data.create_time}}</td>
       <td>
-        <nz-tag [nzColor]="data.status?'green':'red'">{{data.status | status}}</nz-tag>
+        <nz-tag [nzColor]="+data.status?'green':'red'">{{+data.status | status}}</nz-tag>
       </td>
       <td>
-        <a nz-popconfirm [nzTitle]="(data.status?'失效':'生效') + '此配置'" nzPlacement="top" (nzOnConfirm)="setStatus(data)">{{data.status ? '失效':'生效'}}</a>
+        <a nz-popconfirm [nzTitle]="(+data.status?'失效':'生效') + '此配置'" nzPlacement="top" (nzOnConfirm)="setStatus(data)">{{+data.status ? '失效':'生效'}}</a>
         <nz-divider nzType="vertical"></nz-divider>
         <a (click)="showEditModal(data)">编辑</a>
         <nz-divider nzType="vertical"></nz-divider>

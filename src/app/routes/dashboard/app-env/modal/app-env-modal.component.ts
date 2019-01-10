@@ -1,11 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Env } from '../app-env.service';
+import { BaseSelect } from '@zsx/core/base.component';
 
 @Component({
   templateUrl: './app-env-modal.component.html',
 })
-export class AppEnvModalComponent implements OnInit {
+export class AppEnvModalComponent extends BaseSelect implements OnInit {
 
   @Input() env: Env;
 
@@ -16,7 +17,9 @@ export class AppEnvModalComponent implements OnInit {
     status: [1],
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {
+    super();
+  }
 
   ngOnInit() {
     if (this.env) {

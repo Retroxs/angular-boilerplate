@@ -35,7 +35,7 @@
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>状态</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
-      <nz-select formControlName="status">
+      <nz-select formControlName="status" [compareWith]="selectCompareWith">
         <nz-option [nzValue]="1" nzLabel="显示"></nz-option>
         <nz-option [nzValue]="0" nzLabel="隐藏"></nz-option>
       </nz-select>
@@ -68,7 +68,7 @@
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24">父级功能</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
-      <nz-select formControlName="pid">
+      <nz-select formControlName="pid" [compareWith]="selectCompareWith">
         <nz-option [nzValue]="0" nzLabel="顶级"></nz-option>
         <nz-option *ngFor="let pid of parentPid" [nzValue]="pid.id" [nzLabel]="pid.name"></nz-option>
       </nz-select>

@@ -11,7 +11,7 @@
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>产品信息</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-          <nz-select formControlName="product_id" >
+          <nz-select formControlName="product_id" [compareWith]="selectCompareWith">
             <nz-option nzValue="" nzLabel="请选择所属产品"></nz-option>
             <nz-option *ngFor="let p of select?.product_list" [nzValue]="p.product_id"
                        [nzLabel]="p.product_name"></nz-option>
@@ -52,7 +52,7 @@
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24">是否推荐</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-          <nz-select formControlName="recommend">
+          <nz-select formControlName="recommend" [compareWith]="selectCompareWith">
             <nz-option [nzValue]="1" nzLabel="推荐"></nz-option>
             <nz-option [nzValue]="0" nzLabel="不推荐"></nz-option>
           </nz-select>
@@ -62,7 +62,7 @@
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>场景类型</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-          <nz-select formControlName="scen_type">
+          <nz-select formControlName="scen_type" [compareWith]="selectCompareWith">
             <nz-option [nzValue]="0" nzLabel="未知产品类型"></nz-option>
             <nz-option [nzValue]="1" nzLabel="图片"></nz-option>
             <nz-option [nzValue]="2" nzLabel="附件"></nz-option>
@@ -92,7 +92,7 @@
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>套餐状态</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-          <nz-select formControlName="status">
+          <nz-select formControlName="status" [compareWith]="selectCompareWith">
             <nz-option [nzValue]="1" nzLabel="生效"></nz-option>
             <nz-option [nzValue]="0" nzLabel="失效"></nz-option>
           </nz-select>
@@ -112,7 +112,7 @@
 
     <div *ngFor="let app of apps; let i = index" nz-row style="padding: 10px 0">
       <div nz-col nzSpan="12">
-        <nz-select [(ngModel)]="app.app_id" style="width: 80%">
+        <nz-select [(ngModel)]="app.app_id" style="width: 80%" [compareWith]="selectCompareWith">
           <nz-option nzValue="" nzLabel="请选择产品"></nz-option>
           <nz-option *ngFor="let _app of select?.app_list" [nzValue]="_app.app_id" [nzLabel]="_app.remark"></nz-option>
         </nz-select>
@@ -166,7 +166,7 @@
     </button>
     <div *ngFor="let func of func_list ; let i = index" nz-row style="padding: 10px 0">
       <div nz-col nzSpan="6">
-        <nz-select [(ngModel)]="func.function_code">
+        <nz-select [(ngModel)]="func.function_code" [compareWith]="selectCompareWith">
           <nz-option nzValue="" nzLabel="请选择数据项"></nz-option>
           <nz-option *ngFor="let fn of select?.function_num" [nzValue]="fn.fn_code" [nzLabel]="fn.remark"></nz-option>
         </nz-select>

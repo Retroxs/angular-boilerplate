@@ -5,6 +5,20 @@ import { map, tap } from 'rxjs/operators';
 import { Injectable, Injector, OnInit } from '@angular/core';
 import { pipe } from 'rxjs';
 
+export class BaseSelect {
+  selectCompareWith(o1: any, o2: any): boolean {
+    let result = false;
+    if (o1 === o2) {
+      result = true;
+    }
+    if (o1.toString() === o2.toString()) {
+      result = true;
+    }
+    return result;
+  }
+}
+
+
 export abstract class BaseComponent {
   pageIndex = 1;
   pageSize = 10;
