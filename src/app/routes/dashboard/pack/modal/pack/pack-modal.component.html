@@ -165,8 +165,8 @@
       添加数据项
     </button>
     <div *ngFor="let func of func_list ; let i = index" nz-row style="padding: 10px 0">
-      <div nz-col nzSpan="6">
-        <nz-select [(ngModel)]="func.function_code" [compareWith]="selectCompareWith">
+      <div nz-col nzSpan="8">
+        <nz-select [(ngModel)]="func.function_code" [compareWith]="selectCompareWith" style="width: 80%">
           <nz-option nzValue="" nzLabel="请选择数据项"></nz-option>
           <nz-option *ngFor="let fn of select?.function_num" [nzValue]="fn.fn_code" [nzLabel]="fn.remark"></nz-option>
         </nz-select>

@@ -27,7 +27,7 @@ export class BindModalComponent implements OnInit {
 
   ngOnInit() {
     this.memberList.forEach(m => {
-      if (m.suit_id.indexOf(this.suit_id) > -1) {
+      if (m.suit_id.indexOf(Number(this.suit_id)) > -1) {
         m.checked = true;
       }
     });
