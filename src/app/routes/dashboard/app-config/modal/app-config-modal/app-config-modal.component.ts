@@ -8,7 +8,7 @@ import { PackService } from '../../../pack/pack.service';
 export class AppConfigModalComponent implements OnInit {
 
   @Input() config: any;
-  @Input() template: any;
+  @Input() template_origin: any;
   appConfigForm = this.fb.group({
     name: [''],
     app_id: [],
@@ -17,6 +17,8 @@ export class AppConfigModalComponent implements OnInit {
     channel_code: [''],
   });
   selects: any;
+
+  template: any;
 
   constructor(private fb: FormBuilder, private packService: PackService) {
     this.fetchSelects();
@@ -31,7 +33,14 @@ export class AppConfigModalComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.template = JSON.parse(JSON.stringify(this.template_origin));
+
+    /**
+     * 编辑的时候把表单重置
+     */
     if (this.config) {
+
       const {name, app_id, value, version_code, channel_code} = this.config;
       this.appConfigForm.reset({
         name,

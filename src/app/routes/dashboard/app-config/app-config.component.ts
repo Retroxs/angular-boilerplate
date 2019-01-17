@@ -57,7 +57,7 @@ export class AppConfigComponent extends BaseTableComponent implements OnInit {
       nzTitle: '添加配置',
       nzContent: AppConfigModalComponent,
       nzComponentParams: {
-        template: this.configTemplate
+        template_origin: this.configTemplate
       },
       source$: (componentInstance: AppConfigModalComponent) =>
         this.service.create(componentInstance.appConfigForm.value)
@@ -70,7 +70,7 @@ export class AppConfigComponent extends BaseTableComponent implements OnInit {
       nzContent: AppConfigModalComponent,
       nzComponentParams: {
         config: data,
-        template: this.configTemplate
+        template_origin: this.configTemplate
       },
       source$: (componentInstance: AppConfigModalComponent) => this.service.update({
         value: componentInstance.config_value,
