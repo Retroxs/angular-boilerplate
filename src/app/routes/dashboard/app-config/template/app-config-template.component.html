@@ -1,0 +1,88 @@
+<page-header title="APP模版配置"></page-header>
+
+<nz-card>
+  <form class="zsx__table-search-form" nz-form nzLayout="inline" [formGroup]="queryForm" (ngSubmit)="search()">
+    <nz-form-item>
+      <nz-form-label>标题</nz-form-label>
+      <nz-form-control>
+        <input formControlName="title" nz-input>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label>配置参数</nz-form-label>
+      <nz-form-control>
+        <input formControlName="name" nz-input>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label>配置选项</nz-form-label>
+      <nz-form-control>
+        <input formControlName="option" nz-input>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label>配置类型</nz-form-label>
+      <nz-form-control>
+        <nz-select style="width: 200px;" formControlName="type" nzShowSearch nzAllowClear nzPlaceHolder="全部">
+          <nz-option *ngFor="let type of typeSelects" [nzValue]="type.key" [nzLabel]="type.label"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control>
+        <button nz-button nzType="primary">搜索</button>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <button nz-button nzType="primary" type="button" (click)="showModal()">新增</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+
+
+  <nz-table
+    nzBordered
+    [nzSize]="'middle'"
+    [nzData]="dataSet"
+    [nzLoading]="loading"
+    [nzFrontPagination]="false"
+    [nzTotal]="total"
+    [(nzPageIndex)]="pageIndex"
+    (nzPageIndexChange)="search($event)">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>标题</th>
+      <th>配置参数</th>
+      <th>配置选项</th>
+      <th>配置类型</th>
+      <th>创建时间</th>
+      <th>状态</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of dataSet">
+      <td>{{data.id}}</td>
+      <td>{{data.title}}</td>
+      <td>{{data.name}}</td>
+      <td>{{data.option}}</td>
+      <td>{{data.type}}</td>
+      <td>{{data.create_time}}</td>
+      <td>
+        <nz-tag [nzColor]="+data.status?'green':'red'">{{+data.status | status:'usage'}}</nz-tag>
+      </td>
+      <td>
+        <a (click)="goto(data)">查看配置列表</a>
+        <nz-divider nzType="vertical"></nz-divider>
+        <a nz-popconfirm danger [nzTitle]="'删除此模版？'" nzPlacement="top" (nzOnConfirm)="destroy(data.id)">删除</a>
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+</nz-card>

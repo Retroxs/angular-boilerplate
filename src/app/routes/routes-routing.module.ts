@@ -11,6 +11,8 @@ import { AuthGuard } from '../core/auth/auth.guard';
 import { CustomerFeedbackComponent } from './dashboard/feedback/customer/customer.component';
 import { DataFeedbackComponent } from './dashboard/feedback/data/data.component';
 import { AppEnvComponent } from './dashboard/app-env/app-env.component';
+import { AppConfigTemplateComponent } from './dashboard/app-config/template/app-config-template.component';
+import { AppConfigComponent } from './dashboard/app-config/app-config.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -26,7 +28,9 @@ const routes: Routes = [
       {path: 'pack', component: PackComponent},
       {path: 'member', component: MemberComponent},
       {path: 'feedback_user', component: CustomerFeedbackComponent},
-      {path: 'feedback_data', component: DataFeedbackComponent}
+      {path: 'feedback_data', component: DataFeedbackComponent},
+      {path: 'app_config_template', component: AppConfigTemplateComponent},
+      { path: 'app_config/:name', component: AppConfigComponent },
     ],
   },
   {

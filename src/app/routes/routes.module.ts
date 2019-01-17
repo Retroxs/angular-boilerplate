@@ -22,6 +22,10 @@ import { StatusPipe } from '@zsx/core/pipe/status.pipe';
 import { AppEnvModalComponent } from './dashboard/app-env/modal/app-env-modal.component';
 import { AppEnvComponent } from './dashboard/app-env/app-env.component';
 import { LoginModalComponent } from './passport/login/login-modal/login-modal.component';
+import { AppConfigTemplateComponent } from './dashboard/app-config/template/app-config-template.component';
+import { AppConfigTemplateModalComponent } from './dashboard/app-config/modal/app-config-template-modal.component';
+import { AppConfigComponent } from './dashboard/app-config/app-config.component';
+import { AppConfigModalComponent } from './dashboard/app-config/modal/app-config-modal/app-config-modal.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +40,8 @@ import { LoginModalComponent } from './passport/login/login-modal/login-modal.co
     BindModalComponent,
     CustomerFeedbackComponent,
     DataFeedbackComponent,
+    AppConfigTemplateComponent,
+    AppConfigComponent,
 
     // modal
     LoginModalComponent,
@@ -44,10 +50,11 @@ import { LoginModalComponent } from './passport/login/login-modal/login-modal.co
     MemberModalComponent,
     PackModalComponent,
     PriceModalComponent,
+    AppConfigTemplateModalComponent,
+    AppConfigModalComponent,
 
     // pipe
     StatusPipe,
-
   ],
   imports: [
     CommonModule,
@@ -63,7 +70,9 @@ import { LoginModalComponent } from './passport/login/login-modal/login-modal.co
     PackModalComponent,
     PriceModalComponent,
     BindModalComponent,
-    LoginModalComponent
+    LoginModalComponent,
+    AppConfigTemplateModalComponent,
+    AppConfigModalComponent,
   ],
   exports: [RoutesRoutingModule]
 })

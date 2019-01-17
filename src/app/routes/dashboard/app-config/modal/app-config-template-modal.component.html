@@ -1,0 +1,31 @@
+<form nz-form [formGroup]="appConfigTemplateForm">
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>标题</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="title">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>配置参数</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="name">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24">配置类型</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-select style="width: 200px;" formControlName="type">
+        <nz-option *ngFor="let type of typeSelects" [nzValue]="type.key" [nzLabel]="type.label"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24">配置选项</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <textarea formControlName="option" nz-input></textarea>
+    </nz-form-control>
+  </nz-form-item>
+</form>

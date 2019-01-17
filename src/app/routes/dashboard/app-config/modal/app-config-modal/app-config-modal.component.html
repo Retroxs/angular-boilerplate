@@ -1,0 +1,52 @@
+<form nz-form [formGroup]="appConfigForm">
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>应用</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-form-control>
+        <nz-select style="width: 200px;" formControlName="app_id" nzShowSearch nzAllowClear nzPlaceHolder="请选择应用">
+          <nz-option *ngFor="let app of selects?.app_list" [nzValue]="app.app_id" [nzLabel]="app.remark"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>配置值</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <!--text-->
+      <input *ngIf="template.type === 'text'" nz-input formControlName="value">
+
+      <!--textarea-->
+      <textarea *ngIf="template.type === 'textarea'" nz-input formControlName="value"></textarea>
+
+      <!--select-->
+      <nz-select *ngIf="template.type === 'select'" style="width: 200px;" formControlName="value"
+                 nzPlaceHolder="请选择配置值">
+        <nz-option *ngFor="let option of template.option" [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
+      </nz-select>
+
+      <!--radio-->
+      <nz-radio-group *ngIf="template.type === 'radio'" formControlName="value">
+        <label *ngFor="let option of template.option" nz-radio [nzValue]="option.value">{{option.label}}</label>
+      </nz-radio-group>
+
+      <nz-checkbox-group *ngIf="template.type === 'checkbox'" [(ngModel)]="template.option" (ngModelChange)="disposeCheckbox()" [ngModelOptions]="{standalone: true}"></nz-checkbox-group>
+
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>版本号</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="version_code">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>渠道码</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="channel_code">
+    </nz-form-control>
+  </nz-form-item>
+</form>
+
