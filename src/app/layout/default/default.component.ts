@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { AuthService } from '@zsx/core/auth/auth.service';
-import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
+import { Route, Router, Routes } from '@angular/router';
+import { PermissionService } from '../../routes/permission.service';
 
 @Component({
   templateUrl: './default.component.html',
@@ -11,10 +12,12 @@ export class LayoutDefaultComponent implements OnInit {
   isCollapsed = false;
   triggerTemplate = null;
   initSelected: string;
+  menuList: Routes;
 
   @ViewChild('trigger') customTrigger: TemplateRef<void>;
 
-  constructor(private authService: AuthService, private route: ActivatedRoute, private router: Router) {
+  constructor(private authService: AuthService, private router: Router, private permissionService: PermissionService) {
+    this.menuList = this.permissionService.menuList;
   }
 
   ngOnInit() {

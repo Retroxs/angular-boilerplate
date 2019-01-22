@@ -5,59 +5,37 @@
     </div>
     <ul nz-menu [nzTheme]="'light'" [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed">
 
-      <li nz-menu-item routerLink="/dashboard/config" [nzSelected]="initSelected === '/dashboard/config'">
-        <span title><i nz-icon type="home"></i><span class="nav-text">首页功能配置</span></span>
-      </li>
+      <ng-container *ngFor="let item of menuList">
+        <li nz-submenu *ngIf="item.children; else single">
+          <span title>
+            <i nz-icon [type]="item.data.icon"></i>
+            <span class="nav-text">{{item.data.title}}</span>
+          </span>
+          <ul>
+            <li nz-menu-item
+                *ngFor="let child of item.children"
+                [routerLink]="'/dashboard/' + item.path + '/' + child.path"
+                [nzSelected]="initSelected === '/' + item.path + '/' + child.path">
+              {{child.data.title}}
+            </li>
+          </ul>
+        </li>
 
-      <li nz-menu-item routerLink="/dashboard/env" [nzSelected]="initSelected === '/dashboard/env'">
-        <span title><i nz-icon type="setting"></i><span class="nav-text">数据项</span></span>
-      </li>
+        <ng-template #single>
+          <li nz-menu-item
+              [routerLink]="'/dashboard/'+item.path"
+              [nzSelected]="initSelected === '/dashboard/'+ item.path">
+            <span title>
+              <i nz-icon [type]="item.data.icon"></i>
+              <span class="nav-text">{{item.data.title}}</span>
+            </span>
+          </li>
+        </ng-template>
 
-      <li nz-menu-item routerLink="/dashboard/pack" [nzSelected]="initSelected === '/dashboard/pack'">
-        <span title><i nz-icon type="gift"></i><span class="nav-text">商品参数</span></span>
-      </li>
-
-      <li nz-menu-item routerLink="/dashboard/member" [nzSelected]="initSelected === '/dashboard/member'">
-        <span title><i nz-icon type="crown"></i><span class="nav-text">会员</span></span>
-      </li>
-
-      <li nz-submenu>
-        <span title><i nz-icon type="smile"></i><span class="nav-text">反馈管理</span></span>
-        <ul>
-          <li nz-menu-item routerLink="/dashboard/feedback_user" [nzSelected]="initSelected === '/dashboard/feedback_user'">用户反馈</li>
-          <li nz-menu-item routerLink="/dashboard/feedback_data" [nzSelected]="initSelected === '/dashboard/feedback_data'">数据项反馈</li>
-        </ul>
-      </li>
-
-      <li nz-menu-item routerLink="/dashboard/app_config_template" [nzSelected]="initSelected === '/dashboard/app_config_template'">
-        <span title><i nz-icon type="crown"></i><span class="nav-text">APP配置</span></span>
-      </li>
-      <!--<li nz-submenu>-->
-      <!--<span title><i nz-icon type="team"></i><span class="nav-text">套餐</span></span>-->
-      <!--<ul>-->
-      <!--<li nz-menu-item routerLink="/dashboard/pack">添加套餐</li>-->
-      <!--<li nz-menu-item routerLink="/dashboard/pack">套餐信息</li>-->
-      <!--</ul>-->
-      <!--</li>-->
-
-      <!--<li nz-submenu>-->
-      <!--<span title><i nz-icon type="file"></i><span class="nav-text">会员</span></span>-->
-      <!--<ul>-->
-      <!--<li nz-menu-item routerLink="/dashboard/member">添加会员</li>-->
-      <!--<li nz-menu-item routerLink="/dashboard/member">会员信息</li>-->
-      <!--</ul>-->
-      <!--</li>-->
-
-      <!--<li nz-submenu>-->
-      <!--<span title><i nz-icon type="file"></i><span class="nav-text">首页功能配置</span></span>-->
-      <!--<ul>-->
-      <!--<li nz-menu-item routerLink="/dashboard/config">添加功能配置</li>-->
-      <!--<li nz-menu-item routerLink="/dashboard/config">配置信息</li>-->
-      <!--</ul>-->
-      <!--</li>-->
-
+      </ng-container>
     </ul>
   </nz-sider>
+
   <nz-layout>
     <nz-header class="zsx__layout-header">
       <div class="zsx__layout-nav-wrapper">

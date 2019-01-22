@@ -22,6 +22,11 @@ export class TokenService {
     return username;
   }
 
+  get permission(): string[] {
+    const {permission} = this.tokenStore.get(this.authConfig.token_key);
+    return permission;
+  }
+
   set(token) {
     this.tokenStore.set(this.authConfig.token_key, token);
   }
