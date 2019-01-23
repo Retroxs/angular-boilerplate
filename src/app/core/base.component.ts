@@ -4,6 +4,7 @@ import { BaseService1 } from '@zsx/core/base.service';
 import { map, tap } from 'rxjs/operators';
 import { Injectable, Injector, OnInit } from '@angular/core';
 import { pipe } from 'rxjs';
+import { ACL } from '@zsx/core/acl.service';
 
 export class BaseSelect {
   selectCompareWith(o1: any = '', o2: any = ''): boolean {
@@ -31,6 +32,7 @@ export class BaseTableComponent extends BaseComponent implements OnInit {
 
   dataSet: any[];
   queryForm: FormGroup;
+  acl: ACL;
 
   // injector
   protected modalService: NzModalService;

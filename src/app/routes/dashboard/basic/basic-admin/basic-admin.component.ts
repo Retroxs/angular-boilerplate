@@ -4,6 +4,7 @@ import { Admin, BasicAdminService } from './basic-admin.service';
 import { BasicAdminModalComponent } from './modal/basic-admin-modal.component';
 import { BasicAdminAssignRoleModalComponent } from './modal/basic-admin-assign-role-modal/basic-admin-assign-role-modal.component';
 import { BasicRoleService } from '../basic-role/basic-role.service';
+import { ACL, AclService } from '@zsx/core/acl.service';
 
 @Component({
   templateUrl: './basic-admin.component.html'
@@ -15,15 +16,17 @@ export class BasicAdminComponent extends BaseTableComponent implements OnInit {
     user_name: [''],
     nick_name: ['']
   });
+  acl: ACL;
 
   constructor(
     protected injector: Injector,
     protected service: BasicAdminService,
-    private  basicRoleService: BasicRoleService
+    private  basicRoleService: BasicRoleService,
+    private aclService: AclService
   ) {
     super(injector);
+    this.acl = this.aclService.global_acl['ADMIN_ACL'];
   }
-
 
   showModal() {
     this.openModal({

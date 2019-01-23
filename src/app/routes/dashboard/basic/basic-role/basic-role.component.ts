@@ -4,6 +4,7 @@ import { BaseTableComponent } from '@zsx/core/base.component';
 import { BasicRoleModalComponent } from './modal/basic-role-modal.component';
 import { BasicRoleAssignRuleModalComponent } from './modal/basic-role-assign-rule-modal/basic-role-assign-rule-modal.component';
 import { BasicRuleService } from '../basic-rule/basic-rule.service';
+import { ACL, AclService } from '@zsx/core/acl.service';
 
 @Component({
   templateUrl: './basic-role.component.html'
@@ -18,9 +19,11 @@ export class BasicRoleComponent extends BaseTableComponent implements OnInit {
   constructor(
     protected injector: Injector,
     protected service: BasicRoleService,
-    private basicRuleService: BasicRuleService
+    private basicRuleService: BasicRuleService,
+    private aclService: AclService
   ) {
     super(injector);
+    this.acl = this.aclService.global_acl['ROLE_ACL'];
   }
 
 

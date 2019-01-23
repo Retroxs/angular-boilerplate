@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TableResponse } from '@zsx/core/net/response.interface';
 import { FormEncode, QuerySearch } from '@zsx/core/net/rest.decorators';
+import { ACL } from '@zsx/core/auth/auth.config';
+import { TokenService } from '@zsx/core/auth/token.service';
 
 
 export interface Env {
@@ -13,6 +15,7 @@ export interface Env {
   remark: string;
   status: number;
 }
+
 
 @Injectable({
   providedIn: 'root'

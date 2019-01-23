@@ -2,6 +2,7 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { BasicRuleGroupService, RuleGroup } from './basic-rule-group.service';
 import { BaseTableComponent } from '@zsx/core/base.component';
 import { BasicRuleGroupModalComponent } from './modal/basic-rule-group-modal.component';
+import { AclService } from '@zsx/core/acl.service';
 
 @Component({
   templateUrl: './basic-rule-group.component.html'
@@ -15,9 +16,11 @@ export class BasicRuleGroupComponent extends BaseTableComponent implements OnIni
 
   constructor(
     protected injector: Injector,
-    protected service: BasicRuleGroupService
+    protected service: BasicRuleGroupService,
+    private aclService: AclService
   ) {
     super(injector);
+    this.acl = this.aclService.global_acl['RULE_GROUP_ACL'];
   }
 
 
@@ -44,7 +47,7 @@ export class BasicRuleGroupComponent extends BaseTableComponent implements OnIni
   }
 
   delete(group_id) {
-    this.service.delete({ group_id }).pipe(this.doneAndReload).subscribe();
+    this.service.delete({group_id}).pipe(this.doneAndReload).subscribe();
   }
 
   ngOnInit() {

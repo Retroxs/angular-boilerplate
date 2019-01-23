@@ -16,7 +16,7 @@
     </nz-form-item>
     <nz-form-item>
       <nz-form-control>
-        <button nz-button nzType="primary" type="button" (click)="showModal()">新增</button>
+        <button nz-button nzType="primary" type="button" (click)="showModal()" *ngIf="acl.create">新增</button>
       </nz-form-control>
     </nz-form-item>
 
@@ -49,11 +49,11 @@
         <nz-tag [nzColor]="+data.status?'green':'red'">{{+data.status | status: 'user'}}</nz-tag>
       </td>
       <td>
-        <a (click)="showEditModal(data)">编辑</a>
+        <a (click)="showEditModal(data)" *ngIf="acl.update">编辑</a>
         <nz-divider nzType="vertical"></nz-divider>
-        <a (click)="showRuleAssignModel(data.role_id)">分配权限</a>
+        <a (click)="showRuleAssignModel(data.role_id)" *ngIf="acl.assign_rule">分配权限</a>
         <nz-divider nzType="vertical"></nz-divider>
-        <a nz-popconfirm danger [nzTitle]="'删除此权限组？'" nzPlacement="top" (nzOnConfirm)="delete(data.role_id)">删除</a>
+        <a nz-popconfirm danger [nzTitle]="'删除此权限组？'" nzPlacement="top" (nzOnConfirm)="delete(data.role_id)" *ngIf="acl.destroy">删除</a>
       </td>
     </tr>
     </tbody>

@@ -44,13 +44,8 @@ const routes: Routes = [
             data: {
               title: '管理员',
               permission: [
-                '/v1/admin/register',
-                '/v1/admin/update',
-                '/v1/admin/set-password',
-                '/v1/admin/delete',
                 '/v1/admin/index',
-                '/v1/admin/info'
-              ],
+              ]
             }
           },
           {
@@ -59,11 +54,6 @@ const routes: Routes = [
               title: '角色',
               permission: [
                 '/v1/role/index',
-                '/v1/role/add',
-                '/v1/role/edit',
-                '/v1/role/delete',
-                '/v1/role/all-list',
-                '/v1/role/assign',
               ],
             }
           },
@@ -72,11 +62,7 @@ const routes: Routes = [
             data: {
               title: '权限组',
               permission: [
-                '/v1/admin-rule-group/index',
-                '/v1/admin-rule-group/add',
-                '/v1/admin-rule-group/edit',
-                '/v1/admin-rule-group/delete',
-                '/v1/admin-rule-group/all-list'
+                '/v1/admin-rule-group/index'
               ],
             }
           },
@@ -86,11 +72,6 @@ const routes: Routes = [
               title: '权限',
               permission: [
                 '/v1/admin-rule/index',
-                '/v1/admin-rule/add',
-                '/v1/admin-rule/edit',
-                '/v1/admin-rule/delete',
-                '/v1/admin-rule/list-with-group',
-                '/v1/admin-rule/assign'
               ],
             }
           }
@@ -103,12 +84,7 @@ const routes: Routes = [
           title: '数据项',
           icon: 'home',
           permission: [
-            '/v1/function/index',
-            '/v1/function/add',
-            '/v1/function/edit',
-            '/v1/function/set-status',
-            '/v1/function/delete',
-            '/v1/function/info'
+            '/v1/function/index'
           ],
         }
       },
@@ -119,11 +95,6 @@ const routes: Routes = [
           icon: 'home',
           permission: [
             '/v1/app-func/index',
-            '/v1/app-func/add',
-            '/v1/app-func/edit',
-            '/v1/app-func/set-status',
-            '/v1/app-func/delete',
-            '/v1/app-func/info',
           ],
         }
       },
@@ -134,15 +105,6 @@ const routes: Routes = [
           icon: 'home',
           permission: [
             '/v1/suit/index',
-            '/v1/suit/add',
-            '/v1/suit/edit',
-            '/v1/suit/info',
-            '/v1/suit/selected',
-            '/v1/suit/edit-price',
-            '/v1/suit/check-suit-by-name',
-            '/v1/suit/set-status',
-            '/v1/suit/delete',
-            '/v1/suit/bind-member'
           ],
         }
       },
@@ -152,11 +114,7 @@ const routes: Routes = [
           title: '会员',
           icon: 'home',
           permission: [
-            '/v1/member/index',
-            '/v1/member/add',
-            '/v1/member/edit',
-            '/v1/member/delete',
-            '/v1/member/info'
+            '/v1/member/index'
           ],
         }
       },
@@ -197,8 +155,6 @@ const routes: Routes = [
           icon: 'home',
           permission: [
             '/v1/app-config/index',
-            '/v1/app-config/add',
-            '/v1/app-config/delete'
           ],
         }
       },
@@ -208,9 +164,6 @@ const routes: Routes = [
           title: 'app配置',
           permission: [
             '/v1/app-config-origin/index',
-            '/v1/app-config-origin/add',
-            '/v1/app-config-origin/edit',
-            '/v1/app-config-origin/delete'
           ],
           excluded: true
         }

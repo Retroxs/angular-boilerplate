@@ -6,7 +6,7 @@
     <ul nz-menu [nzTheme]="'light'" [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed">
 
       <ng-container *ngFor="let item of menuList">
-        <li nz-submenu *ngIf="item.children; else single">
+        <li nz-submenu *ngIf="item.children; else single" [nzOpen]="item.path === currentRootRoute.path">
           <span title>
             <i nz-icon [type]="item.data.icon"></i>
             <span class="nav-text">{{item.data.title}}</span>
@@ -15,7 +15,7 @@
             <li nz-menu-item
                 *ngFor="let child of item.children"
                 [routerLink]="'/dashboard/' + item.path + '/' + child.path"
-                [nzSelected]="initSelected === '/' + item.path + '/' + child.path">
+                [nzSelected]="initSelected === '/dashboard/' + item.path + '/' + child.path">
               {{child.data.title}}
             </li>
           </ul>

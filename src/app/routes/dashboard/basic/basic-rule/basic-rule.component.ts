@@ -2,6 +2,7 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { BaseTableComponent } from '@zsx/core/base.component';
 import { BasicRuleService, Rule } from './basic-rule.service';
 import { BasicRuleModalComponent } from './modal/basic-rule-modal.component';
+import { AclService } from '@zsx/core/acl.service';
 
 @Component({
   templateUrl: './basic-rule.component.html'
@@ -16,9 +17,11 @@ export class BasicRuleComponent extends BaseTableComponent implements OnInit {
 
   constructor(
     protected injector: Injector,
-    protected service: BasicRuleService
+    protected service: BasicRuleService,
+    private aclService: AclService
   ) {
     super(injector);
+    this.acl = this.aclService.global_acl['RULE_ACL'];
   }
 
 
