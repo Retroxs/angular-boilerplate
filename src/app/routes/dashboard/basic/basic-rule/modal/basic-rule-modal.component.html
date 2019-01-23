@@ -1,0 +1,37 @@
+<form nz-form [formGroup]="basicRuleForm">
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>标题</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="title">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>权限规则</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="name">
+    </nz-form-control>
+  </nz-form-item>
+
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>权限组</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-select formControlName="group_id" [compareWith]="selectCompareWith" nzPlaceHolder="请选择权限组">
+        <nz-option *ngFor="let item of ruleGroupList" [nzValue]="item.value" [nzLabel]="item.label"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24"  nzRequired>状态</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-select formControlName="status" [compareWith]="selectCompareWith">
+        <nz-option [nzValue]="1" nzLabel="正常"></nz-option>
+        <nz-option [nzValue]="0" nzLabel="禁用"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+</form>

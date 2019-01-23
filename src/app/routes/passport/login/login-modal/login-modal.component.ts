@@ -26,7 +26,7 @@ export class LoginModalComponent implements OnInit {
     const user = this.loginForm.value;
 
     return this.loginService.login(user).pipe(
-      tap(res => this.authService.Authorize({username: user.user_name, token: res.data.token}))
+      tap(res => this.authService.Authorize({username: user.user_name, token: res.data.token, permission: res.data.rule_list}))
     );
   }
 

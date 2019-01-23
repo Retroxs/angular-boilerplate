@@ -1,0 +1,55 @@
+<page-header title="权限组管理"></page-header>
+
+<nz-card>
+  <form class="zsx__table-search-form" nz-form nzLayout="inline" [formGroup]="queryForm" (ngSubmit)="search()">
+    <nz-form-item>
+      <nz-form-label>名称</nz-form-label>
+      <nz-form-control>
+        <input formControlName="name" nz-input>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control>
+        <button nz-button nzType="primary">搜索</button>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <button nz-button nzType="primary" type="button" (click)="showModal()">新增</button>
+      </nz-form-control>
+    </nz-form-item>
+
+  </form>
+
+
+  <nz-table [nzData]="dataSet"
+            [nzLoading]="loading"
+            [nzFrontPagination]="false"
+            [nzTotal]="total"
+            [(nzPageIndex)]="pageIndex"
+            (nzPageIndexChange)="search($event)">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>名称</th>
+      <th>创建时间</th>
+      <th>更新时间</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of dataSet">
+      <td>{{data.group_id}}</td>
+      <td>{{data.name}}</td>
+      <td>{{data.create_time}}</td>
+      <td>{{data.update_time}}</td>
+      <td>
+        <a (click)="showEditModal(data)">编辑</a>
+        <nz-divider nzType="vertical"></nz-divider>
+        <a nz-popconfirm danger [nzTitle]="'删除此角色？'" nzPlacement="top" (nzOnConfirm)="delete(data.group_id)">删除</a>
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+</nz-card>

@@ -1,0 +1,41 @@
+<form nz-form [formGroup]="basicAdminForm">
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>用户名</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="user_name">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>昵称</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="nick_name">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24"  nzRequired>密码</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="password">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24"  nzRequired>确认密码</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="repassword">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24"  nzRequired>状态</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-select formControlName="status" [compareWith]="selectCompareWith">
+        <nz-option [nzValue]="1" nzLabel="正常"></nz-option>
+        <nz-option [nzValue]="0" nzLabel="禁用"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+</form>

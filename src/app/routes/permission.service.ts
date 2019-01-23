@@ -7,24 +7,31 @@ import { TokenService } from '@zsx/core/auth/token.service';
 })
 export class PermissionService {
 
-  menuList: Routes;
 
   constructor(private tokenService: TokenService,
               private router: Router) {
+  }
 
+  get tokenPermission() {
+    return this.tokenService.permission;
+  }
+
+  hasPermission = route => route.data.permission.some(p => this.tokenPermission.includes(p));
+
+  // 根据权限列表计算出菜单
+  get menuList(): Routes {
     const routes = this.router.config[1].children;
-    const tokenPermission = this.tokenService.permission;
-    const hasPermission = route => route.data.permission.some(p => tokenPermission.includes(p));
     const permissionRoutes = routes
       .filter(route => !route.data.excluded)
-      .filter(route => !route.children ? hasPermission(route) : true)
+      .filter(route => !route.children ? this.hasPermission(route) : true)
       .map(parentRoute => {
         if (parentRoute.children) {
-          parentRoute.children = parentRoute.children.filter(hasPermission);
+          parentRoute.children = parentRoute.children.filter(this.hasPermission);
         }
         return parentRoute;
       });
-
-    this.menuList = permissionRoutes;
+    return permissionRoutes;
   }
+
+
 }

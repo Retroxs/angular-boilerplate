@@ -1,0 +1,69 @@
+<page-header title="管理员管理"></page-header>
+
+<nz-card>
+  <form class="zsx__table-search-form" nz-form nzLayout="inline" [formGroup]="queryForm" (ngSubmit)="search()">
+    <nz-form-item>
+      <nz-form-label>用户名</nz-form-label>
+      <nz-form-control>
+        <input formControlName="user_name" nz-input>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label>昵称</nz-form-label>
+      <nz-form-control>
+        <input formControlName="nick_name" nz-input>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control>
+        <button nz-button nzType="primary">搜索</button>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <button nz-button nzType="primary" type="button" (click)="showModal()">新增</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+
+
+  <nz-table [nzData]="dataSet"
+            [nzLoading]="loading"
+            [nzFrontPagination]="false"
+            [nzTotal]="total"
+            [(nzPageIndex)]="pageIndex"
+            (nzPageIndexChange)="search($event)">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>用户名</th>
+      <th>昵称</th>
+      <th>上次登陆ip</th>
+      <th>上次登陆时间</th>
+      <th>状态</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of dataSet">
+      <td>{{data.admin_id}}</td>
+      <td>{{data.user_name}}</td>
+      <td>{{data.nick_name}}</td>
+      <td>{{data.last_login_ip}}</td>
+      <td>{{data.last_login_time}}</td>
+      <td>
+        <nz-tag [nzColor]="+data.status?'green':'red'">{{+data.status | status: 'user'}}</nz-tag>
+      </td>
+      <td>
+        <a (click)="showEditModal(data)">编辑</a>
+        <nz-divider nzType="vertical"></nz-divider>
+        <a (click)="showRoleAssignModel(data.admin_id)">分配角色</a>
+        <nz-divider nzType="vertical"></nz-divider>
+        <a nz-popconfirm danger [nzTitle]="'删除此用户？'" nzPlacement="top" (nzOnConfirm)="delete(data.admin_id)">删除</a>
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+</nz-card>

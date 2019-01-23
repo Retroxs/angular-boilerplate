@@ -13,6 +13,10 @@ import { AppEnvComponent } from './dashboard/app-env/app-env.component';
 import { AppConfigTemplateComponent } from './dashboard/app-config/template/app-config-template.component';
 import { AppConfigComponent } from './dashboard/app-config/app-config.component';
 import { WelcomeComponent } from './dashboard/welcome/welcome.component';
+import { BasicAdminComponent } from './dashboard/basic/basic-admin/basic-admin.component';
+import { BasicRoleComponent } from './dashboard/basic/basic-role/basic-role.component';
+import { BasicRuleComponent } from './dashboard/basic/basic-rule/basic-rule.component';
+import { BasicRuleGroupComponent } from './dashboard/basic/basic-rule-group/basic-rule-group.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard/welcome', pathMatch: 'full'},
@@ -36,7 +40,7 @@ const routes: Routes = [
         },
         children: [
           {
-            path: 'admin', component: AppEnvComponent,
+            path: 'admin', component: BasicAdminComponent,
             data: {
               title: '管理员',
               permission: [
@@ -50,7 +54,7 @@ const routes: Routes = [
             }
           },
           {
-            path: 'role', component: AppEnvComponent,
+            path: 'role', component: BasicRoleComponent,
             data: {
               title: '角色',
               permission: [
@@ -64,15 +68,23 @@ const routes: Routes = [
             }
           },
           {
-            path: 'rule', component: AppEnvComponent,
+            path: 'rule_group', component: BasicRuleGroupComponent,
             data: {
-              title: '权限',
+              title: '权限组',
               permission: [
                 '/v1/admin-rule-group/index',
                 '/v1/admin-rule-group/add',
                 '/v1/admin-rule-group/edit',
                 '/v1/admin-rule-group/delete',
-                '/v1/admin-rule-group/all-list',
+                '/v1/admin-rule-group/all-list'
+              ],
+            }
+          },
+          {
+            path: 'rule', component: BasicRuleComponent,
+            data: {
+              title: '权限',
+              permission: [
                 '/v1/admin-rule/index',
                 '/v1/admin-rule/add',
                 '/v1/admin-rule/edit',
