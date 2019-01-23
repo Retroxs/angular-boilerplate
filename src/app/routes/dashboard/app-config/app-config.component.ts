@@ -3,7 +3,7 @@ import { BaseTableComponent } from '@zsx/core/base.component';
 import { ActivatedRoute } from '@angular/router';
 import { AppConfigService } from './app-config.service';
 import { AppConfigModalComponent } from './modal/app-config-modal/app-config-modal.component';
-import { PackService } from '../pack/pack.service';
+import { Select, SelectService } from '../../select.service';
 
 interface ConfigTemplate {
   name: string;
@@ -27,12 +27,12 @@ export class AppConfigComponent extends BaseTableComponent implements OnInit {
   });
 
   configTemplate: ConfigTemplate;
-  selects: any;
+  app_list: Select[];
 
   constructor(
     protected injector: Injector,
     protected service: AppConfigService,
-    private packService: PackService,
+    private selectService: SelectService,
     private route: ActivatedRoute
   ) {
     super(injector);
@@ -41,7 +41,7 @@ export class AppConfigComponent extends BaseTableComponent implements OnInit {
 
 
   fetchSelects() {
-    this.packService.fetchSelect().subscribe(res => this.selects = res.data);
+    this.selectService.fetch({'flag[]': ['app_list']}).subscribe(res => this.app_list = res.data['app_list']);
   }
 
   ngOnInit() {

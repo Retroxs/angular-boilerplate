@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { PackService } from '../../../pack/pack.service';
+import { Select, SelectService } from '../../../../select.service';
 
 @Component({
   templateUrl: './app-config-modal.component.html'
@@ -16,11 +16,12 @@ export class AppConfigModalComponent implements OnInit {
     version_code: [],
     channel_code: [''],
   });
-  selects: any;
+
+  app_list: Select[];
 
   template: any;
 
-  constructor(private fb: FormBuilder, private packService: PackService) {
+  constructor(private fb: FormBuilder, private selectService: SelectService) {
     this.fetchSelects();
   }
 
@@ -29,7 +30,7 @@ export class AppConfigModalComponent implements OnInit {
   }
 
   fetchSelects() {
-    this.packService.fetchSelect().subscribe(res => this.selects = res.data);
+    this.selectService.fetch({'flag[]': ['app_list']}).subscribe(res => this.app_list = res.data['app_list']);
   }
 
   ngOnInit() {

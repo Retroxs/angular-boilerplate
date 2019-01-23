@@ -5,6 +5,7 @@ import { map, tap } from 'rxjs/operators';
 import { BaseComponent } from '@zsx/core/base.component';
 import { PackService } from '../../pack/pack.service';
 import { formatDate } from '@zsx/utils';
+import { Select, SelectService } from '../../../select.service';
 
 @Component({
   templateUrl: './data.component.html',
@@ -13,10 +14,10 @@ export class DataFeedbackComponent extends BaseComponent implements OnInit {
   dataSet = [];
   startValue: Date = null;
   endValue: Date = null;
-  select: any;
-  ghash_list: any;
+  app_list: Select[];
+  ghash_list: Select[];
 
-  constructor(private fb: FormBuilder, private feedbackService: FeedbackService, private packService: PackService) {
+  constructor(private fb: FormBuilder, private feedbackService: FeedbackService, private selectService: SelectService) {
     super();
   }
 
@@ -30,8 +31,10 @@ export class DataFeedbackComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
     this.search();
-    this.packService.fetchSelect().subscribe(v => this.select = v.data);
-    this.feedbackService.fetchHash().subscribe(v => this.ghash_list = v.data);
+    this.selectService.fetch({'flag[]': ['app_list', 'function_apply']}).subscribe(res => {
+      this.app_list = res.data['app_list'];
+      this.ghash_list = res.data['function_apply'];
+    });
   }
 
   search(page = 1, query = this.queryForm.value, page_size = this.pageSize) {

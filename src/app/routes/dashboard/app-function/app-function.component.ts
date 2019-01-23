@@ -3,6 +3,7 @@ import { AppFunctionModalComponent } from './modal/app-function-modal.component'
 import { AppFunctionService, Pid } from './app-function.service';
 import { BaseTableComponent } from '@zsx/core/base.component';
 import { PackService } from '../pack/pack.service';
+import { Select, SelectService } from '../../select.service';
 
 @Component({
   templateUrl: './app-function.component.html'
@@ -14,12 +15,12 @@ export class AppFunctionComponent extends BaseTableComponent implements OnInit {
     app_id: [undefined],
   });
 
-  selects: any;
+  app_list: Select[];
 
   constructor(
     protected injector: Injector,
     protected service: AppFunctionService,
-    private packService: PackService
+    private selectService: SelectService
   ) {
     super(injector);
   }
@@ -30,7 +31,7 @@ export class AppFunctionComponent extends BaseTableComponent implements OnInit {
   }
 
   fetchSelects() {
-    this.packService.fetchSelect().subscribe(res => this.selects = res.data);
+    this.selectService.fetch({'flag[]': ['app_list']}).subscribe(res => this.app_list = res.data['app_list']);
   }
 
   showModal() {
@@ -38,7 +39,7 @@ export class AppFunctionComponent extends BaseTableComponent implements OnInit {
       nzTitle: '添加配置',
       nzContent: AppFunctionModalComponent,
       nzComponentParams: {
-        appList: this.selects.app_list
+        appList: this.app_list
       },
       source$: (componentInstance: AppFunctionModalComponent) => this.service.create(componentInstance.appFunctionForm.value)
     });
@@ -51,7 +52,7 @@ export class AppFunctionComponent extends BaseTableComponent implements OnInit {
       nzContent: AppFunctionModalComponent,
       nzComponentParams: {
         config: data,
-        appList: this.selects.app_list
+        appList: this.app_list
       },
       source$: (componentInstance: AppFunctionModalComponent) => this.service.update({
         ...componentInstance.appFunctionForm.value,

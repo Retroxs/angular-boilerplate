@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { BaseTableComponent } from '@zsx/core/base.component';
 import { PriceModalComponent } from './modal/price-modal.component';
 import { BindModalComponent } from './modal/bind-modal.component';
+import { SelectList, SelectService } from '../../select.service';
 
 @Component({
   templateUrl: './pack.component.html'
@@ -16,20 +17,23 @@ export class PackComponent extends BaseTableComponent implements OnInit {
     app_id: ['']
   });
 
-  selects: any;
+  selects: SelectList;
 
   constructor(protected injector: Injector,
-              protected service: PackService) {
+              protected service: PackService,
+              private selectService: SelectService
+  ) {
     super(injector);
   }
 
   ngOnInit() {
     super.ngOnInit();
-    this.fetchAppList();
+    this.fetchSelects();
   }
 
-  fetchAppList() {
-    this.service.fetchSelect().subscribe(res => this.selects = res.data);
+  fetchSelects() {
+    this.selectService.fetch({'flag[]': ['app_list', 'product_list', 'default_func', 'function_num']})
+      .subscribe(res => this.selects = res.data);
   }
 
   delete({suit_id}) {

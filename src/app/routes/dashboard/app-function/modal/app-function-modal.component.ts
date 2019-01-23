@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { UploadChangeParam } from 'ng-zorro-antd';
 import { Config, AppFunctionService, Pid } from '../app-function.service';
 import { BaseSelect } from '@zsx/core/base.component';
+import { Select, SelectService } from '../../../select.service';
 
 @Component({
   templateUrl: './app-function-modal.component.html'
@@ -10,7 +11,7 @@ import { BaseSelect } from '@zsx/core/base.component';
 export class AppFunctionModalComponent extends BaseSelect implements OnInit {
 
   @Input() config: Config;
-  @Input() appList: any;
+  @Input() appList: Select[];
   appFunctionForm = this.fb.group({
     name: [''],
     app_id: [],
@@ -24,9 +25,9 @@ export class AppFunctionModalComponent extends BaseSelect implements OnInit {
     tags: [''],
   });
 
-  parentPid: Pid[];
+  parentPid: Select[];
 
-  constructor(private fb: FormBuilder, private appFunctionService: AppFunctionService) {
+  constructor(private fb: FormBuilder, private selectService: SelectService) {
     super();
   }
 
@@ -42,7 +43,7 @@ export class AppFunctionModalComponent extends BaseSelect implements OnInit {
   }
 
   getParentPidList() {
-    this.appFunctionService.fetchSelect().subscribe(res => this.parentPid = res.data);
+    this.selectService.fetch({'flag[]':['app_func']}).subscribe(res => this.parentPid = res.data['app_func']);
   }
 
   handleUploadChange($event: UploadChangeParam) {

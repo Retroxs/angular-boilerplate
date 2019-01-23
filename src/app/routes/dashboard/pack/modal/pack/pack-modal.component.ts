@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { UploadChangeParam } from 'ng-zorro-antd';
 import { BaseSelect } from '@zsx/core/base.component';
+import { SelectList } from '../../../../select.service';
 
 @Component({
   selector: 'app-form',
@@ -10,7 +11,7 @@ import { BaseSelect } from '@zsx/core/base.component';
 export class PackModalComponent extends BaseSelect implements OnInit {
 
   @Input() pack: any;
-  @Input() select: any;
+  @Input() select: SelectList;
   packForm = this.fb.group({
 
     suit_name: [''],

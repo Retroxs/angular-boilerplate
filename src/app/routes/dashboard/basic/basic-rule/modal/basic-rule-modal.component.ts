@@ -31,6 +31,6 @@ export class BasicRuleModalComponent extends BaseSelect implements OnInit {
   }
 
   fetchRuleGroup() {
-    return this.selectService.fetch({flag: ['rule_group']});
+    return this.selectService.fetch({'flag[]': ['rule_group']});
   }
 }

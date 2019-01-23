@@ -14,7 +14,7 @@
       <nz-form-control>
         <nz-select style="width: 200px;" formControlName="app_id">
           <nz-option nzValue="" nzLabel="全部"></nz-option>
-          <nz-option *ngFor="let app of selects?.app_list" [nzValue]="app.app_id" [nzLabel]="app.remark"></nz-option>
+          <nz-option *ngFor="let app of selects?.app_list" [nzValue]="app.value" [nzLabel]="app.label"></nz-option>
         </nz-select>
       </nz-form-control>
     </nz-form-item>

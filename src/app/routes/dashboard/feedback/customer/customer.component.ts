@@ -5,6 +5,7 @@ import { map, tap } from 'rxjs/operators';
 import { FormBuilder } from '@angular/forms';
 import { formatDate } from '@zsx/utils';
 import { PackService } from '../../pack/pack.service';
+import { Select, SelectService } from '../../../select.service';
 
 
 @Component({
@@ -16,9 +17,9 @@ export class CustomerFeedbackComponent extends BaseComponent implements OnInit {
   dataSet = [];
   startValue: Date = null;
   endValue: Date = null;
-  select: any;
+  app_list: Select[];
 
-  constructor(private fb: FormBuilder, private feedbackService: FeedbackService, private packService: PackService) {
+  constructor(private fb: FormBuilder, private feedbackService: FeedbackService, private selectService: SelectService) {
     super();
   }
 
@@ -31,7 +32,7 @@ export class CustomerFeedbackComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
     this.search();
-    this.packService.fetchSelect().subscribe(v => this.select = v.data);
+    this.selectService.fetch({'flag[]': ['app_list']}).subscribe(v => this.app_list = v.data['app_list']);
   }
 
   search(page = 1, query = this.queryForm.value, page_size = this.pageSize) {
@@ -55,14 +56,14 @@ export class CustomerFeedbackComponent extends BaseComponent implements OnInit {
       return false;
     }
     return startValue.getTime() > this.endValue.getTime();
-  };
+  }
 
   disabledEndDate = (endValue: Date): boolean => {
     if (!endValue || !this.startValue) {
       return false;
     }
     return endValue.getTime() <= this.startValue.getTime();
-  };
+  }
 
   onStartChange(date: Date): void {
     this.startValue = date;

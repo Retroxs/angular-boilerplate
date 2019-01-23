@@ -7,7 +7,7 @@
       <nz-form-control>
         <nz-select style="width: 200px;" formControlName="app_id">
           <nz-option nzValue="" nzLabel="全部"></nz-option>
-          <nz-option *ngFor="let app of select?.app_list" [nzValue]="app.app_id" [nzLabel]="app.remark"></nz-option>
+          <nz-option *ngFor="let app of app_list" [nzValue]="app.value" [nzLabel]="app.label"></nz-option>
         </nz-select>
       </nz-form-control>
     </nz-form-item>
@@ -17,7 +17,7 @@
       <nz-form-control>
         <nz-select style="width: 200px;" formControlName="ghash">
           <nz-option nzValue="" nzLabel="全部"></nz-option>
-          <nz-option *ngFor="let app of ghash_list" [nzValue]="app.ghash" [nzLabel]="app.description"></nz-option>
+          <nz-option *ngFor="let ghash of ghash_list" [nzValue]="ghash.value" [nzLabel]="ghash.label"></nz-option>
         </nz-select>
       </nz-form-control>
     </nz-form-item>
@@ -30,8 +30,8 @@
     </nz-form-item>
 
     <nz-form-item>
-      <nz-form-label >开始</nz-form-label>
-      <nz-form-control >
+      <nz-form-label>开始</nz-form-label>
+      <nz-form-control>
         <nz-date-picker
           [nzDisabledDate]="disabledStartDate"
           nzShowTime
@@ -45,7 +45,7 @@
 
     <nz-form-item>
       <nz-form-label>结束</nz-form-label>
-      <nz-form-control >
+      <nz-form-control>
         <nz-date-picker
           [nzDisabledDate]="disabledEndDate"
           nzShowTime
@@ -65,7 +65,7 @@
   </form>
 
   <nz-table [nzData]="dataSet" [nzLoading]="loading" [nzFrontPagination]="false" [nzTotal]="total"
-            [(nzPageIndex)]="pageIndex" (nzPageIndexChange)="search($event)" >
+            [(nzPageIndex)]="pageIndex" (nzPageIndexChange)="search($event)">
     <thead>
     <tr>
       <th>时间</th>

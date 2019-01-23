@@ -26,10 +26,6 @@ export class PackService {
     return this.http.get<TableResponse<Pack[]>>(`${this.baseUrl}/index`, {params});
   }
 
-  fetchSelect() {
-    return this.http.get<Response>(`${this.baseUrl}/selected`);
-  }
-
   fetchMembers(params) {
     return this.http.get<Response>(`${this.baseUrl}/bind-member`, {params});
   }

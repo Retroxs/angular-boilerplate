@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { QuerySearch } from '@zsx/core/net/rest.decorators';
 import { Observable } from 'rxjs';
 import { Response } from '@zsx/core/net/response.interface';
 
@@ -9,7 +8,7 @@ export interface Select {
   value: string;
 }
 
-interface SelectList {
+export interface SelectList {
   [key: string]: Select[];
 }
 
@@ -23,8 +22,7 @@ export class SelectService {
 
   baseUrl = 'select';
 
-  @QuerySearch()
-  fetch(params): Observable<Response<SelectList>> {
+  fetch(params: { 'flag[]': string[] }): Observable<Response<SelectList>> {
     return this.http.get<Response<SelectList>>(`${this.baseUrl}/index`, {params});
   }
 }

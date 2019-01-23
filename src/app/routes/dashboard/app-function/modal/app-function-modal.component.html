@@ -11,7 +11,7 @@
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>所属APP</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <nz-select formControlName="app_id" nzShowSearch nzAllowClear nzPlaceHolder="选择APP">
-        <nz-option *ngFor="let app of appList" [nzValue]="app.app_id" [nzLabel]="app.remark"></nz-option>
+        <nz-option *ngFor="let app of appList" [nzValue]="app.value" [nzLabel]="app.label"></nz-option>
       </nz-select>
     </nz-form-control>
   </nz-form-item>
@@ -70,7 +70,7 @@
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <nz-select formControlName="pid" [compareWith]="selectCompareWith">
         <nz-option [nzValue]="0" nzLabel="顶级"></nz-option>
-        <nz-option *ngFor="let pid of parentPid" [nzValue]="pid.id" [nzLabel]="pid.name"></nz-option>
+        <nz-option *ngFor="let pid of parentPid" [nzValue]="pid.value" [nzLabel]="pid.label"></nz-option>
       </nz-select>
       <nz-form-extra danger>对应APP分组栏目</nz-form-extra>
     </nz-form-control>

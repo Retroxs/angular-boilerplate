@@ -39,10 +39,6 @@ export class AppFunctionService {
     return this.http.get<TableResponse<Config[]>>(`${this.baseUrl}/index`, {params});
   }
 
-  fetchSelect() {
-    return this.http.get<Response<Pid[]>>(`${this.baseUrl}/get-select`);
-  }
-
   @FormEncode()
   create(data) {
     return this.http.post(`${this.baseUrl}/add`, data);
