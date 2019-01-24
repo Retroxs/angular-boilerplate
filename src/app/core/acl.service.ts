@@ -102,9 +102,11 @@ export const APP_CONFIG_TEMPLATE_ACL: ACL = {
   create: '/v1/app-config/add',
   update: '',
   destroy: '/v1/app-config/delete',
+  showConfig: '/v1/app-config-origin/index'
 };
 
 export const APP_CONFIG_ACL: ACL = {
+  index: '/v1/app-config-origin/index',
   show: '',
   create: '/v1/app-config-origin/add',
   update: '/v1/app-config-origin/edit',
@@ -131,11 +133,12 @@ export const Global_ACL: ACLSET = {
   providedIn: 'root'
 })
 export class AclService {
-  get tokenPermission() {
+  private get tokenPermission() {
     return this.tokenService.permission;
   }
 
-  constructor(private tokenService: TokenService) {}
+  constructor(private tokenService: TokenService) {
+  }
 
   get global_acl(): ACLSET {
     const _global_acl = JSON.parse(JSON.stringify(Global_ACL));

@@ -4,6 +4,7 @@ import { AppFunctionService, Pid } from './app-function.service';
 import { BaseTableComponent } from '@zsx/core/base.component';
 import { PackService } from '../pack/pack.service';
 import { Select, SelectService } from '../../select.service';
+import { AclService } from '@zsx/core/acl.service';
 
 @Component({
   templateUrl: './app-function.component.html'
@@ -20,9 +21,11 @@ export class AppFunctionComponent extends BaseTableComponent implements OnInit {
   constructor(
     protected injector: Injector,
     protected service: AppFunctionService,
-    private selectService: SelectService
+    private selectService: SelectService,
+    private aclService: AclService
   ) {
     super(injector);
+    this.acl = this.aclService.global_acl['CONFIG_ACL'];
   }
 
   ngOnInit() {

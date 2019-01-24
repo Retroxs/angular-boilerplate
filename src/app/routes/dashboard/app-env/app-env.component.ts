@@ -2,6 +2,7 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { AppEnvModalComponent } from './modal/app-env-modal.component';
 import { AppEnvService } from './app-env.service';
 import { BaseTableComponent } from '@zsx/core/base.component';
+import { AclService } from '@zsx/core/acl.service';
 
 @Component({
   templateUrl: './app-env.component.html',
@@ -16,8 +17,11 @@ export class AppEnvComponent extends BaseTableComponent implements OnInit {
   });
 
   constructor(protected injector: Injector,
-              protected service: AppEnvService) {
+              protected service: AppEnvService,
+              private aclService: AclService
+  ) {
     super(injector);
+    this.acl = this.aclService.global_acl['ENV_ACL'];
   }
 
   ngOnInit() {

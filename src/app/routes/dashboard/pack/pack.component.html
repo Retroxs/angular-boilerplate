@@ -26,18 +26,18 @@
     </nz-form-item>
     <nz-form-item>
       <nz-form-control>
-        <button nz-button nzType="primary" type="button" (click)="showModal()">新增</button>
+        <button nz-button nzType="primary" type="button" (click)="showModal()" *ngIf="acl.create">新增</button>
       </nz-form-control>
     </nz-form-item>
   </form>
 
   <nz-table
-            [nzData]="dataSet"
-            [nzLoading]="loading"
-            [nzFrontPagination]="false"
-            [nzTotal]="total"
-            [(nzPageIndex)]="pageIndex"
-            (nzPageIndexChange)="search($event)">
+    [nzData]="dataSet"
+    [nzLoading]="loading"
+    [nzFrontPagination]="false"
+    [nzTotal]="total"
+    [(nzPageIndex)]="pageIndex"
+    (nzPageIndexChange)="search($event)">
     <thead>
     <tr>
       <th>ID</th>
@@ -60,13 +60,24 @@
         <nz-tag [nzColor]="+data.status?'green':'red'">{{+data.status | status:'usage'}}</nz-tag>
       </td>
       <td>
-        <a (click)="changePrice(data)">改价</a>
-        <nz-divider nzType="vertical"></nz-divider>
-        <a (click)="bindMember(data)">绑定会员</a>
-        <nz-divider nzType="vertical"></nz-divider>
-        <a (click)="findPackAndOpenModal(data)">编辑</a>
-        <nz-divider nzType="vertical"></nz-divider>
-        <a nz-popconfirm danger [nzTitle]="'删除此商品?'" nzPlacement="top" (nzOnConfirm)="delete(data)">删除</a>
+        <ng-container *ngIf="acl.edit_price">
+          <a (click)="changePrice(data)">改价</a>
+          <nz-divider nzType="vertical"></nz-divider>
+        </ng-container>
+
+        <ng-container *ngIf="acl.bind_member">
+          <a (click)="bindMember(data)">绑定会员</a>
+          <nz-divider nzType="vertical"></nz-divider>
+        </ng-container>
+
+        <ng-container *ngIf="acl.update">
+          <a (click)="findPackAndOpenModal(data)">编辑</a>
+          <nz-divider nzType="vertical"></nz-divider>
+        </ng-container>
+
+        <ng-container *ngIf="acl.destroy">
+          <a nz-popconfirm danger [nzTitle]="'删除此商品?'" nzPlacement="top" (nzOnConfirm)="delete(data)">删除</a>
+        </ng-container>
       </td>
     </tr>
     </tbody>

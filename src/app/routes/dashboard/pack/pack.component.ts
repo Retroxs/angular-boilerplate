@@ -6,6 +6,7 @@ import { BaseTableComponent } from '@zsx/core/base.component';
 import { PriceModalComponent } from './modal/price-modal.component';
 import { BindModalComponent } from './modal/bind-modal.component';
 import { SelectList, SelectService } from '../../select.service';
+import { AclService } from '@zsx/core/acl.service';
 
 @Component({
   templateUrl: './pack.component.html'
@@ -21,9 +22,11 @@ export class PackComponent extends BaseTableComponent implements OnInit {
 
   constructor(protected injector: Injector,
               protected service: PackService,
-              private selectService: SelectService
+              private selectService: SelectService,
+              private aclService: AclService
   ) {
     super(injector);
+    this.acl = this.aclService.global_acl['PACK_ACL'];
   }
 
   ngOnInit() {

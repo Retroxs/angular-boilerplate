@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AppConfigService } from './app-config.service';
 import { AppConfigModalComponent } from './modal/app-config-modal/app-config-modal.component';
 import { Select, SelectService } from '../../select.service';
+import { AclService } from '@zsx/core/acl.service';
 
 interface ConfigTemplate {
   name: string;
@@ -33,10 +34,12 @@ export class AppConfigComponent extends BaseTableComponent implements OnInit {
     protected injector: Injector,
     protected service: AppConfigService,
     private selectService: SelectService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private aclService: AclService
   ) {
     super(injector);
     this.fetchSelects();
+    this.acl = this.aclService.global_acl['APP_CONFIG_ACL'];
   }
 
 

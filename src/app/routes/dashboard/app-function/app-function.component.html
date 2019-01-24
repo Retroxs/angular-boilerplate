@@ -25,7 +25,7 @@
     </nz-form-item>
     <nz-form-item>
       <nz-form-control>
-        <button nz-button nzType="primary" type="button" (click)="showModal()">新增</button>
+        <button nz-button nzType="primary" type="button" (click)="showModal()" *ngIf="acl.create">新增</button>
       </nz-form-control>
     </nz-form-item>
   </form>
@@ -72,9 +72,14 @@
         <nz-tag [nzColor]="+data.status?'green':'red'">{{+data.status | status:'visible'}}</nz-tag>
       </td>
       <td>
-        <a (click)="showEditModal(data)">编辑</a>
-        <nz-divider nzType="vertical"></nz-divider>
-        <a nz-popconfirm [nzTitle]="(+data.status?'隐藏':'显示') + '此功能'" nzPlacement="top" (nzOnConfirm)="setStatus(data)">{{+data.status ? '隐藏':'显示'}}</a>
+        <ng-container *ngIf="acl.update">
+          <a (click)="showEditModal(data)">编辑</a>
+          <nz-divider nzType="vertical"></nz-divider>
+        </ng-container>
+
+        <ng-container *ngIf="acl.set_status">
+          <a nz-popconfirm [nzTitle]="(+data.status?'隐藏':'显示') + '此功能'" nzPlacement="top" (nzOnConfirm)="setStatus(data)">{{+data.status ? '隐藏':'显示'}}</a>
+        </ng-container>
       </td>
     </tr>
     </tbody>

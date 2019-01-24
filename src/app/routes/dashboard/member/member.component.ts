@@ -2,6 +2,7 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { MemberModalComponent } from './modal/member-modal.component';
 import { MemberService } from './member.service';
 import { BaseTableComponent } from '@zsx/core/base.component';
+import { AclService } from '@zsx/core/acl.service';
 
 @Component({
   templateUrl: './member.component.html',
@@ -13,8 +14,11 @@ export class MemberComponent extends BaseTableComponent implements OnInit {
   });
 
   constructor(protected injector: Injector,
-              protected service: MemberService) {
+              protected service: MemberService,
+              private aclService: AclService
+  ) {
     super(injector);
+    this.acl = this.aclService.global_acl['MEMBER_ACL'];
   }
 
   ngOnInit() {

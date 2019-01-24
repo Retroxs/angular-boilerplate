@@ -3,6 +3,7 @@ import { BaseTableComponent } from '@zsx/core/base.component';
 import { AppConfigTemplateService } from './app-config-template.service';
 import { AppConfigTemplateModalComponent } from '../modal/app-config-template-modal.component';
 import { Router } from '@angular/router';
+import { AclService } from '@zsx/core/acl.service';
 
 @Component({
   templateUrl: './app-config-template.component.html'
@@ -27,9 +28,11 @@ export class AppConfigTemplateComponent extends BaseTableComponent implements On
   constructor(
     protected injector: Injector,
     protected service: AppConfigTemplateService,
-    private router: Router
+    private router: Router,
+    private aclService: AclService
   ) {
     super(injector);
+    this.acl = this.aclService.global_acl['APP_CONFIG_TEMPLATE_ACL'];
   }
 
   ngOnInit() {
