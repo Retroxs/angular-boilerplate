@@ -18,9 +18,12 @@ export class PermissionService {
 
   hasPermission = route => route.data.permission.some(p => this.tokenPermission.includes(p));
 
-  // 根据权限列表计算出菜单
+  /**
+   * 根据权限列表计算出菜单
+   * 需要深拷贝router配置
+   */
   get menuList(): Routes {
-    const routes = this.router.config[1].children;
+    const routes = JSON.parse(JSON.stringify(this.router.config[1].children))
     const permissionRoutes = routes
       .filter(route => !route.data.excluded)
       .filter(route => !route.children ? this.hasPermission(route) : true)
@@ -32,6 +35,4 @@ export class PermissionService {
       });
     return permissionRoutes;
   }
-
-
 }

@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { AuthService } from '@zsx/core/auth/auth.service';
 import { ActivatedRoute, Route, Router, Routes } from '@angular/router';
 import { PermissionService } from '../../routes/permission.service';
+import { TokenService } from '@zsx/core/auth/token.service';
 
 @Component({
   templateUrl: './default.component.html',
@@ -13,6 +14,7 @@ export class LayoutDefaultComponent implements OnInit {
   triggerTemplate = null;
   initSelected: string;
   menuList: Routes;
+  user_name: string;
   currentRootRoute: any;
 
   @ViewChild('trigger') customTrigger: TemplateRef<void>;
@@ -20,8 +22,10 @@ export class LayoutDefaultComponent implements OnInit {
   constructor(private authService: AuthService,
               private router: Router,
               private permissionService: PermissionService,
+              private tokenService: TokenService,
               private route: ActivatedRoute) {
     this.menuList = this.permissionService.menuList;
+    this.user_name = this.tokenService.username;
   }
 
   ngOnInit() {

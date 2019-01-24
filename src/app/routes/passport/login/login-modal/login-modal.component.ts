@@ -10,7 +10,7 @@ import { AuthService } from '@zsx/core/auth/auth.service';
 })
 export class LoginModalComponent implements OnInit {
   loginForm = this.fb.group({
-    user_name: ['', [Validators.required]],
+    user_name: [{value: '', disabled: true}, [Validators.required]],
     password: ['', [Validators.required]]
   });
 
@@ -23,7 +23,7 @@ export class LoginModalComponent implements OnInit {
 
 
   onLogin() {
-    const user = this.loginForm.value;
+    const user = this.loginForm.getRawValue();
 
     return this.loginService.login(user).pipe(
       tap(res => this.authService.Authorize({username: user.user_name, token: res.data.token, permission: res.data.rule_list}))

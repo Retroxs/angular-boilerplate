@@ -131,16 +131,21 @@ export const Global_ACL: ACLSET = {
   providedIn: 'root'
 })
 export class AclService {
-  global_acl: ACLSET = {};
+  get tokenPermission() {
+    return this.tokenService.permission;
+  }
 
-  constructor(private tokenService: TokenService) {
+  constructor(private tokenService: TokenService) {}
+
+  get global_acl(): ACLSET {
     const _global_acl = JSON.parse(JSON.stringify(Global_ACL));
     for (const key in Global_ACL) {
       for (const acl_key in Global_ACL[key]) {
         // @ts-ignore
-        _global_acl[key][acl_key] = this.tokenService.permission.includes(Global_ACL[key][acl_key]);
+        _global_acl[key][acl_key] = this.tokenPermission.includes(Global_ACL[key][acl_key]);
       }
     }
-    this.global_acl = _global_acl;
+    return _global_acl;
   }
+
 }

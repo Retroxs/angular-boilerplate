@@ -35,7 +35,7 @@ const routes: Routes = [
       {
         path: 'basic',
         data: {
-          title: '基础配置',
+          title: '基础管理',
           icon: 'home'
         },
         children: [

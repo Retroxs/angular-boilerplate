@@ -6,20 +6,22 @@
     <ul nz-menu [nzTheme]="'light'" [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed">
 
       <ng-container *ngFor="let item of menuList">
-        <li nz-submenu *ngIf="item.children; else single" [nzOpen]="item.path === currentRootRoute.path">
+        <ng-container *ngIf="item.children; else single">
+          <li nz-submenu *ngIf="item.children.length > 0" [nzOpen]="item.path === currentRootRoute.path">
           <span title>
             <i nz-icon [type]="item.data.icon"></i>
             <span class="nav-text">{{item.data.title}}</span>
           </span>
-          <ul>
-            <li nz-menu-item
-                *ngFor="let child of item.children"
-                [routerLink]="'/dashboard/' + item.path + '/' + child.path"
-                [nzSelected]="initSelected === '/dashboard/' + item.path + '/' + child.path">
-              {{child.data.title}}
-            </li>
-          </ul>
-        </li>
+            <ul>
+              <li nz-menu-item
+                  *ngFor="let child of item.children"
+                  [routerLink]="'/dashboard/' + item.path + '/' + child.path"
+                  [nzSelected]="initSelected === '/dashboard/' + item.path + '/' + child.path">
+                {{child.data.title}}
+              </li>
+            </ul>
+          </li>
+        </ng-container>
 
         <ng-template #single>
           <li nz-menu-item
@@ -31,7 +33,6 @@
             </span>
           </li>
         </ng-template>
-
       </ng-container>
     </ul>
   </nz-sider>
@@ -55,7 +56,7 @@
                   <div nz-dropdown>
                     <nz-avatar nzSrc="https://ng-alain.github.io/ng-alain/assets/tmp/img/avatar.jpg"
                                nzSize="small"></nz-avatar>
-                    <strong>Admin</strong>
+                    <strong style="margin-left: 10px">{{user_name}}</strong>
                   </div>
                   <ul nz-menu>
                     <li nz-menu-item>
